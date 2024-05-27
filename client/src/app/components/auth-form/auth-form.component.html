@@ -1,23 +1,71 @@
-<form class="auth-form" formShadow>
-  <h2 class="auth-title">Sign up</h2>
+<form class="auth-form" [formGroup]="formData" formShadow >
+  <h2 class="auth-title">{{isSignUp ? 'Signup' : 'Signin'}}</h2>
 
-  <div class="df fdc  alc " >
-    <mat-form-field appearance="outline" class="example-full-width auth-label">
+  <div class="df fdc alc">
+
+    <mat-form-field *ngIf="isSignUp ; else null" appearance="outline" class="example-full-width auth-label">
       <mat-label>First name</mat-label>
-      <input matInput>
+      <input 
+      formControlName="name"
+      required
+      matInput>
     </mat-form-field>
+
     <mat-form-field appearance="outline" class="example-full-width auth-label">
-      <mat-label>First name</mat-label>
-      <input matInput>
+      <mat-label>Enter your email</mat-label>
+      <input matInput
+             placeholder="pat@example.com"
+             formControlName="email"
+             (blur)="updateErrorMessage()"
+             required>
+          @if (formData.controls.email.invalid) {
+            <mat-error>{{errorMessage}}</mat-error>
+          }
     </mat-form-field>
+
     <mat-form-field appearance="outline" class="example-full-width auth-label">
-      <mat-label>First name</mat-label>
-      <input matInput>
+      <mat-label>Telephone</mat-label>
+      <span matTextPrefix>+7 &nbsp;</span>
+      <input 
+      type="tel" 
+      matInput 
+      required
+      placeholder="555-555-1234"
+      formControlName="phone"
+      >
+      <!-- <mat-icon matSuffix>mode_edit</mat-icon> -->
     </mat-form-field>
+   
+    <mat-form-field appearance="outline" class="example-full-width auth-label">
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hidePass().pass1 ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="handleShowPassword($event, 'pass1')" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass().pass1">
+        <mat-icon>{{hidePass().pass1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width auth-label">
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hidePass().pass2 ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="handleShowPassword($event, 'pass2')" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass().pass2">
+        <mat-icon>{{hidePass().pass2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
     
-    <mat-form-field appearance="outline" class="example-full-width auth-label">
-      <mat-label>First name</mat-label>
-      <input matInput>
-    </mat-form-field>
+    <ng-container *ngIf="isSignUp; else signuplink">
+      <div class="AuthForm__quastion">
+        У вас есть аккаунт? <a [routerLink]="'/Signin'">Sign in</a>
+      </div>
+    </ng-container>
+
+    <ng-template #signuplink>
+      <div class="AuthForm__quastion">
+        У вас нет аккаунт? <a [routerLink]="'/Signup'">Sign up</a>
+      </div>
+    </ng-template>
+
+    <button mat-flat-button color="primary">Primary</button>
+
   </div>
 </form>

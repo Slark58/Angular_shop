@@ -7,7 +7,9 @@ import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 export enum Paths {
   Home = '',
   Catalog = 'Catalog',
-  Authentication = 'Authentication',
+  Signup = 'Signup',
+  Signin = 'Signin',
+  // Authentication = 'Authentication',
 }
 
 const routes: Routes = [
@@ -20,7 +22,11 @@ const routes: Routes = [
     component: CatalogPageComponent 
   },
   { 
-    path: Paths.Authentication, 
+    path: Paths.Signin, 
+    component: AuthPageComponent 
+  },
+  { 
+    path: Paths.Signup, 
     component: AuthPageComponent 
   },
 ];

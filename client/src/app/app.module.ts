@@ -15,6 +15,7 @@ import { AuthFormComponent } from './components/auth-form/auth-form.component';
 import {MatInputModule} from '@angular/material/input';
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { FormShadowDirective } from './utils/directives/formShadow.directive';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +34,7 @@ import { FormShadowDirective } from './utils/directives/formShadow.directive';
     MatToolbarModule,
     MatButtonModule,
     MatInputModule,
+    ReactiveFormsModule,
   ],
   providers: [
     provideAnimationsAsync()

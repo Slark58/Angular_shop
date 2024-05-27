@@ -34,7 +34,7 @@ export class FormShadowDirective implements AfterViewInit {
   //   this.renderer.removeClass(this.el.nativeElement, 'directive-card')
   // }
 
-
+  
   @HostListener('focusin') onFocusIn(event: FocusEvent) {
     this.checkAndApplyShadow();
   }
