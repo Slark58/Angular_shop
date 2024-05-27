@@ -1,0 +1,37 @@
+.swiper-button-prev, .swiper-button-next {
+  background-color: navy;
+  color: white;
+  padding: .5rem;
+  border-radius: .5rem;
+}
+
+.swiper-button-prev {
+  left: 2rem;
+  right: auto;
+}
+
+.swiper-button-next {
+  right: 2rem;
+  left: auto;
+}
+
+
+:host ::ng-deep .swiper-scrollbar{
+  position: absolute;
+  bottom: -2rem;
+}
+
+:host ::ng-deep .swiper-scrollbar.swiper-scrollbar-horizontal {
+  height: .65rem;
+}
+
+:host ::ng-deep .swiper-scrollbar.swiper-scrollbar-horizontal .swiper-scrollbar-drag{
+  background: navy;
+  height: .5rem;
+  padding: .1rem;
+}
+
+.slide {
+  height: 100dvh;
+  width: 100%;
+}

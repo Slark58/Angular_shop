@@ -1,0 +1,42 @@
+
+<!-- <div class="toolbar-wrap"> -->
+  <mat-toolbar color="primary" class="df jcsb alc">
+    <div class="df alc">
+
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>
+        <a class="app-title" routerLink="/">Angular shop</a>
+      </span>
+      
+            <a routerLink="Catalog">
+              <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                <mat-icon class="cw">
+                  shopping_cart
+                  </mat-icon>
+              </button>
+            </a>
+        
+    </div>
+    <!-- <span class="example-spacer">фывфы</span> -->
+
+    <div class="df alc">
+  
+      <ng-container *ngIf="isAuth; else AccountBtn">
+        <button  mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+          <mat-icon><span class="material-symbols-outlined">
+            account_circle
+            </span></mat-icon>
+        </button>
+      </ng-container>
+  
+      <ng-template #AccountBtn>
+        <a routerLink="Authentication">
+          <button mat-flat-button color="accent">Sign in</button>
+        </a>
+      </ng-template>
+    </div>
+
+  </mat-toolbar>
+<!-- </div> -->
