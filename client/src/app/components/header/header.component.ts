@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, inject } from '@angular/core';
 import { Paths } from '../../app-routing.module';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -9,8 +10,6 @@ import { Paths } from '../../app-routing.module';
 })
 export class HeaderComponent {
 
-  public isAuth = false
-
-  
+  authService = inject(AuthService)
 
 }

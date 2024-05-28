@@ -1,4 +1,4 @@
-<form class="auth-form" [formGroup]="formData" formShadow >
+<form class="auth-form" [formGroup]="authForm" formShadow  (ngSubmit)="onSubmit()">
   <h2 class="auth-title">{{isSignUp ? 'Signup' : 'Signin'}}</h2>
 
   <div class="df fdc alc">
@@ -18,12 +18,12 @@
              formControlName="email"
              (blur)="updateErrorMessage()"
              required>
-          @if (formData.controls.email.invalid) {
+          @if (authForm.controls.email.invalid) {
             <mat-error>{{errorMessage}}</mat-error>
           }
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="example-full-width auth-label">
+    <mat-form-field *ngIf="isSignUp ; else null" appearance="outline" class="example-full-width auth-label">
       <mat-label>Telephone</mat-label>
       <span matTextPrefix>+7 &nbsp;</span>
       <input 
@@ -33,21 +33,31 @@
       placeholder="555-555-1234"
       formControlName="phone"
       >
-      <!-- <mat-icon matSuffix>mode_edit</mat-icon> -->
+      
     </mat-form-field>
    
     <mat-form-field appearance="outline" class="example-full-width auth-label">
       <mat-label>Enter your password</mat-label>
-      <input matInput [type]="hidePass().pass1 ? 'password' : 'text'">
-      <button mat-icon-button matSuffix (click)="handleShowPassword($event, 'pass1')" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass().pass1">
+      <input 
+        required 
+        matInput 
+        [type]="hidePass().pass1 ? 'password' : 'text'"
+        formControlName="password"
+        >
+      <button type="button" mat-icon-button matSuffix (click)="handleShowPassword($event, 'pass1')" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass().pass1">
         <mat-icon>{{hidePass().pass1 ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="example-full-width auth-label">
+    <mat-form-field *ngIf="isSignUp ; else null" appearance="outline" class="example-full-width auth-label">
       <mat-label>Enter your password</mat-label>
-      <input matInput [type]="hidePass().pass2 ? 'password' : 'text'">
-      <button mat-icon-button matSuffix (click)="handleShowPassword($event, 'pass2')" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass().pass2">
+      <input 
+        required 
+        matInput 
+        [type]="hidePass().pass2 ? 'password' : 'text'"
+        formControlName="secondPassword"
+        >
+      <button type="button" mat-icon-button matSuffix (click)="handleShowPassword($event, 'pass2')" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass().pass2">
         <mat-icon>{{hidePass().pass2 ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
@@ -65,7 +75,11 @@
       </div>
     </ng-template>
 
-    <button mat-flat-button color="primary">Primary</button>
+    <mat-spinner [diameter]="40" class="mt10" *ngIf="authService.isLoading(); else btnsubmit" ></mat-spinner>
+
+    <ng-template #btnsubmit>
+      <button  type="submit" mat-flat-button color="primary" class="mt10">{{isSignUp ? 'Signup' : 'Signin'}}</button>
+    </ng-template>
 
   </div>
 </form>
