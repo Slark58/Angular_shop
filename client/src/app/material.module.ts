@@ -7,20 +7,15 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatCardModule} from '@angular/material/card';
+import {MatDialogModule} from '@angular/material/dialog';
+
+
 
 
 
 @NgModule({
-  imports: [
-    MatIconModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    MatSidenavModule,
-    MatMenuModule,
-    MatCheckboxModule
-  ],
+  imports: [],
   exports: [
     MatIconModule,
     MatToolbarModule,
@@ -29,7 +24,9 @@ import {MatMenuModule} from '@angular/material/menu';
     MatProgressSpinnerModule,
     MatSidenavModule,
     MatMenuModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatCardModule,
+    MatDialogModule,
   ],
   declarations: [],
   providers: [],

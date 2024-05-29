@@ -2,10 +2,14 @@
 <!-- <div class="toolbar-wrap"> -->
   <mat-toolbar color="primary" class="df jcsb alc">
     <div class="df alc">
+      
+      <a routerLink="AdminPanel">
+        <button  mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+          <mat-icon class="cw">menu</mat-icon>
+        </button>
 
-      <button  mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-      </button>
+      </a>
+
       <span>
         <a class="app-title" routerLink="/">Angular shop</a>
       </span>
@@ -22,11 +26,10 @@
     <!-- <span class="example-spacer">фывфы</span> -->
 
     <div class="df alc">
-      
       <ng-container *ngIf="authService.isAuth(); else AccountBtn">
         <a routerLink="Account">
           <button  mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with share icon">
-            <mat-icon><span class="material-symbols-outlined">
+            <mat-icon class="cw"><span class="material-symbols-outlined">
               account_circle
               </span></mat-icon>
           </button>

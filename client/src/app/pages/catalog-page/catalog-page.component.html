@@ -1,21 +1,33 @@
 
 <div class="catalog-page">
   <div class="container">
-    <div class="catalog-page-filters">
+    <div class="df g30">
 
-      <ng-container *ngFor="let item of filtersService.filters$ | async">
-        <div class="filter-block">
-          <div class="filter-title">{{item.title}}</div>
-          <div class="df fdc">
-            <mat-checkbox *ngFor="let item of item.data" class="example-margin">{{item.value}}</mat-checkbox>
+      <div class="catalog-page-filters">
+  
+        <ng-container *ngFor="let item of filtersService.filters$ | async">
+          <div class="filter-block">
+            <div class="filter-title">{{item.title}}</div>
+            <div class="df fdc">
+              <mat-checkbox *ngFor="let item of item.data" class="example-margin">{{item.value}}</mat-checkbox>
+            </div>
           </div>
-        </div>
-      </ng-container>
-
-
-    </div>
-    <div class="catalog-page-list">
-
+        </ng-container>
+  
+  
+      </div>
+      <div class="catalog-page-list df fww g30 jcc">
+        <app-catalog-card></app-catalog-card>
+        <app-catalog-card></app-catalog-card>
+        <app-catalog-card></app-catalog-card>
+        <app-catalog-card></app-catalog-card>
+        <app-catalog-card></app-catalog-card>
+        <app-catalog-card></app-catalog-card>
+        <app-catalog-card></app-catalog-card>
+        <app-catalog-card></app-catalog-card>
+        <app-catalog-card></app-catalog-card>
+        <!-- <ng-container *ngFor="let item of list"></ng-container> -->
+      </div>
     </div>
   </div>
 </div>

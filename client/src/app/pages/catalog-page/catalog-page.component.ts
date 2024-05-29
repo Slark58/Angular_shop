@@ -9,17 +9,13 @@ import { FiltersResponse } from '../../models/Response';
   styleUrls: ['./catalog-page.component.scss']
 })
 export class CatalogPageComponent implements OnInit {
-  showFiller = false;
   
   filtersService: FiltersService = inject(FiltersService)
 
   ngOnInit(): void {
     this.filtersService.getAllFilters()
-    console.log(this.filtersService.filtersSubject);
+    // console.log(this.filtersService.filtersSubject$);
     
   }
 
-  toggleSidebar() {
-    this.showFiller = !this.showFiller
-  }
 }
