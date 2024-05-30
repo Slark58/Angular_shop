@@ -1,7 +1,61 @@
 <mat-dialog-content>
-  <p>What's your favorite animal?</p>
+  <p>Create product</p>
+  <form [formGroup]="productForm">
+
+    <div class="df g15 alc">
+      <mat-form-field appearance="outline" class="example-full-width auth-label">
+        <mat-label>Enter name</mat-label>
+        <input 
+          required 
+          matInput 
+          type="text"
+          formControlName="name"
+          >
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width auth-label">
+        <mat-label>Enter price</mat-label>
+        <input 
+          required 
+          matInput 
+          type="text"
+          formControlName="price"
+          >
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="example-full-width auth-label">
+        <mat-label>Enter old price</mat-label>
+        <input 
+          matInput 
+          type="text"
+          formControlName="oldPrice"
+          >
+      </mat-form-field>
+
+    </div>
+
+    <div formArrayName="imgs">
+      <ng-container *ngFor="let item of imgs.controls; let i = index">
+        <div [formGroupName]="i">
+            <label class="signUpForm__label">
+              <div class="signUpForm__label-title">{{i + 1}} | img</div>
+              <input required type="file" class="signUpForm__label-input" formControlName="picture"/>
+            </label>
+            <button mat-button (click)="removeImg(i)">Del img </button>
+        </div>
+      </ng-container>
+    </div>
+
+
+    <button mat-button class="accent" (click)="addNewImg($event)">add img</button>
+    
+  
+  </form>
   <mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button [mat-dialog-close]="'asdas'" cdkFocusInitial>Ok</button>
+    <button 
+      [ngClass]="!productForm.valid ? 'disabled' : null"
+      [disabled]="!productForm.valid" 
+      mat-button 
+      [mat-dialog-close]="productForm.value" 
+      cdkFocusInitial>Ok</button>
   </mat-dialog-actions>
 </mat-dialog-content>

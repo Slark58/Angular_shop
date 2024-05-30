@@ -9,20 +9,18 @@ import { CreateProductDialogComponent } from '../../../../components/UI/create-p
 })
 export class AdminProductsPageComponent  {
 
-  animal: string = 'kek'
-  name: string = 'lol'
 
   constructor(public dialog: MatDialog) { }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(CreateProductDialogComponent, {
-      data: {name: this.name, animal: this.animal},
-    });
+    const dialogRef = this.dialog.open(CreateProductDialogComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
+    dialogRef.afterClosed()
+      .subscribe(result => {
+        // const imgs = result.imgs.map((item: string) => item[0])
+        // console.log(imgs);
+        console.log(result.imgs);
+      });
   }
 
 
