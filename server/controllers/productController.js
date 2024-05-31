@@ -8,7 +8,9 @@ const {
     CharacteristicName,
     ShutdownCurveAvto,
     Product,
-    ProductInfo
+    ProductInfo,
+    Img,
+    ProductImgs
 } = require('../models/models')
 const ApiError = require('../error/ApiError');
 const {
@@ -18,47 +20,63 @@ const {
 class ProductController {
     async createProduct(req, res, next) {
         try {
-            let { name,price, info } = req.body
-            
-            const {picture} = req.files
-            let fileName = uuid.v4() + ".jpg"
-            picture.mv(path.resolve(__dirname, '..', 'static', fileName))
+            let { name,price, oldPrice } = req.body
+            console.log(name, price, oldPrice);
+            const {imgs} = req.files
 
-
-              const filteredBody = Object.keys(req.body)
-              .filter(key => req.body[key] !== '')
-              .reduce((obj, key) => {
-                obj[key] = req.body[key];
-                return obj;
-              }, {});
-
-
-              console.log(filteredBody);
-            
-
-              const productData = {
+            const product = await Product.create({
                 name,
                 price,
-                info,
-                img: fileName,
-                ...filteredBody
-              };
-
-
-            const product = await Product.create(productData);
-
-            if (info) {
-                info = JSON.parse(info)
-                info.forEach(item =>
-                    ProductInfo.create({
-                        title: item.title,
-                        description: item.description,
-                        productId: product.id
-                    })
-                )
+                oldPrice
+            })
+            
+            const createImg = async (fileName) => {
+                const img = await Img.create({
+                    img: fileName,
+                    tag: 'test'
+                })
+                return img
             }
 
-            return res.json(item)
+        
+            if (imgs) {
+                for (const img of imgs) {
+                    let fileName = uuid.v4() + ".jpg"
+                    img.mv(path.resolve(__dirname, '..', 'static', fileName))   
+    
+                    const imgNew = await createImg(fileName)
+                    
+                    console.log(imgNew);
+    
+                    ProductImgs.create({
+                        productId: product.id,
+                        imgId: imgNew.id
+                    })
+                }
+            }
+            
+
+
+
+            // let fileName = uuid.v4() + ".jpg"
+            // picture.mv(path.resolve(__dirname, '..', 'static', fileName))
+
+
+
+            // const product = await Product.create(productData);
+
+            // if (info) {
+            //     info = JSON.parse(info)
+            //     info.forEach(item =>
+            //         ProductInfo.create({
+            //             title: item.title,
+            //             description: item.description,
+            //             productId: product.id
+            //         })
+            //     )
+            // }
+
+            return res.json(product)
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }

@@ -1,5 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { User, UserLogin, UserRegister } from '../models/User';
+import { User } from '../models/User';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { catchError } from 'rxjs';

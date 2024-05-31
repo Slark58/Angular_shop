@@ -8,6 +8,5 @@ export interface User {
   role: string
   phone: string
 }
-export type UserRegister = Omit<User, 'id' | 'role'>
-export type UserLogin = Pick<User, 'email' | 'password'>
+
 

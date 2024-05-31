@@ -9,8 +9,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class AuthFormComponent  {
 
-  public authService = inject(AuthService)
   @Input() isSignUp: boolean = false
+  public authService = inject(AuthService)
   public message = signal<string[]>([])
   public hidePass = signal({
     pass1: true, 

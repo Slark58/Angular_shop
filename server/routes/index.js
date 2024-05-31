@@ -5,7 +5,7 @@ const userRouter = require('./userRouter');
 const filtersRouter = require('./filtersRouter');
 // const cartOrderRouter = require('./cartOrderRouter');
 // const paymentRouter = require('./paymentRouter');
-// const adminRouter = require('./adminRouter');
+const adminRouter = require('./adminRouter');
 // const orderRouter = require('./orderRouter');
 // const tgReqRouter = require('./tgReqRouter');
 
@@ -14,7 +14,7 @@ router.use('/user', userRouter)
 router.use('/filters', filtersRouter)
 // router.use('/cartOrder', cartOrderRouter)
 // router.use('/payment', paymentRouter)
-// router.use('/admin', adminRouter)
+router.use('/admin', adminRouter)
 // router.use('/order', orderRouter)
 // router.use('/tgReq', tgReqRouter)
 

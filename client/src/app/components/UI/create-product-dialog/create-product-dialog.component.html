@@ -31,21 +31,36 @@
       </mat-form-field>
 
     </div>
-
-    <div formArrayName="imgs">
-      <ng-container *ngFor="let item of imgs.controls; let i = index">
-        <div [formGroupName]="i">
+    <!-- [formGroupName]="i"  -->
+    <!-- <div formArrayName="imgs"> -->
+      <!-- <ng-container *ngFor="let item of imgs.controls; let i = index"> -->
+        <div >
             <label class="signUpForm__label">
-              <div class="signUpForm__label-title">{{i + 1}} | img</div>
-              <input required type="file" class="signUpForm__label-input" formControlName="picture"/>
+              <!-- <div class="signUpForm__label-title">{{i + 1}} | img</div> -->
+              <input
+                (change)="changeImgs($event)" 
+                multiple 
+                required 
+                type="file" 
+                accept="image/*,.png,.jpg,.gig,.web,"
+                class="signUpForm__label-input" 
+                formControlName="imgs"/>
             </label>
-            <button mat-button (click)="removeImg(i)">Del img </button>
+            <!-- <button mat-button (click)="removeImg(i)">Del img </button> -->
         </div>
-      </ng-container>
-    </div>
+
+        <div class="df alc g15">
+          <ng-container *ngFor="let imgName of this.imgs()">
+            <div class="img-forms">
+              <img [src]='imgName.src'  [alt]="imgName.name" />
+            </div>
+          </ng-container>
+        </div>
+      <!-- </ng-container> -->
+    <!-- </div> -->
 
 
-    <button mat-button class="accent" (click)="addNewImg($event)">add img</button>
+    <!-- <button mat-button class="accent" (click)="addNewImg($event)">add img</button> -->
     
   
   </form>
@@ -56,6 +71,6 @@
       [disabled]="!productForm.valid" 
       mat-button 
       [mat-dialog-close]="productForm.value" 
-      cdkFocusInitial>Ok</button>
+      >Ok</button>
   </mat-dialog-actions>
 </mat-dialog-content>
