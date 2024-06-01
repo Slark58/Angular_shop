@@ -4,12 +4,14 @@
     <mat-card-title>Shiba Inu</mat-card-title>
     <mat-card-subtitle>Dog Breed</mat-card-subtitle>
   </mat-card-header> -->
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+
+  <!-- mat-card-image  -->
+  <img [src]="'http://localhost:5000/'+product!.product_imgs[0].img.img" alt="Photo of a Shiba Inu">
   <mat-card-content>
-    <div class="card-title">Lol ke</div>
+    <div class="card-title">{{product?.name}}</div>
     <div class="df g10">
-      <div class="price">1000</div>
-      <div class="oldPrice">1200</div>
+      <div class="price">{{product?.price}}</div>
+      <div class="oldPrice">{{product?.oldPrice}}</div>
     </div>
     <div class="card-rate">4.6</div>
   </mat-card-content>

@@ -10,7 +10,12 @@ const {
     Product,
     ProductInfo,
     Img,
-    ProductImgs
+    ProductImgs,
+    ProductChars,
+    Type,
+    Brand,
+    Gender,
+    Size
 } = require('../models/models')
 const ApiError = require('../error/ApiError');
 const {
@@ -99,19 +104,57 @@ class ProductController {
 
     async getAllProducts(req, res, next) {
         try {
-            let {page, limit} = req.query
+            // let {page, limit} = req.query
       
-            page = page || 1
-            limit = limit || 35
-            let offset = page * limit - limit
+            // page = page || 1
+            // limit = limit || 35
+            // let offset = page * limit - limit
 
-            const product = await Product.findAndCountAll({limit, offset})
+            const products = await Product.findAll({
+                include: [
+                    {
+                        model: ProductChars,
+                        include: [
+                            {model: Type},
+                            {model: Brand},
+                            {model: Gender},
+                            {model: Size},
+                        ]
+                    },
+                    {
+                        model: ProductImgs,
+                        include: [
+                            {model: Img}
+                        ]
+                    },
+                ],
+            })
 
-            if (!product) {
+            // const productWithChars = await ProductChars.findAll({
+            //     include: [
+            //         {model: Product},
+            //         {model: Type},
+            //         {model: Brand},
+            //         {model: Gender},
+            //         {model: Size},
+            //     ]
+            // })
+            // const productWithImgs = await ProductImgs.findAll({
+            //     include: [
+            //         {model: Product},
+            //         {model: Img},
+            //     ]
+            // })
+
+
+            // const result = await Promise.all([productWithChars, productWithImgs])
+
+
+            if (!products) {
                 return next(ApiError.badRequest('Продукты не найдены'))
               }
           
-            return res.json(product)
+            return res.json(products)
 
         } catch (error) {
             return next(ApiError.badRequest(error))

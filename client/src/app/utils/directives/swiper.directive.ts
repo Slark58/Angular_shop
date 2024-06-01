@@ -21,8 +21,9 @@ export class SwiperDirective implements AfterViewInit {
     console.log(this.config);
     
     
+    Object.assign(this.element.nativeElement, this.config);
     console.log(Object.assign(this.element.nativeElement, this.config));
-    //  Object.assign(this.element.nativeElement, this.config)
+    
     // @ts-ignore - We ignore this because there is no initialize method on the HTMLElement
     this.element.nativeElement.initialize();
   }

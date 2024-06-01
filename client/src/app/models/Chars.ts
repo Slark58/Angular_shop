@@ -9,7 +9,7 @@ export type Gender = BaseTypeChar;
 export type Size = BaseTypeChar;
 
 
-export interface imgs {
+export interface Imgs {
   id: number
   img: string
   tag: string

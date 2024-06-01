@@ -8,44 +8,43 @@ import { SwiperOptions } from 'swiper/types';
 })
 export class MainPageComponent {
 
-      // swiper?: Swiper;
-      // @ViewChild('swiperRef')
-      // swiperRef: ElementRef | undefined;
-      // slides: Array<{title: string}> = [
-      //   {
-      //     title: "Slide 1"
-      //   },
-      //   {
-      //     title: "Slide 2"
-      //   },
-      //   {
-      //     title: "Slide 3"
-      //   },
-      // ]
+      swiper?: Swiper;
+      @ViewChild('swiperRef') swiperRef: ElementRef | undefined;
+      slides: Array<{title: string}> = [
+        {
+          title: "Slide 1"
+        },
+        {
+          title: "Slide 2"
+        },
+        {
+          title: "Slide 3"
+        },
+      ]
 
-      // // ngAfterViewInit() {
-      // //   this.swiper = this.swiperRef?.nativeElement.swiper;
-      // // }
-
-      // public config: SwiperOptions = {
-      //   slidesPerView: 1,
-      //   spaceBetween: 25,
-      //   loop: true,
-      //   breakpoints: {
-      //     320: {
-      //       slidesPerView: 1.5,
-      //     },
-      //     768: {
-      //       slidesPerView: 1,
-      //     },
-      //     1280: {
-      //       slidesPerView: 1,
-      //     }
-      //   },
-
-      //   pagination: true
-
+      // ngAfterViewInit() {
+      //   this.swiper = this.swiperRef?.nativeElement.swiper;
       // }
+
+      public config: SwiperOptions = {
+        slidesPerView: 1,
+        spaceBetween: 25,
+        loop: true,
+        breakpoints: {
+          320: {
+            slidesPerView: 1.5,
+          },
+          768: {
+            slidesPerView: 1,
+          },
+          1280: {
+            slidesPerView: 1,
+          }
+        },
+
+        pagination: true
+
+      }
 
 
 }

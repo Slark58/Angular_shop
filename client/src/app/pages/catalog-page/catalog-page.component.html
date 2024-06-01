@@ -17,15 +17,9 @@
   
       </div>
       <div class="catalog-page-list df fww g30 jcc">
-        <app-catalog-card></app-catalog-card>
-        <app-catalog-card></app-catalog-card>
-        <app-catalog-card></app-catalog-card>
-        <app-catalog-card></app-catalog-card>
-        <app-catalog-card></app-catalog-card>
-        <app-catalog-card></app-catalog-card>
-        <app-catalog-card></app-catalog-card>
-        <app-catalog-card></app-catalog-card>
-        <app-catalog-card></app-catalog-card>
+        <ng-container *ngFor="let product of productsService.products$ | async">
+          <app-catalog-card [product]="product"></app-catalog-card>
+        </ng-container>
         <!-- <ng-container *ngFor="let item of list"></ng-container> -->
       </div>
     </div>

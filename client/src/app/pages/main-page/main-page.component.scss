@@ -1,37 +1,37 @@
-.swiper-button-prev, .swiper-button-next {
-  background-color: navy;
-  color: white;
-  padding: .5rem;
-  border-radius: .5rem;
-}
 
-.swiper-button-prev {
-  left: 2rem;
-  right: auto;
-}
+swiper-slide { 
 
-.swiper-button-next {
-  right: 2rem;
-  left: auto;
-}
+  img {
+    width: 100%;
+    height: 100%;
+  }
 
 
-:host ::ng-deep .swiper-scrollbar{
-  position: absolute;
-  bottom: -2rem;
 }
 
-:host ::ng-deep .swiper-scrollbar.swiper-scrollbar-horizontal {
-  height: .65rem;
-}
+// swiper-slide {
+//   text-align: center;
+//   font-size: 24px;
+//   border-radius: 24px;
+//   padding: 16px 0;
+//   height: 400px;
 
-:host ::ng-deep .swiper-scrollbar.swiper-scrollbar-horizontal .swiper-scrollbar-drag{
-  background: navy;
-  height: .5rem;
-  padding: .1rem;
-}
 
-.slide {
-  height: 100dvh;
-  width: 100%;
-}
+//   &:nth-of-type(1) {
+//       background-color: #780000;
+//       color: white
+//   }
+
+//   &:nth-of-type(2) {
+//       background-color: #fdf0d5;
+//   }
+
+//   &:nth-of-type(3) {
+//       background-color: #003049;
+//       color: white;
+//   }
+
+//   &:nth-of-type(4) {
+//       background-color: #669bbc;
+//   }
+// }
