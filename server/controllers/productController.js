@@ -93,10 +93,23 @@ class ProductController {
         const {id} = req.params
         const product = await Product.findOne({
             where: {id},
-            include: [{
-                model: ProductInfo,
-                as: 'info'
-            }]
+            include: [
+                {
+                    model: ProductChars,
+                    include: [
+                        {model: Type},
+                        {model: Brand},
+                        {model: Gender},
+                        {model: Size},
+                    ]
+                },
+                {
+                    model: ProductImgs,
+                    include: [
+                        {model: Img}
+                    ]
+                },
+            ],
         }, )
         return res.json(product)
     }
@@ -129,26 +142,6 @@ class ProductController {
                     },
                 ],
             })
-
-            // const productWithChars = await ProductChars.findAll({
-            //     include: [
-            //         {model: Product},
-            //         {model: Type},
-            //         {model: Brand},
-            //         {model: Gender},
-            //         {model: Size},
-            //     ]
-            // })
-            // const productWithImgs = await ProductImgs.findAll({
-            //     include: [
-            //         {model: Product},
-            //         {model: Img},
-            //     ]
-            // })
-
-
-            // const result = await Promise.all([productWithChars, productWithImgs])
-
 
             if (!products) {
                 return next(ApiError.badRequest('Продукты не найдены'))

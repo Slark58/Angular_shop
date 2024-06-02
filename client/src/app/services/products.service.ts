@@ -32,4 +32,10 @@ export class ProductsService {
       })
   }
 
+  public getProductById(id: number) {
+    this.isLoading.set(true)
+    return this.http.get<FullProduct>(`${environment.URL_API}/product/${id}`)
+      
+  }
+
 }

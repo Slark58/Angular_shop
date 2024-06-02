@@ -40,8 +40,8 @@ export type FullProduct = Product &{
   product_chars: {
     size: Size,
     type: Type,
-    brands: Brand,
-    genders: Gender,
+    brand: Brand,
+    gender: Gender,
     typeId: number,
     brandId: number,
     genderId: number,
