@@ -23,6 +23,7 @@ import { AdminUsersPageComponent } from './pages/admin-panel-page/childerens/adm
 import { AdminProductsPageComponent } from './pages/admin-panel-page/childerens/admin-products-page/admin-products-page.component';
 import { CreateProductDialogComponent } from './components/UI/create-product-dialog/create-product-dialog.component';
 import { register } from 'swiper/element/bundle';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
 // register Swiper custom elements
 register();
 
@@ -43,6 +44,7 @@ register();
     AdminUsersPageComponent,
     AdminProductsPageComponent,
     CreateProductDialogComponent,
+    ProductPageComponent,
   ],
   imports: [
     HttpClientModule,

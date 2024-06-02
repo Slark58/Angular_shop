@@ -9,6 +9,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { AdminOrdersPageComponent } from './pages/admin-panel-page/childerens/admin-orders-page/admin-orders-page.component';
 import { AdminUsersPageComponent } from './pages/admin-panel-page/childerens/admin-users-page/admin-users-page.component';
 import { AdminProductsPageComponent } from './pages/admin-panel-page/childerens/admin-products-page/admin-products-page.component';
+import { ProductPageComponent } from './pages/product-page/product-page.component';
 
 export enum Paths {
   Home = '',
@@ -16,7 +17,8 @@ export enum Paths {
   Signup = 'Signup',
   Signin = 'Signin',
   Account = 'Account',
-  AdminPanel = 'AdminPanel'
+  AdminPanel = 'AdminPanel',
+  Product = 'Catalog/:id',
 }
 
 export enum AdminPaths {
@@ -49,6 +51,10 @@ const routes: Routes = [
       { 
         path: Paths.Signup, 
         component: AuthPageComponent 
+      },
+      { 
+        path: Paths.Product, 
+        component: ProductPageComponent 
       },
     ]
   },

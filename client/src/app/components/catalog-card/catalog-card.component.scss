@@ -1,5 +1,11 @@
 .catalog-card {
   width: 250px;
+  cursor: pointer;
+  transition: all 0.18s;
+  &:hover {
+    background-color: rgb(224, 224, 224);
+  }
+  
 }
 
 .like {
@@ -10,4 +16,6 @@
 .cart {
   background-color: #FFD740;
   color: white;
+
+  
 }
