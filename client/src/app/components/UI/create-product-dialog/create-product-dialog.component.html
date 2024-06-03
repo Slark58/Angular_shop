@@ -1,6 +1,6 @@
 <mat-dialog-content>
   <p>Create product</p>
-  <form [formGroup]="productForm">
+  <form [formGroup]="productFbForm">
 
     <div class="df g15 alc">
       <mat-form-field appearance="outline" class="example-full-width auth-label">
@@ -32,41 +32,29 @@
 
     </div>
 
-    <div class="filters-cahrs" formGroupName="chars">
-      @if(filtersService.filters$ | async; as filters) {
-        <div class="df g10 fdc">
-         @for(filter of filters; track filter.title) {
-            @if(filter.title === "Types" || filter.title === "Genders") {
-              <div class="">{{filter.title}}</div>
-              <div class="df alc g10 fww">
-                @for(item of filter.data; track item) {        
-                  <div 
-                  class="filters-btn">{{item.value}}</div>
-                }
-              </div>
-            } @else {
-              <div class="">{{filter.title}}</div>
-              <div class="df alc g10 fww"  >
-                @for(item of filter.data; track item) {        
-                  <div 
-                  [ngClass]="{'act': isItemActive(filter.title, item.id)}"
-                  (click)="changeMulriSelect(filter.title, item.id)" 
-                   class="filters-btn">{{item.value}}</div>
-                }
-              </div>
-              }
-            }
-          </div>
-      
-      }
+    <p>Choise characteristic</p>
+      <div class="filters-cahrs" formGroupName="chars">
+        @if(filtersService.filters$ | async; as filters) {
+          <div class="df g10 fdc">
+           @for(filter of filters; track filter.title) {
+                <div class="">{{filter.title}}</div>
+                <mat-form-field>
+                  <mat-label>Favorite food</mat-label>
+                  <mat-select>
+                    @for (item of filter.data; track item) {
+                      <mat-option [value]="item.id">{{item.value}}</mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              } 
+            </div>
+        
+        }
     </div>
-    <!-- [formGroupName]="i"  -->
-    <!-- <div formArrayName="imgs"> -->
-      <!-- <ng-container *ngFor="let item of imgs.controls; let i = index"> -->
+
         <div >
           <div class="mt10">Imges</div>
             <label class="signUpForm__label">
-              <!-- <div class="signUpForm__label-title">{{i + 1}} | img</div> -->
               <input
                 (change)="changeImgs($event)" 
                 multiple 
@@ -76,7 +64,6 @@
                 class="signUpForm__label-input" 
                 formControlName="imgs"/>
             </label>
-            <!-- <button mat-button (click)="removeImg(i)">Del img </button> -->
         </div>
 
         <div class="df alc g15">
@@ -86,22 +73,15 @@
             </div>
           </ng-container>
         </div>
-      <!-- </ng-container> -->
-    <!-- </div> -->
-
-
-
-    <!-- <button mat-button class="accent" (click)="addNewImg($event)">add img</button> -->
-    
   
   </form>
   <mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
     <button 
-      [ngClass]="!productForm.valid ? 'disabled' : null"
-      [disabled]="!productForm.valid" 
+      [ngClass]="!productFbForm.valid ? 'disabled' : null"
+      [disabled]="!productFbForm.valid" 
       mat-button 
-      [mat-dialog-close]="productForm.value" 
+      [mat-dialog-close]="productFbForm.value" 
       >Ok</button>
   </mat-dialog-actions>
 </mat-dialog-content>

@@ -17,7 +17,7 @@ export class CreateProductDialogComponent implements OnInit  {
 
   constructor(
     public dialogRef: MatDialogRef<CreateProductDialogComponent>,
-    private _fb: FormBuilder
+    private formBuilder: FormBuilder
   ) {}
 
   filtersService: FiltersService = inject(FiltersService)
@@ -32,88 +32,37 @@ export class CreateProductDialogComponent implements OnInit  {
   //   return this.productForm.get('imgs') as FormArray
   // }
 
-  // public productFbForm = this._fb.group({
-  //   name: ['', [Validators.required]],
-  //   price: [0],
-  //   oldPrice: [0],
-  //   imgs: this._fb.array([])
-  // })
-
-
-  public productForm = new FormGroup({
-    name: new FormControl<string>('', [Validators.required]),
-    price: new FormControl<number | null>(null, [Validators.required]),
-    oldPrice: new FormControl<number | null>(null, [Validators.required]),
-    imgs: new FormControl<File[]>([], [Validators.required]),
-    chars: new FormGroup({
-      colors: new FormControl<number[]>([], [Validators.required]),
-      sizes: new FormControl<number[]>([], [Validators.required]),
-      type: new FormControl<number | null>(null, [Validators.required]),
-      gender: new FormControl<number | null>(null, [Validators.required]),
+  public productFbForm = this.formBuilder.group({
+    name: [<string>'', [Validators.required]],
+    price: [<number | null>null, [Validators.required]],
+    oldPrice: [<number | null>null, [Validators.required]],
+    imgs: [<File[]>[], [Validators.required]],
+    chars: this.formBuilder.group({
+      colors: [<string | null> null, [Validators.required]],
+      sizes: [<string | number | null> null, [Validators.required]],
+      type: [<string | null> null, [Validators.required]],
+      gender: [<string | null> null, [Validators.required]],
     })
   })
 
-  public isItemActive(title: string, id: number): boolean {
-    if (title.toLocaleLowerCase() === 'colors') {
-      const colors = this.productForm.get('chars.colors')?.value as number[] | null | undefined;
-      return colors ? colors.includes(id) : false;
-    } else if (title.toLocaleLowerCase() === 'sizes') {
-      const sizes = this.productForm.get('chars.sizes')?.value as number[] | null | undefined;
-      return sizes ? sizes.includes(id) : false;
-    }
-    return false;
-  }
 
-  public changeMulriSelect(title: string, id: number) {
-    if (title.toLocaleLowerCase() === 'colors') {
-      const colors = this.productForm.get('chars.colors')?.value as number[];
-      if (colors) {
-        const index = colors.indexOf(id);
-        if (index !== -1) {
-          colors.splice(index, 1);
-          console.log(this.productForm.value);
-        } else {
-          colors.push(id);
-          console.log(this.productForm.value);
-        }
-      }
-    } else if (title.toLocaleLowerCase() === 'sizes') {
-      const sizes = this.productForm.get('chars.sizes')?.value as number[];
-      if (sizes) {
-        const index = sizes.indexOf(id);
-        if (index !== -1) {
-          sizes.splice(index, 1);
-          console.log(this.productForm.value);
-
-        } else {
-          sizes.push(id);
-          console.log(this.productForm.value);
-
-        }
-      }
-    }
-
-  }
-  public changeToggle(id: number) {
-  
-  }
 
   public changeImgs(e: Event) {
     this.imgs.set([])
-    this.productForm.value.imgs = []
+    this.productFbForm.value.imgs = []
     
 
     const inputElement = e.target as HTMLInputElement;
     if (inputElement.files) {
-      const files = Array.from(inputElement.files) // Или использовать file объекты напрямую
+      const files = Array.from(inputElement.files) 
       
       if (files.length > this.maxImgs) {
         alert(`You can only add up to ${this.maxImgs} files.`);
-        this.productForm.patchValue({imgs: []})
+        this.productFbForm.patchValue({imgs: []})
         return;
       }
 
-      this.productForm.value.imgs = [...files]
+      this.productFbForm.value.imgs = [...files]
 
       files.forEach(file => {
         
@@ -133,16 +82,7 @@ export class CreateProductDialogComponent implements OnInit  {
     }
   }
 
-  public NewImg(): FormGroup {
 
-    // return this._fb.group({
-    //   picture: '',
-    // })
-
-    return new FormGroup({
-      picture: new FormControl([], [Validators.required]),
-    })  
-  }
 
   // public addNewImg(e: Event) {
   //   e.preventDefault()
