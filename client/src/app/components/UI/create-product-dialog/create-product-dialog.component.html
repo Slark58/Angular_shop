@@ -31,10 +31,40 @@
       </mat-form-field>
 
     </div>
+
+    <div class="filters-cahrs" formGroupName="chars">
+      @if(filtersService.filters$ | async; as filters) {
+        <div class="df g10 fdc">
+         @for(filter of filters; track filter.title) {
+            @if(filter.title === "Types" || filter.title === "Genders") {
+              <div class="">{{filter.title}}</div>
+              <div class="df alc g10 fww">
+                @for(item of filter.data; track item) {        
+                  <div 
+                  class="filters-btn">{{item.value}}</div>
+                }
+              </div>
+            } @else {
+              <div class="">{{filter.title}}</div>
+              <div class="df alc g10 fww"  >
+                @for(item of filter.data; track item) {        
+                  <div 
+                  [ngClass]="{'act': isItemActive(filter.title, item.id)}"
+                  (click)="changeMulriSelect(filter.title, item.id)" 
+                   class="filters-btn">{{item.value}}</div>
+                }
+              </div>
+              }
+            }
+          </div>
+      
+      }
+    </div>
     <!-- [formGroupName]="i"  -->
     <!-- <div formArrayName="imgs"> -->
       <!-- <ng-container *ngFor="let item of imgs.controls; let i = index"> -->
         <div >
+          <div class="mt10">Imges</div>
             <label class="signUpForm__label">
               <!-- <div class="signUpForm__label-title">{{i + 1}} | img</div> -->
               <input
@@ -60,12 +90,13 @@
     <!-- </div> -->
 
 
+
     <!-- <button mat-button class="accent" (click)="addNewImg($event)">add img</button> -->
     
   
   </form>
   <mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button (click)="onNoClick()">Cancel</button>
     <button 
       [ngClass]="!productForm.valid ? 'disabled' : null"
       [disabled]="!productForm.valid" 

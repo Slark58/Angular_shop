@@ -56,13 +56,9 @@ const OrderProduct = sequelize.define('order_product', {
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////@
-//////////////////////////////////////////@ ХАРАКТЕРИСТИКИ ?///////////////////////////////////////////////////?
+//////////////////////////////////////////@ ХАРАКТЕРИСТИКИ @///////////////////////////////////////////////////@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////@
 const Type = sequelize.define('type', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    value: {type: DataTypes.STRING, allowNull: false},
-}, {timestamps: false})
-const Brand = sequelize.define('brand', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     value: {type: DataTypes.STRING, allowNull: false},
 }, {timestamps: false})
@@ -72,18 +68,27 @@ const Gender = sequelize.define('gender', {
 }, {timestamps: false})
 const Size = sequelize.define('size', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    value: {type: DataTypes.INTEGER, allowNull: false},
+    value: {type: DataTypes.STRING, allowNull: false},
+}, {timestamps: false})
+const Color = sequelize.define('color', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    value: {type: DataTypes.STRING, allowNull:false},
+    code: {type: DataTypes.STRING, allowNull: true},
+}, {timestamps: false})
+const Stock = sequelize.define('stock', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    count: {type: DataTypes.INTEGER, allowNull: true},
 }, {timestamps: false})
 const Img = sequelize.define('img', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     img: {type: DataTypes.STRING, allowNull: false},
-    tag: {type: DataTypes.STRING, allowNull: false},
 }, {timestamps: false})
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////*
 //////////////////////////////////////////* СВЯЗЫВАЮЩИЕ ?///////////////////////////////////////////////////?
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////*
+
 const ProductChars = sequelize.define('product_chars', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     count: {type: DataTypes.INTEGER, allowNull: false},
@@ -153,19 +158,20 @@ OrderProduct.belongsTo(Product)
 Product.hasMany(ProductInfo, {as: 'info'});
 ProductInfo.belongsTo(Product)
 
-Product.hasMany(ProductChars)
+Product.hasMany(ProductChars, {as: 'chars'})
 ProductChars.belongsTo(Product)
 
-Product.hasMany(ProductImgs)
+Product.hasMany(ProductImgs, {as: 'imgs'})
 ProductImgs.belongsTo(Product)
+
+ProductChars.hasOne(Stock)
+Stock.belongsTo(ProductChars)
 
 //////! CHARSiristis
 
+
 Type.hasMany(ProductChars)
 ProductChars.belongsTo(Type)
-
-Brand.hasMany(ProductChars)
-ProductChars.belongsTo(Brand)
 
 Gender.hasMany(ProductChars)
 ProductChars.belongsTo(Gender)
@@ -173,29 +179,36 @@ ProductChars.belongsTo(Gender)
 Size.hasMany(ProductChars)
 ProductChars.belongsTo(Size)
 
+Color.hasMany(ProductChars)
+ProductChars.belongsTo(Color)
+
+Color.hasMany(ProductImgs)
+ProductImgs.belongsTo(Color)
+
 Img.hasMany(ProductImgs)
 ProductImgs.belongsTo(Img)
-
-
 
 module.exports = {
 
     User,
     Basket,
     BasketProduct,
+
+    Comments,
     Product,
     Rating,
     ProductInfo,
     Order,
     OrderProduct,
-    Promocode,
-    Comments,
-    ProductChars,
     ProductImgs,
+    ProductChars,
+    
+    Promocode,
+    
     Type,
-    Brand,
+    Color,
     Gender,
     Size,
-    Img
-    
+    Img,
+    Stock
 }

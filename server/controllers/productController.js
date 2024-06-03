@@ -25,7 +25,7 @@ const {
 class ProductController {
     async createProduct(req, res, next) {
         try {
-            let { name,price, oldPrice } = req.body
+            let { name,price, oldPrice, sizes, colors, type, gender } = req.body
             console.log(name, price, oldPrice);
             const {imgs} = req.files
 
@@ -41,6 +41,22 @@ class ProductController {
                     tag: 'test'
                 })
                 return img
+            }
+        
+            if (imgs) {
+                for (const img of imgs) {
+                    let fileName = uuid.v4() + ".jpg"
+                    img.mv(path.resolve(__dirname, '..', 'static', fileName))   
+    
+                    const imgNew = await createImg(fileName)
+                    
+                    console.log(imgNew);
+    
+                    ProductImgs.create({
+                        productId: product.id,
+                        imgId: imgNew.id
+                    })
+                }
             }
 
         
@@ -60,7 +76,7 @@ class ProductController {
                 }
             }
             
-
+            
 
 
             // let fileName = uuid.v4() + ".jpg"

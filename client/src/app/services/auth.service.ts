@@ -30,6 +30,7 @@ export class AuthService {
       .subscribe({
         next: (res) => {
           localStorage.setItem('token', res.token)
+          this.router.navigate([Paths.Signin])
           console.log(res);
         },
         error: (error) => {

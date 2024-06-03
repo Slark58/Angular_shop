@@ -4,7 +4,8 @@ const {
 Brand,
 Size,
 Type,
-Gender
+Gender,
+Color
 } = require('../models/models')
 const ApiError = require('../error/ApiError');
 
@@ -15,11 +16,11 @@ class FiltersController {
 
       const sizes = await Size.findAll();
       const types = await Type.findAll();
-      const brands = await Brand.findAll();
+      const colors = await Color.findAll();
       const genders = await Gender.findAll();
 
       return res.json([
-        { title: 'Brands', data: brands },
+        { title: 'Colors', data: colors },
         { title: 'Sizes', data: sizes },
         { title: 'Types', data: types },
         { title: 'Genders', data: genders }
