@@ -25,7 +25,7 @@ const {
 class ProductController {
     async createProduct(req, res, next) {
         try {
-            let { name,price, oldPrice, sizes, colors, type, gender } = req.body
+            let { name,price, oldPrice, size, color, type, gender } = req.body
             console.log(name, price, oldPrice);
             const {imgs} = req.files
 
@@ -60,7 +60,7 @@ class ProductController {
             }
 
         
-            if (imgs) {
+            if (size, color, type, gender) {
                 for (const img of imgs) {
                     let fileName = uuid.v4() + ".jpg"
                     img.mv(path.resolve(__dirname, '..', 'static', fileName))   

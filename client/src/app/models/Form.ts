@@ -8,6 +8,12 @@ export interface ProductCreateForm {
   name: string,
   price: number,
   oldPrice: number,
-  imgs: File[]
+  imgs: File[],
+  chars: {
+    color: number 
+    size: number
+    type: number 
+    gender: number
+  }
 }
 

@@ -24,11 +24,15 @@ import { AdminProductsPageComponent } from './pages/admin-panel-page/childerens/
 import { CreateProductDialogComponent } from './components/UI/create-product-dialog/create-product-dialog.component';
 import { register } from 'swiper/element/bundle';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
+import { LastLetterPipePipe } from './utils/pipes/LastLetterPipe.pipe';
 // register Swiper custom elements
 register();
 
 @NgModule({
   declarations: [
+
+    LastLetterPipePipe,
+
     AppComponent,
     HeaderComponent,
     SwiperDirective,

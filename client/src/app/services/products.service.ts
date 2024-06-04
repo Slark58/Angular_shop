@@ -38,4 +38,22 @@ export class ProductsService {
       
   }
 
+
+  public createProduct(formData: FormData) {
+    // this.isLoading.set(true)
+    console.log(formData);
+    
+    // this.http.post(`${environment.URL_API}/admin/create-product`, formData)
+    //   .subscribe({
+    //     next: (res) => {
+    //       console.log(res);
+    //       this.isLoading.set(false)
+    //     },
+    //     error: (error) => {
+    //       console.log(error);
+    //       this.isLoading.set(false)
+    //     },
+    //   })
+  }
+
 }

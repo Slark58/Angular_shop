@@ -33,24 +33,48 @@
     </div>
 
     <p>Choise characteristic</p>
-      <div class="filters-cahrs" formGroupName="chars">
+      <div class="filters-cahrs" formArrayName="chars">
         @if(filtersService.filters$ | async; as filters) {
-          <div class="df g10 fdc">
-           @for(filter of filters; track filter.title) {
-                <div class="">{{filter.title}}</div>
+          <div class="df g10 ">
+          @for(char of chars.controls; track $index) {
+            <div [formGroupName]="$index">
+              @for(filter of filters; track filter.title) {
                 <mat-form-field>
-                  <mat-label>Favorite food</mat-label>
-                  <mat-select>
+                  <mat-label>{{filter.title}}</mat-label>
+                  <mat-select [formControlName]="filter.title | lowercase | LastLetterPipe">
                     @for (item of filter.data; track item) {
                       <mat-option [value]="item.id">{{item.value}}</mat-option>
                     }
                   </mat-select>
                 </mat-form-field>
-              } 
+                
+              }     
+              <mat-form-field appearance="fill" class="example-full-width auth-label">
+                <mat-label>count</mat-label>
+                <input 
+                  matInput 
+                  type="text"
+                  formControlName="count"
+                  >
+              </mat-form-field>   
+              <!-- <mat-form-field>
+                <mat-label>{{filters[$index].title}}</mat-label>
+                <mat-select [formControlName]="filters[$index].title | lowercase | LastLetterPipe">
+                  @for (item of filters[$index].data; track item) {
+                    <mat-option [value]="item.id">{{item.value}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field> -->
+           
+              <button (click)="removeChar($index)">removeChar</button>
+            </div>
+          }
             </div>
         
         }
     </div>
+    <button (click)="addNewChar($event)">addNewChar</button>
+
 
         <div >
           <div class="mt10">Imges</div>
@@ -59,12 +83,15 @@
                 (change)="changeImgs($event)" 
                 multiple 
                 required 
+                #Imgsinput
                 type="file" 
                 accept="image/*,.png,.jpg,.gig,.web,"
                 class="signUpForm__label-input" 
                 formControlName="imgs"/>
             </label>
         </div>
+
+        <div (click)="triggerInputImgs(Imgsinput)" class="btn-upload">Upload</div>
 
         <div class="df alc g15">
           <ng-container *ngFor="let imgName of this.imgs()">
@@ -75,6 +102,8 @@
         </div>
   
   </form>
+
+  {{productFbForm.value | json}}
   <mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
     <button 

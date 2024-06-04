@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateProductDialogComponent } from '../../../../components/UI/create-product-dialog/create-product-dialog.component';
 import { AdminService } from '../../../../services/admin.service';
 import { ProductCreateForm } from '../../../../models/Form';
+import { ProductsService } from '../../../../services/products.service';
 
 @Component({
   selector: 'app-admin-products-page',
@@ -11,7 +12,7 @@ import { ProductCreateForm } from '../../../../models/Form';
 })
 export class AdminProductsPageComponent  {
 
-  public adminService: AdminService = inject(AdminService)
+  public adminService: ProductsService = inject(ProductsService)
   
   constructor(
     private dialog: MatDialog
@@ -30,6 +31,10 @@ export class AdminProductsPageComponent  {
         result.imgs.forEach((file, i) => {
           formData.append('imgs', file)
         })
+        formData.append('color', result.chars.color.toString())
+        formData.append('size', result.chars.size.toString())
+        formData.append('type', result.chars.type.toString())
+        formData.append('gender', result.chars.gender.toString())
 
         this.adminService.createProduct(formData)
         console.log(result);
