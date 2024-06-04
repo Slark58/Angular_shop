@@ -35,9 +35,10 @@
     <p>Choise characteristic</p>
       <div class="filters-cahrs" formArrayName="chars">
         @if(filtersService.filters$ | async; as filters) {
-          <div class="df g10 ">
+          <div class="df g10 fdc">
           @for(char of chars.controls; track $index) {
-            <div [formGroupName]="$index">
+            <div class="df g10 " [formGroupName]="$index">
+              <div class="signUpForm__label-title">{{$index + 1}} | </div>
               @for(filter of filters; track filter.title) {
                 <mat-form-field>
                   <mat-label>{{filter.title}}</mat-label>
@@ -53,7 +54,7 @@
                 <mat-label>count</mat-label>
                 <input 
                   matInput 
-                  type="text"
+                  type="number"
                   formControlName="count"
                   >
               </mat-form-field>   

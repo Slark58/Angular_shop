@@ -11,7 +11,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 
@@ -30,6 +30,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatDialogModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatTabsModule
   ],
   declarations: [],
   providers: [],

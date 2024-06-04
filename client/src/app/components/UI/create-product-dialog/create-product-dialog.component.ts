@@ -36,7 +36,7 @@ export class CreateProductDialogComponent implements OnInit  {
     price: [null, [Validators.required]],
     oldPrice: [null, [Validators.required]],
     imgs: [<File[]>[], [Validators.required]],
-    chars: this.formBuilder.array([this.newChar()])
+    chars: this.formBuilder.array([])
     // chars: this.formBuilder.group({ // Тут характеристики (тестовая версия)
     //   color: [ null, [Validators.required]], 
     //   size: [ null, [Validators.required]], 

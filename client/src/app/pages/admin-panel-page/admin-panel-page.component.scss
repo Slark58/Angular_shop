@@ -8,15 +8,15 @@
 }
 
 .content {
-  background-color: rgb(162, 162, 162);
+  // background-color: rgb(162, 162, 162);
   flex: 1;
 }
 .sidebar-link {
   font-size: 18px;
   color: white;
   text-decoration: none;
-  padding: 15px 10px;
-  width: 100%;
+  padding: 15px 0px 15px 10px;
+  // width: 100%;
   &:hover:not(.link-active) {
     background-color: #542f95;
   }
