@@ -1,6 +1,21 @@
 <div (click)="redirecToProduct(product?.id)">
   <mat-card  class="example-card catalog-card" >
-    <img [src]="'http://localhost:5000/'+product!.product_imgs[0].img.img" alt="Photo of a Shiba Inu">
+
+    <div class="card-wrapper-slider">
+      <swiper-container 
+          class="card-preview-slider" 
+          slides-per-view="1"
+          pagination="true"
+          space-between="10">
+          @if (product) {
+            @for (item of product.imgs; track $index) {
+              <swiper-slide >
+                  <img [src]="'http://localhost:5000/'+item.img.img" />
+              </swiper-slide>
+            }
+          }
+          </swiper-container>
+    </div>
     <mat-card-content >
       <div class="card-title">{{product?.name}}</div>
       <div class="df g10">
@@ -10,12 +25,12 @@
       <div class="card-rate">4.6</div>
     </mat-card-content>
     <mat-card-actions align="end" class="df g10">
-      <button mat-button class="like">
+      <button type="button" mat-button class="like">
         <mat-icon class="cw">
             favorite
         </mat-icon>
       </button>
-      <button mat-button class="cart">
+      <button type="button"  mat-button class="cart">
         <mat-icon class="bl">
             shopping_basket
         </mat-icon>

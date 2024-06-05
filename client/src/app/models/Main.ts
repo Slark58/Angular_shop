@@ -37,7 +37,7 @@ export interface Comments {
 }
 
 export type FullProduct = Product &{
-  product_chars: {
+  chars: {
     size: Size,
     type: Type,
     brand: Brand,
@@ -49,7 +49,7 @@ export type FullProduct = Product &{
     sizeId: number,
     count: number,
   }[]
-  product_imgs: {
+  imgs: {
     id: number,
     img: Imgs
     imgId: number,

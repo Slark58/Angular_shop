@@ -1,11 +1,29 @@
 .catalog-card {
-  width: 250px;
+  max-width: 300px;
   cursor: pointer;
+  height: max-content;
   transition: all 0.18s;
   &:hover {
     background-color: rgb(224, 224, 224);
   }
   
+}
+
+.card-wrapper-slider {
+  width: 100%;
+  height: 360px;
+}
+
+.card-preview-slider {
+  width: 100%;
+  height: 100%;
+  swiper-slide img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+
+  }
+
 }
 
 .like {

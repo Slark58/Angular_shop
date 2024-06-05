@@ -10,7 +10,7 @@
         space-between="10">
         
         @if (product$ | async; as product) {
-          @for (item of product.product_imgs; track $index) {
+          @for (item of product.imgs; track $index) {
             <swiper-slide >
                 <img [src]="'http://localhost:5000/'+item.img.img" />
             </swiper-slide>
@@ -23,7 +23,7 @@
           space-between="10"  
           navigation="true">
           @if (product$ | async; as product) {
-            @for (item of product.product_imgs; track item.id) {
+            @for (item of product.imgs; track item.id) {
               <swiper-slide class="prod-slide-down">
                   <img [src]="'http://localhost:5000/'+item.img.img" />
               </swiper-slide>
@@ -34,7 +34,7 @@
 
       <div class="product-page-chrs">
         @if (product$ | async; as product) {
-          @for (item of product.product_chars; track item) {
+          @for (item of product.chars; track item) {
            <div class="df g15 alc">
             <div class="">{{item.gender.value}}</div>
             <div class=""></div>
