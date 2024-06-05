@@ -15,7 +15,8 @@ const {
     Type,
     Brand,
     Gender,
-    Size
+    Size,
+    Color
 } = require('../models/models')
 const ApiError = require('../error/ApiError');
 const {
@@ -25,11 +26,14 @@ const {
 class ProductController {
     async createProduct(req, res, next) {
         try {
-            let { name,price, oldPrice, size, color, type, gender } = req.body
-            console.log(name, price, oldPrice);
+            let { name,price, oldPrice, chars, colorId } = req.body
             const {imgs} = req.files
+            console.log("chars: ", JSON.parse(chars));
+            // console.log('imgssssss: ', imgs);
 
-            const product = await Product.create({
+            console.log("color: ", JSON.parse(chars)[0].color);
+            console.log("ColorId: ", Number(colorId));
+            const product = await Product.create({   
                 name,
                 price,
                 oldPrice
@@ -38,7 +42,6 @@ class ProductController {
             const createImg = async (fileName) => {
                 const img = await Img.create({
                     img: fileName,
-                    tag: 'test'
                 })
                 return img
             }
@@ -54,36 +57,29 @@ class ProductController {
     
                     ProductImgs.create({
                         productId: product.id,
+                        colorId: colorId,
                         imgId: imgNew.id
                     })
                 }
             }
 
         
-            if (size, color, type, gender) {
-                for (const img of imgs) {
-                    let fileName = uuid.v4() + ".jpg"
-                    img.mv(path.resolve(__dirname, '..', 'static', fileName))   
-    
-                    const imgNew = await createImg(fileName)
-                    
-                    console.log(imgNew);
-    
-                    ProductImgs.create({
+            if (chars) {
+                chars = JSON.parse(chars)
+                for (const char of chars) {
+                    ProductChars.create({
                         productId: product.id,
-                        imgId: imgNew.id
+                        typeId: char.type,
+                        genderId: char.gender,
+                        sizeId: char.size,
+                        colorId: char.color,
+                        count: char.count
                     })
+                  
                 }
             }
             
             
-
-
-            // let fileName = uuid.v4() + ".jpg"
-            // picture.mv(path.resolve(__dirname, '..', 'static', fileName))
-
-
-
             // const product = await Product.create(productData);
 
             // if (info) {
@@ -96,6 +92,7 @@ class ProductController {
             //         })
             //     )
             // }
+
 
             return res.json(product)
         } catch (e) {
@@ -114,7 +111,7 @@ class ProductController {
                     model: ProductChars,
                     include: [
                         {model: Type},
-                        {model: Brand},
+                        {model: Color},
                         {model: Gender},
                         {model: Size},
                     ]
@@ -122,7 +119,8 @@ class ProductController {
                 {
                     model: ProductImgs,
                     include: [
-                        {model: Img}
+                        {model: Img},
+                        {model: Color},
                     ]
                 },
             ],
@@ -145,7 +143,7 @@ class ProductController {
                         model: ProductChars,
                         include: [
                             {model: Type},
-                            {model: Brand},
+                            {model: Color},
                             {model: Gender},
                             {model: Size},
                         ]
@@ -153,11 +151,14 @@ class ProductController {
                     {
                         model: ProductImgs,
                         include: [
-                            {model: Img}
+                            {model: Img},
+                            {model: Color},
                         ]
                     },
                 ],
             })
+
+            console.log(products);
 
             if (!products) {
                 return next(ApiError.badRequest('Продукты не найдены'))

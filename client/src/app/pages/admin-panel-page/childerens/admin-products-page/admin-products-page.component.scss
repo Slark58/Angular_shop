@@ -6,3 +6,37 @@
 //   background-color: rgba(245, 245, 220, 0.448);
 //   width: 1100px;
 // }
+
+.signUpForm__label-input {
+  display: none;
+}
+
+.row-flex {
+  width: 900px;
+  gap: 10px;
+}
+
+.imgs-block {
+  width: 200px;
+  height: 150px;
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+
+.sub-disabled {
+  padding: 8px 12px;
+  border: 8px;
+  background-color: transparent;
+  border: 3px solid #a436e9;
+  cursor: pointer;
+  &:disabled {
+    border: 3px solid #e93636;
+
+  }
+}

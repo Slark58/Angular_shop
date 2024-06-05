@@ -9,7 +9,7 @@
       <mat-tab label="All">All</mat-tab>
       <mat-tab label="Create">
 
-          <form [formGroup]="productFbForm">
+          <form [formGroup]="productFbForm" (submit)="onSubmit()">
         
             <div class="df g15 alc">
               <mat-form-field appearance="outline" class="example-full-width auth-label">
@@ -44,9 +44,9 @@
             <p>Choise characteristic</p>
               <div class="filters-cahrs" formArrayName="chars">
                 @if(filtersService.filters$ | async; as filters) {
-                  <div class="df g10 fdc">
+                  <div class="df g10 fdc ">
                   @for(char of chars.controls; track $index) {
-                    <div class="df g10 " [formGroupName]="$index">
+                    <div class="df g10 row-flex" [formGroupName]="$index">
                       <div class="signUpForm__label-title">{{$index + 1}} | </div>
                       @for(filter of filters; track filter.title) {
                         <mat-form-field>
@@ -67,14 +67,7 @@
                           formControlName="count"
                           >
                       </mat-form-field>   
-                      <!-- <mat-form-field>
-                        <mat-label>{{filters[$index].title}}</mat-label>
-                        <mat-select [formControlName]="filters[$index].title | lowercase | LastLetterPipe">
-                          @for (item of filters[$index].data; track item) {
-                            <mat-option [value]="item.id">{{item.value}}</mat-option>
-                          }
-                        </mat-select>
-                      </mat-form-field> -->
+
                    
                       <button (click)="removeChar($index)">removeChar</button>
                     </div>
@@ -85,38 +78,59 @@
             </div>
             <button (click)="addNewChar($event)">addNewChar</button>
         
-        
-                <div >
-                  <div class="mt10">Imges</div>
-                    <label class="signUpForm__label">
-                      <input
-                        (change)="changeImgs($event)" 
-                        multiple 
-                        required 
-                        #Imgsinput
-                        type="file" 
-                        accept="image/*,.png,.jpg,.gig,.web,"
-                        class="signUpForm__label-input" 
-                        formControlName="imgs"/>
-                    </label>
-                </div>
-        
-                <div (click)="triggerInputImgs(Imgsinput)" class="btn-upload">Upload</div>
+            
+            <div class="mt10">Imges</div>
+            <label class="signUpForm__label">
+              <input
+                  (change)="changeImgs($event)" 
+                  multiple 
+                  required 
+                  #Imgsinput
+                  type="file" 
+                  accept="image/*,.png,.jpg,.gig,.web,"
+                  class="signUpForm__label-input" 
+                  
+                  />
+                </label>
+            
         
                 <div class="df alc g15">
-                  <ng-container *ngFor="let imgName of this.imgs()">
-                    <div class="img-forms">
+                  <ng-container *ngFor="let imgName of this.imgs().imgView">
+                    <div class="imgs-block">
                       <img [src]='imgName.src'  [alt]="imgName.name" />
                     </div>
                   </ng-container>
                 </div>
+                <div class="df">
+                  <button mat-button type="button" color="accent" mat-flat-button (click)="triggerInputImgs(Imgsinput)" class="btn-upload">Upload</button>
+                  @if(filtersService.filters$ | async; as filters) { 
+  
+                    @for(filter of filters; track filter.title) {
+                      @if(filter.title === 'Colors') {
+                        <mat-form-field>
+                          <mat-label>coise color</mat-label>
+                          <mat-select formControlName="colorId">
+                              @for (item of filters[0].data; track item) {
+                                <mat-option [value]="item.id">{{item.value}}</mat-option>
+                              }
+                            </mat-select>
+                          </mat-form-field>
+                      }
+                    }     
+                  }
+                </div>
           
+                <button 
+                type="submit"
+                [ngClass]="!productFbForm.valid ? 'sub-disabled' : null"
+                [disabled]="!productFbForm.valid" 
+                mat-button  
+                >Add new product</button>
           </form>
           {{productFbForm.value | json}}
 
       </mat-tab>
     </mat-tab-group>
-
 
 
   </div>

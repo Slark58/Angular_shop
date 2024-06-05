@@ -75,10 +75,6 @@ const Color = sequelize.define('color', {
     value: {type: DataTypes.STRING, allowNull:false},
     code: {type: DataTypes.STRING, allowNull: true},
 }, {timestamps: false})
-const Stock = sequelize.define('stock', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    count: {type: DataTypes.INTEGER, allowNull: true},
-}, {timestamps: false})
 const Img = sequelize.define('img', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     img: {type: DataTypes.STRING, allowNull: false},
@@ -164,8 +160,7 @@ ProductChars.belongsTo(Product)
 Product.hasMany(ProductImgs, {as: 'imgs'})
 ProductImgs.belongsTo(Product)
 
-ProductChars.hasOne(Stock)
-Stock.belongsTo(ProductChars)
+
 
 //////! CHARSiristis
 
@@ -210,5 +205,4 @@ module.exports = {
     Gender,
     Size,
     Img,
-    Stock
 }
