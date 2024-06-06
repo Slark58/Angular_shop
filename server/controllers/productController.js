@@ -109,6 +109,7 @@ class ProductController {
             include: [
                 {
                     model: ProductChars,
+                    as: 'chars',
                     include: [
                         {model: Type},
                         {model: Color},
@@ -118,6 +119,7 @@ class ProductController {
                 },
                 {
                     model: ProductImgs,
+                    as: "imgs",
                     include: [
                         {model: Img},
                         {model: Color},

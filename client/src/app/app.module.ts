@@ -25,6 +25,10 @@ import { CreateProductDialogComponent } from './components/UI/create-product-dia
 import { register } from 'swiper/element/bundle';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { LastLetterPipePipe } from './utils/pipes/LastLetterPipe.pipe';
+import { AccountPageComponent } from './pages/account-page/account-page.component';
+import { AccountCartPageComponent } from './pages/account-page/account-cart-page/account-cart-page.component';
+import { AccountOrdersPageComponent } from './pages/account-page/account-orders-page/account-orders-page.component';
+import { AccountProfilePageComponent } from './pages/account-page/account-profile-page/account-profile-page.component';
 // register Swiper custom elements
 register();
 
@@ -49,6 +53,11 @@ register();
     AdminProductsPageComponent,
     CreateProductDialogComponent,
     ProductPageComponent,
+
+    AccountPageComponent,
+    AccountCartPageComponent,
+    AccountOrdersPageComponent,
+    AccountProfilePageComponent,
   ],
   imports: [
     HttpClientModule,

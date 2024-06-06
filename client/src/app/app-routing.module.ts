@@ -10,6 +10,9 @@ import { AdminOrdersPageComponent } from './pages/admin-panel-page/childerens/ad
 import { AdminUsersPageComponent } from './pages/admin-panel-page/childerens/admin-users-page/admin-users-page.component';
 import { AdminProductsPageComponent } from './pages/admin-panel-page/childerens/admin-products-page/admin-products-page.component';
 import { ProductPageComponent } from './pages/product-page/product-page.component';
+import { AccountProfilePageComponent } from './pages/account-page/account-profile-page/account-profile-page.component';
+import { AccountOrdersPageComponent } from './pages/account-page/account-orders-page/account-orders-page.component';
+import { AccountCartPageComponent } from './pages/account-page/account-cart-page/account-cart-page.component';
 
 export enum Paths {
   Home = '',
@@ -26,6 +29,11 @@ export enum AdminPaths {
   Products = "products",
   Orders = "orders",
 }
+export enum UserAccountPaths {
+  Profile = "profile",
+  Cart = "cart",
+  Orders = "orders",
+}
 
 const routes: Routes = [
   {
@@ -38,7 +46,21 @@ const routes: Routes = [
       },
       { 
         path: Paths.Account, 
-        component: AccountPageComponent 
+        component: AccountPageComponent,
+        children: [
+          {
+            path: UserAccountPaths.Profile,
+            component: AccountProfilePageComponent
+          },
+          {
+            path: UserAccountPaths.Cart,
+            component: AccountCartPageComponent,
+          },
+          {
+            path: UserAccountPaths.Orders,
+            component: AccountOrdersPageComponent
+          },
+        ]
       },
       { 
         path: Paths.Catalog, 

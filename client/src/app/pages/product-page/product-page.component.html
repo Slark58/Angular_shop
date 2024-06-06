@@ -32,18 +32,38 @@
         </swiper-container>
       </div>
 
-      <div class="product-page-chrs">
+      <!-- <div class="product-page-chrs">
         @if (product$ | async; as product) {
           @for (item of product.chars; track item) {
            <div class="df g15 alc">
-            <div class="">{{item.gender.value}}</div>
+            <div class="">{{item.size.value}}</div>
             <div class=""></div>
            </div>
           }
         }
-      </div>
+      </div> -->
       <div class="product-page-buy">
-        sadasdasdasd
+        <div class="widget-buy">
+          <div class="df g10 alc">
+            @if (product$ | async; as product) {
+              <div class="widget-buy-price span-price">{{product.price}}</div>
+              <s>
+                <div class="widget-buy-oldprice ">{{product.oldPrice}}</div>
+              </s>
+            }
+          </div>
+          <div class="df g10 alc mt10">
+            @if (product$ | async; as product) {
+              @for(item of product.chars; track item) {
+                <div class="btn-size">{{item.size.value}}</div>
+              }
+            }
+          </div>
+          <div class="df g10 mt10">
+            <button class="like-btn">like</button>
+            <button class="cart-btn">Add in the cart</button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="product-page-reviews">

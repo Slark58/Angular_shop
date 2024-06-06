@@ -16,7 +16,7 @@ export class ProductPageComponent implements OnInit{
   productsService: ProductsService = inject(ProductsService)
   activatedRoute: ActivatedRoute = inject(ActivatedRoute)
   product$?: Observable<FullProduct>
-
+  
 
 
   ngOnInit() {

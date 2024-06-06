@@ -7,10 +7,56 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
 .container {
-margin: 0 auto;
-  width: 1350px;
+  margin: 0 auto;
+  width: 1920px;
+  // background-color: rgba(0, 0, 0, 0.112);
+}
+
+@media screen and (max-width: 1921px) {
+  .container {
+    max-width: 1700px;
+  }
+}
+
+@media screen and (max-width: 1750px) {
+  .container {
+    max-width: 1450px;
+  }
+}
+
+@media screen and (max-width: 1450px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    max-width: 992px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 576px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+  }
 
 }
+
 
 .cw {
   color: white;
