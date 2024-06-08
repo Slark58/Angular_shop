@@ -26,7 +26,7 @@ const {
 class ProductController {
     async createProduct(req, res, next) {
         try {
-            let { name,price, oldPrice, chars, colorId } = req.body
+            let { name,price, oldPrice, chars, colorId, info } = req.body
             const {imgs} = req.files
             console.log("chars: ", JSON.parse(chars));
             // console.log('imgssssss: ', imgs);
@@ -79,19 +79,18 @@ class ProductController {
                 }
             }
             
-            
-            // const product = await Product.create(productData);
+        
 
-            // if (info) {
-            //     info = JSON.parse(info)
-            //     info.forEach(item =>
-            //         ProductInfo.create({
-            //             title: item.title,
-            //             description: item.description,
-            //             productId: product.id
-            //         })
-            //     )
-            // }
+            if (info) {
+                info = JSON.parse(info)
+                info.forEach(item =>
+                    ProductInfo.create({
+                        title: item.title,
+                        description: item.description,
+                        productId: product.id
+                    })
+                )
+            }
 
 
             return res.json(product)

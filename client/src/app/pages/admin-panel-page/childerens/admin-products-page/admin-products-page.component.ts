@@ -38,6 +38,9 @@ export class AdminProductsPageComponent {
   public get chars(): FormArray {
     return this.productFbForm.get('chars') as FormArray
   }
+  public get info(): FormArray {
+    return this.productFbForm.get('info') as FormArray
+  }
 
   public productFbForm = this.formBuilder.group({
     name: [<string>'', [Validators.required]],
@@ -45,7 +48,15 @@ export class AdminProductsPageComponent {
     oldPrice: [<number | null>null, [Validators.required]],
     colorId: [<number | null>null, [Validators.required]],
     chars: this.formBuilder.array<ProductCharForm>([]),
+    info: this.formBuilder.array<{title: string, description: string}[]>([]),
   }) 
+
+  private newInfo() {
+    return this.formBuilder.group({
+      title: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+    })
+  }
 
   private newChar() {
     return this.formBuilder.group({
@@ -61,9 +72,16 @@ export class AdminProductsPageComponent {
     e.preventDefault()
     this.chars.push(this.newChar())
   }
+  public addNewInfo(e: Event) {
+    e.preventDefault()
+    this.info.push(this.newInfo())
+  }
 
   public removeChar(i: number) {
     this.chars.removeAt(i)
+  }
+  public removeImfo(i: number) {
+    this.info.removeAt(i)
   }
 
 
@@ -121,11 +139,11 @@ export class AdminProductsPageComponent {
 
 
   public onSubmit() {
-        const {chars, name, oldPrice, colorId, price } = this.productFbForm.value
+        const {chars, name, oldPrice, colorId, price, info } = this.productFbForm.value
         
         console.log(chars);
         
-        if (chars && name && oldPrice && price && colorId) {
+        if (name && oldPrice && price && colorId) {
 
           const formData = new FormData()
           formData.append('name', name)
@@ -136,6 +154,7 @@ export class AdminProductsPageComponent {
             formData.append('imgs', file)
           })
           formData.append('chars', JSON.stringify(chars))
+          formData.append('info', JSON.stringify(info))
 
           this.adminService.createProduct(formData)
         }
