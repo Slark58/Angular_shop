@@ -1,0 +1,68 @@
+<div class="auth-page">
+
+  <form class="auth-form" [formGroup]="form" formShadow (ngSubmit)="onSubmit()">
+    <h2 class="auth-title">Register</h2>
+
+    <div class="df fdc alc">
+
+      <mat-form-field appearance="outline" class="example-full-width auth-label">
+        <mat-label>First name</mat-label>
+        <input formControlName="name" required matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="example-full-width auth-label">
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="pat@example.com" formControlName="email" (blur)="updateErrorMessage()" required>
+        @if (form.controls.email.invalid) {
+        <mat-error>{{errorMessage()}}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="example-full-width auth-label">
+        <mat-label>Telephone</mat-label>
+        <span matTextPrefix>+7 &nbsp;</span>
+        <input type="tel" matInput required placeholder="555-555-1234" formControlName="phone">
+
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="example-full-width auth-label">
+        <mat-label>Enter your password</mat-label>
+        <input required matInput [type]="hidePass().pass1 ? 'password' : 'text'" formControlName="firstPassword">
+        <button type="button" mat-icon-button matSuffix (click)="handleShowPassword($event, 'pass1')"
+          [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass().pass1">
+          <mat-icon>{{hidePass().pass1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="example-full-width auth-label">
+        <mat-label>Enter your password</mat-label>
+        <input required matInput [type]="hidePass().pass2 ? 'password' : 'text'" formControlName="secondPassword">
+        <button type="button" mat-icon-button matSuffix (click)="handleShowPassword($event, 'pass2')"
+          [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass().pass2">
+          <mat-icon>{{hidePass().pass2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+
+      <!-- <ng-container *ngIf="isSignUp; else signuplink"> -->
+      <div class="AuthForm__quastion">
+        У вас есть аккаунт? <a [routerLink]="'/login'">Sign in</a>
+      </div>
+      <!-- </ng-container> -->
+
+      <!-- <ng-template #signuplink> -->
+      <!-- <div class="AuthForm__quastion"> -->
+      <!-- У вас нет аккаунт? <a [routerLink]="'/register'">Sign up</a> -->
+      <!-- </div> -->
+      <!-- </ng-template> -->
+
+      <mat-spinner [diameter]="40" class="mt10" *ngIf="false; else btnsubmit"></mat-spinner>
+
+      <ng-template #btnsubmit>
+        <button type="submit" mat-flat-button color="primary" class="mt10">go</button>
+      </ng-template>
+
+    </div>
+  </form>
+
+</div>

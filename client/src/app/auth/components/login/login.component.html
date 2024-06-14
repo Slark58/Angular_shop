@@ -1,0 +1,38 @@
+<div class="auth-page">
+  <form class="auth-form" [formGroup]="form" formShadow (ngSubmit)="onSubmit()">
+    <h2 class="auth-title">login</h2>
+
+    <div class="df fdc alc">
+
+      <mat-form-field appearance="outline" class="example-full-width auth-label">
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="pat@example.com" formControlName="email" (blur)="updateErrorMessage()" required>
+        @if (form.controls.email.invalid) {
+        <mat-error>{{errorMessage()}}</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="example-full-width auth-label">
+        <mat-label>Enter your password</mat-label>
+        <input required matInput [type]="isActivePass() ? 'password' : 'text'" formControlName="password">
+        <button type="button" mat-icon-button matSuffix (click)="toggleVisionPassword()"
+          [attr.aria-label]="'Hide password'" [attr.aria-pressed]="isActivePass()">
+          <mat-icon>{{isActivePass() ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+
+      <div class="AuthForm__quastion">
+        У вас нет аккаунта? <a [routerLink]="'/register'">register</a>
+      </div>
+
+      <!-- <mat-spinner [diameter]="40" class="mt10" *ngIf="authService.isLoading(); else btnsubmit"></mat-spinner> -->
+      <mat-spinner [diameter]="40" class="mt10" *ngIf="false; else btnsubmit"></mat-spinner>
+
+      <ng-template #btnsubmit>
+        <button type="submit" mat-flat-button color="primary" class="mt10"> go </button>
+      </ng-template>
+
+    </div>
+  </form>
+</div>

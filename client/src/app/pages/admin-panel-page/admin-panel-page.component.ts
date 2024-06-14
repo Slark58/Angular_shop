@@ -1,26 +1,24 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { AdminPaths } from '../../app-routing.module';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AdminPaths } from '../../app.routes';
 
 @Component({
   selector: 'app-admin-panel-page',
   templateUrl: './admin-panel-page.component.html',
-  styleUrls: ['./admin-panel-page.component.scss']
+  styleUrls: ['./admin-panel-page.component.scss'],
 })
 export class AdminPanelPageComponent implements OnInit {
+  router: Router = inject(Router);
+  activeRoute: ActivatedRoute = inject(ActivatedRoute);
 
-  router: Router = inject(Router)
-  activeRoute: ActivatedRoute = inject(ActivatedRoute)
-
-  public nav = navigationLinks
+  public nav = navigationLinks;
 
   ngOnInit(): void {
-    this.router.navigate([AdminPaths.Products], {relativeTo: this.activeRoute})
+    this.router.navigate([AdminPaths.Products], {
+      relativeTo: this.activeRoute,
+    });
   }
-
-  
 }
-
 
 const navigationLinks = [
   {
@@ -35,5 +33,4 @@ const navigationLinks = [
     link: 'orders',
     title: 'Orders',
   },
- 
-]
+];

@@ -1,47 +1,46 @@
-
 <!-- <div class="toolbar-wrap"> -->
-  <mat-toolbar color="primary" class="df jcsb alc">
-    <div class="df alc">
-      
-      <a routerLink="AdminPanel">
-        <button  mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-          <mat-icon class="cw">menu</mat-icon>
-        </button>
+<mat-toolbar color="primary" class="df jcsb alc">
+  <div class="df alc">
 
-      </a>
+    <a routerLink="AdminPanel">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon class="cw">menu</mat-icon>
+      </button>
 
-      <span>
-        <a class="app-title" routerLink="/">Angular shop</a>
-      </span>
-      
-            <a routerLink="Catalog">
-              <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-                <mat-icon class="cw">
-                  shopping_cart
-                  </mat-icon>
-              </button>
-            </a>
-        
-    </div>
-    <!-- <span class="example-spacer">фывфы</span> -->
+    </a>
 
-    <div class="df alc">
-      <ng-container *ngIf="authService.isAuth(); else AccountBtn">
-        <a routerLink="Account">
-          <button  mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with share icon">
-            <mat-icon class="cw"><span class="material-symbols-outlined">
+    <span>
+      <a class="app-title" routerLink="/">Angular shop</a>
+    </span>
+
+    <a routerLink="Catalog">
+      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon class="cw">
+          shopping_cart
+        </mat-icon>
+      </button>
+    </a>
+
+  </div>
+  <!-- <span class="example-spacer">фывфы</span> -->
+
+  <div class="df alc">
+    <ng-container *ngIf="authService.isAuth(); else AccountBtn">
+      <a routerLink="Account">
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with share icon">
+          <mat-icon class="cw"><span class="material-symbols-outlined">
               account_circle
-              </span></mat-icon>
-          </button>
-        </a>
-      </ng-container>
-  
-      <ng-template #AccountBtn>
-        <a routerLink="Signup">
-          <button mat-flat-button color="accent">Sign in</button>
-        </a>
-      </ng-template>
-    </div>
+            </span></mat-icon>
+        </button>
+      </a>
+    </ng-container>
 
-  </mat-toolbar>
+    <ng-template #AccountBtn>
+      <a routerLink="/login">
+        <button mat-flat-button color="accent">Sign in</button>
+      </a>
+    </ng-template>
+  </div>
+
+</mat-toolbar>
 <!-- </div> -->

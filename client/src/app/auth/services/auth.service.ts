@@ -1,15 +1,12 @@
-import { Injectable, inject, signal } from '@angular/core';
-import { User } from '../models/User';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment.development';
-import { catchError } from 'rxjs';
-import { AuthResponse } from '../models/Response';
+import { Injectable, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { Paths } from '../app.routes';
+import { User } from '../../models/User';
+import { AuthResponse } from '../../models/Response';
+import { environment } from '../../../environments/environment.development';
+import { Paths } from '../../app.routes';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AuthService {
   public http: HttpClient = inject(HttpClient);
   public router: Router = inject(Router);

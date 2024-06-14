@@ -1,25 +1,24 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdminPaths, UserAccountPaths } from '../../app-routing.module';
+import { UserAccountPaths } from '../../app.routes';
 
 @Component({
   selector: 'app-account-page',
   templateUrl: './account-page.component.html',
-  styleUrls: ['./account-page.component.scss']
+  styleUrls: ['./account-page.component.scss'],
 })
-export class AccountPageComponent implements OnInit  {
-  router: Router = inject(Router)
-  activeRoute: ActivatedRoute = inject(ActivatedRoute)
+export class AccountPageComponent implements OnInit {
+  router: Router = inject(Router);
+  activeRoute: ActivatedRoute = inject(ActivatedRoute);
 
-  public nav = navigationLinks
+  public nav = navigationLinks;
 
   ngOnInit(): void {
-    this.router.navigate([UserAccountPaths.Profile], {relativeTo: this.activeRoute})
+    this.router.navigate([UserAccountPaths.Profile], {
+      relativeTo: this.activeRoute,
+    });
   }
- 
 }
-
-
 
 const navigationLinks = [
   {
@@ -34,5 +33,4 @@ const navigationLinks = [
     link: 'orders',
     title: 'Orders',
   },
- 
-]
+];

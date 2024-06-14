@@ -1,4 +1,4 @@
-<mat-dialog-content>
+<!-- <mat-dialog-content>
   <p>Create product</p>
   <form [formGroup]="productFbForm">
 
@@ -58,14 +58,7 @@
                   formControlName="count"
                   >
               </mat-form-field>   
-              <!-- <mat-form-field>
-                <mat-label>{{filters[$index].title}}</mat-label>
-                <mat-select [formControlName]="filters[$index].title | lowercase | LastLetterPipe">
-                  @for (item of filters[$index].data; track item) {
-                    <mat-option [value]="item.id">{{item.value}}</mat-option>
-                  }
-                </mat-select>
-              </mat-form-field> -->
+
            
               <button (click)="removeChar($index)">removeChar</button>
             </div>
@@ -114,4 +107,16 @@
       [mat-dialog-close]="productFbForm.value" 
       >Ok</button>
   </mat-dialog-actions>
-</mat-dialog-content>
+</mat-dialog-content> -->
+
+
+
+
+<!-- <mat-form-field>
+                <mat-label>{{filters[$index].title}}</mat-label>
+                <mat-select [formControlName]="filters[$index].title | lowercase | LastLetterPipe">
+                  @for (item of filters[$index].data; track item) {
+                    <mat-option [value]="item.id">{{item.value}}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field> -->
