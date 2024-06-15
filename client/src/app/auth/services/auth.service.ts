@@ -2,97 +2,42 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../models/User';
-import { AuthResponse } from '../../models/Response';
 import { environment } from '../../../environments/environment.development';
 import { Paths } from '../../app.routes';
+import { AuthResponse } from '../types/authRes.interface';
+import { IRegisterRequest } from '../types/registerReq.interface';
+import { ILoginRequest } from '../types/loginReq.interface';
+import { Observable, map } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthService {
-  public http: HttpClient = inject(HttpClient);
-  public router: Router = inject(Router);
+  private http: HttpClient = inject(HttpClient);
 
-  public isAuth = signal<boolean>(false);
-  public user = signal<User>({} as User);
-  public isLoading = signal<boolean>(false);
-  public errorMessage = '';
-
-  async register(
-    email: string | null | undefined,
-    name: string | null | undefined,
-    password: string | null | undefined,
-    phone: string | null | undefined
-  ) {
-    this.isLoading.set(true);
-    this.http
-      .post<AuthResponse>(`${environment.URL_API}/user/registration`, {
-        email,
-        name,
-        password,
-        phone,
-        role: 'USER',
-      })
-      .subscribe({
-        next: (res) => {
-          localStorage.setItem('token', res.token);
-          this.router.navigate([Paths.Signin]);
-          console.log(res);
-        },
-        error: (error) => {
-          console.log(error);
-        },
-        complete: () => {
-          this.isLoading.set(false);
-        },
-      });
+  register(data: IRegisterRequest): Observable<AuthResponse> {
+    const url = environment.URL_API + '/user/registration';
+    return this.http.post<AuthResponse>(url, data);
   }
 
-  login(email: string | null | undefined, password: string | null | undefined) {
-    this.isLoading.set(true);
-    this.http
-      .post<AuthResponse>(`${environment.URL_API}/user/login`, {
-        email,
-        password,
-      })
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          localStorage.setItem('token', res.token);
-          this.isAuth.set(true);
-          this.isLoading.set(false);
-          this.router.navigate([Paths.Home]);
-        },
-        error: (error) => {
-          this.errorMessage = error;
-          this.isLoading.set(false);
-        },
-        complete: () => {
-          setTimeout(() => {
-            this.errorMessage = '';
-          }, 3000);
-          this.isLoading.set(false);
-        },
-      });
+  login(data: ILoginRequest): Observable<AuthResponse['token']> {
+    const url = environment.URL_API + '/user/login';
+    console.log('service auth: ', data);
+
+    return this.http
+      .post<AuthResponse>(url, data)
+      .pipe(map((item) => item.token));
   }
 
   checkAuth() {
-    this.http
-      .get<{ token: string }>(`${environment.URL_API}/user/auth`)
-      .subscribe({
-        next: (res) => {
-          console.log(res.token);
-          localStorage.setItem('token', res.token);
-          this.isAuth.set(true);
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
+    const url = environment.URL_API + '/user/login';
+    return this.http.get<{ token: string }>(url);
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    this.isAuth.set(false);
-    this.user.set({} as User);
-    this.router.navigate([Paths.Signin]);
-  }
+  // logout() {
+  //   localStorage.removeItem('token');
+  //   this.isAuth.set(false);
+  //   this.user.set({} as User);
+  //   this.router.navigate([Paths.Signin]);
+  // }
 }

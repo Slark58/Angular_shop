@@ -14,6 +14,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { MatIcon } from '@angular/material/icon';
+import { Store } from '@ngrx/store';
+import { loginAction } from '../../store/actions/login.action';
 
 @Component({
   selector: 'app-login',
@@ -33,12 +35,12 @@ import { MatIcon } from '@angular/material/icon';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class LoginComponent implements OnInit {
-  public fb: FormBuilder = inject(FormBuilder);
-
+  public readonly fb: FormBuilder = inject(FormBuilder);
+  public readonly store: Store = inject(Store);
   public isActivePass = signal(false);
   public errorMessage = signal('');
 
-  public form = this.fb.group({
+  public loginForm = this.fb.group({
     email: ['', Validators.required],
     password: ['', Validators.required],
   });
@@ -48,12 +50,24 @@ export class LoginComponent implements OnInit {
     this.isActivePass.update((prev) => !prev);
   }
 
-  onSubmit() {}
+  onSubmit() {
+    console.log('click');
+
+    if (this.loginForm.valid) {
+      const request = {
+        email: this.loginForm.value.email!,
+        password: this.loginForm.value.password!,
+      };
+      console.log(request);
+
+      this.store.dispatch(loginAction({ request }));
+    }
+  }
 
   updateErrorMessage() {
-    if (this.form.controls.email.hasError('required')) {
+    if (this.loginForm.controls.email.hasError('required')) {
       this.errorMessage.set('You must enter a value');
-    } else if (this.form.controls.email.hasError('email')) {
+    } else if (this.loginForm.controls.email.hasError('email')) {
       this.errorMessage.set('Not a valid email');
     } else {
       this.errorMessage.set('');

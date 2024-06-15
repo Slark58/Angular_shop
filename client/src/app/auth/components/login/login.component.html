@@ -1,5 +1,5 @@
 <div class="auth-page">
-  <form class="auth-form" [formGroup]="form" formShadow (ngSubmit)="onSubmit()">
+  <form class="auth-form" [formGroup]="loginForm" formShadow (ngSubmit)="onSubmit()">
     <h2 class="auth-title">login</h2>
 
     <div class="df fdc alc">
@@ -7,7 +7,7 @@
       <mat-form-field appearance="outline" class="example-full-width auth-label">
         <mat-label>Enter your email</mat-label>
         <input matInput placeholder="pat@example.com" formControlName="email" (blur)="updateErrorMessage()" required>
-        @if (form.controls.email.invalid) {
+        @if (loginForm.controls.email.invalid) {
         <mat-error>{{errorMessage()}}</mat-error>
         }
       </mat-form-field>

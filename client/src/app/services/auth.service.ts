@@ -3,7 +3,6 @@ import { User } from '../models/User';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { catchError } from 'rxjs';
-import { AuthResponse } from '../models/Response';
 import { Router } from '@angular/router';
 import { Paths } from '../app.routes';
 
@@ -27,7 +26,7 @@ export class AuthService {
   ) {
     this.isLoading.set(true);
     this.http
-      .post<AuthResponse>(`${environment.URL_API}/user/registration`, {
+      .post<any>(`${environment.URL_API}/user/registration`, {
         email,
         name,
         password,
@@ -52,7 +51,7 @@ export class AuthService {
   login(email: string | null | undefined, password: string | null | undefined) {
     this.isLoading.set(true);
     this.http
-      .post<AuthResponse>(`${environment.URL_API}/user/login`, {
+      .post<any>(`${environment.URL_API}/user/login`, {
         email,
         password,
       })

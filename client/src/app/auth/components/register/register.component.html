@@ -12,9 +12,10 @@
 
       <mat-form-field appearance="outline" class="example-full-width auth-label">
         <mat-label>Enter your email</mat-label>
-        <input matInput placeholder="pat@example.com" formControlName="email" (blur)="updateErrorMessage()" required>
+        <input matInput placeholder="pat@example.com" formControlName="email" (blur)="updateEmailErrorMessage()"
+          required>
         @if (form.controls.email.invalid) {
-        <mat-error>{{errorMessage()}}</mat-error>
+        <mat-error>{{emailErrorMessage()}}</mat-error>
         }
       </mat-form-field>
 

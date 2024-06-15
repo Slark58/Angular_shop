@@ -26,7 +26,7 @@ import { RouterModule } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   public fb: FormBuilder = inject(FormBuilder);
-  public errorMessage = signal('');
+  public emailErrorMessage = signal('');
   public hidePass = signal({
     pass1: true,
     pass2: true,
@@ -50,13 +50,13 @@ export class RegisterComponent implements OnInit {
 
   public onSubmit() {}
 
-  updateErrorMessage() {
+  updateEmailErrorMessage() {
     if (this.form.controls.email.hasError('required')) {
-      this.errorMessage.set('You must enter a value');
+      this.emailErrorMessage.set('You must enter a value');
     } else if (this.form.controls.email.hasError('email')) {
-      this.errorMessage.set('Not a valid email');
+      this.emailErrorMessage.set('Not a valid email');
     } else {
-      this.errorMessage.set('');
+      this.emailErrorMessage.set('');
     }
   }
 
