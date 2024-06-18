@@ -6,10 +6,11 @@ import {
   loginFailureAction,
   loginSuccessAction,
 } from '../actions/login.action';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { IUser } from '../../../shared/types/User.interface';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 export const loginEffect$ = createEffect(
   (actions$ = inject(Actions), authServices = inject(AuthService)) => {
@@ -33,4 +34,15 @@ export const loginEffect$ = createEffect(
     );
   },
   { functional: true }
+);
+
+export const redirectAfetrLogin$ = createEffect(
+  (actions$ = inject(Actions), router = inject(Router)) => {
+    return actions$.pipe(
+      ofType(loginSuccessAction),
+      tap(({ user }) => console.log('log from 1 tap: ', user)),
+      tap(() => router.navigate(['/']))
+    );
+  },
+  { dispatch: false, functional: true }
 );

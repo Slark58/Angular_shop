@@ -25,7 +25,7 @@
   <!-- <span class="example-spacer">фывфы</span> -->
 
   <div class="df alc">
-    <ng-container *ngIf="authService.isAuth(); else AccountBtn">
+    <ng-container *ngIf="isAuth$ | async; else AccountBtn">
       <a routerLink="Account">
         <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with share icon">
           <mat-icon class="cw"><span class="material-symbols-outlined">

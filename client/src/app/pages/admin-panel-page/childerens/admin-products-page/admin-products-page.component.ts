@@ -11,7 +11,13 @@ import { CreateProductDialogComponent } from '../../../../components/UI/create-p
 import { AdminService } from '../../../../services/admin.service';
 import { ProductCharForm, ProductCreateForm } from '../../../../models/Form';
 import { ProductsService } from '../../../../services/products.service';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  NonNullableFormBuilder,
+  Validators,
+} from '@angular/forms';
 import { FiltersService } from '../../../../services/filters.service';
 
 interface IImgSig {
@@ -30,11 +36,11 @@ interface IImgSig {
 export class AdminProductsPageComponent {
   public adminService: ProductsService = inject(ProductsService);
   public filtersService: FiltersService = inject(FiltersService);
+  // public newFb: NonNullableFormBuilder = inject(NonNullableFormBuilder);
+  public formBuilder: FormBuilder = inject(FormBuilder);
 
   maxImgs: number = 3;
   imgs = signal<IImgSig>({} as IImgSig);
-
-  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.filtersService.getAllFilters();
@@ -46,6 +52,12 @@ export class AdminProductsPageComponent {
   public get info(): FormArray {
     return this.productFbForm.get('info') as FormArray;
   }
+
+  // public qiizForm = this.newFb.group({
+  //   nameT: '',
+  //   priceT: null,
+  //   colorT: '',
+  // });
 
   public productFbForm = this.formBuilder.group({
     name: [<string>'', [Validators.required]],
