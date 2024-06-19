@@ -1,6 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { RouterOutlet } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { checkAuthAction } from './auth/store/actions/checkAuth.action';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +14,9 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'project';
 
-  authService: AuthService = inject(AuthService);
+  private store: Store = inject(Store);
 
   ngOnInit(): void {
-    this.authService.checkAuth();
+    this.store.dispatch(checkAuthAction());
   }
 }

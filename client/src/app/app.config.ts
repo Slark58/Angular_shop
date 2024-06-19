@@ -13,7 +13,7 @@ import { provideState, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { authFeature } from './auth/store/reducer';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import * as authEffect from './auth/store/effects/login.effect';
+import * as authEffects from './auth/store/effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(HttpClientModule),
     provideStore(),
     provideState(authFeature),
-    provideEffects(authEffect),
+    provideEffects(authEffects),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode

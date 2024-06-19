@@ -1,6 +1,6 @@
 <div class="auth-page">
 
-  <form class="auth-form" [formGroup]="form" formShadow (ngSubmit)="onSubmit()">
+  <form class="auth-form" [formGroup]="registerForm" formShadow (ngSubmit)="onSubmit()">
     <h2 class="auth-title">Register</h2>
 
     <div class="df fdc alc">
@@ -14,7 +14,7 @@
         <mat-label>Enter your email</mat-label>
         <input matInput placeholder="pat@example.com" formControlName="email" (blur)="updateEmailErrorMessage()"
           required>
-        @if (form.controls.email.invalid) {
+        @if (registerForm.controls.email.invalid) {
         <mat-error>{{emailErrorMessage()}}</mat-error>
         }
       </mat-form-field>
@@ -28,7 +28,7 @@
 
       <mat-form-field appearance="outline" class="example-full-width auth-label">
         <mat-label>Enter your password</mat-label>
-        <input required matInput [type]="hidePass().pass1 ? 'password' : 'text'" formControlName="firstPassword">
+        <input required matInput [type]="hidePass().pass1 ? 'password' : 'text'" formControlName="password">
         <button type="button" mat-icon-button matSuffix (click)="handleShowPassword($event, 'pass1')"
           [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass().pass1">
           <mat-icon>{{hidePass().pass1 ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -37,7 +37,7 @@
 
       <mat-form-field appearance="outline" class="example-full-width auth-label">
         <mat-label>Enter your password</mat-label>
-        <input required matInput [type]="hidePass().pass2 ? 'password' : 'text'" formControlName="secondPassword">
+        <input required matInput [type]="hidePass().pass2 ? 'password' : 'text'" formControlName="confirmPassword">
         <button type="button" mat-icon-button matSuffix (click)="handleShowPassword($event, 'pass2')"
           [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass().pass2">
           <mat-icon>{{hidePass().pass2 ? 'visibility_off' : 'visibility'}}</mat-icon>

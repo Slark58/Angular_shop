@@ -6,7 +6,12 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -14,8 +19,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { MatIcon } from '@angular/material/icon';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { loginAction } from '../../store/actions/login.action';
+import { loadingSelector } from '../../store/selectors';
 
 @Component({
   selector: 'app-login',
@@ -35,10 +41,12 @@ import { loginAction } from '../../store/actions/login.action';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class LoginComponent implements OnInit {
-  public readonly fb: FormBuilder = inject(FormBuilder);
+  public readonly fb: NonNullableFormBuilder = inject(NonNullableFormBuilder);
   public readonly store: Store = inject(Store);
   public isActivePass = signal(false);
   public errorMessage = signal('');
+
+  public isLoading$ = this.store.pipe(select(loadingSelector));
 
   public loginForm = this.fb.group({
     email: ['', Validators.required],
@@ -55,8 +63,8 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm.valid) {
       const request = {
-        email: this.loginForm.value.email!,
-        password: this.loginForm.value.password!,
+        email: this.loginForm.getRawValue().email,
+        password: this.loginForm.getRawValue().password,
       };
       console.log(request);
 

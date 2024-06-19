@@ -26,8 +26,7 @@
         У вас нет аккаунта? <a [routerLink]="'/register'">register</a>
       </div>
 
-      <!-- <mat-spinner [diameter]="40" class="mt10" *ngIf="authService.isLoading(); else btnsubmit"></mat-spinner> -->
-      <mat-spinner [diameter]="40" class="mt10" *ngIf="false; else btnsubmit"></mat-spinner>
+      <mat-spinner [diameter]="40" class="mt10" *ngIf="isLoading$ | async; else btnsubmit"></mat-spinner>
 
       <ng-template #btnsubmit>
         <button type="submit" mat-flat-button color="primary" class="mt10"> go </button>

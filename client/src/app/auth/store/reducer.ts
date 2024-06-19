@@ -11,6 +11,11 @@ import {
   loginSuccessAction,
 } from './actions/login.action';
 import { logoutAction } from './actions/logout.action';
+import {
+  checkAuthAction,
+  checkAuthFailureAction,
+  checkAuthSuccessAction,
+} from './actions/checkAuth.action';
 
 export const AUTH_FEATURE_KEY = 'auth';
 
@@ -47,7 +52,7 @@ export const authFeature = createFeature({
       registerFailureAction,
       (state, action): IAuthState => ({
         ...state,
-        isLoading: true,
+        isLoading: false,
         error: action.error.message,
         isAuth: false,
       })
@@ -82,30 +87,29 @@ export const authFeature = createFeature({
 
     //$ CHECK AUTH $//
 
-    // on(
-    //   loginAction,
-    //   (state): IAuthState => ({
-    //     ...state,
-    //     isLoading: true,
-    //   })
-    // ),
-    // on(
-    //   loginSuccessAction,
-    //   (state, action): IAuthState => ({
-    //     ...state,
-    //     isLoading: false,
-    //     user: action.user,
-    //     isAuth: true,
-    //   })
-    // ),
-    // on(
-    //   loginFailureAction,
-    //   (state, action): IAuthState => ({
-    //     ...state,
-    //     isLoading: false,
-    //     error: action.error.message,
-    //   })
-    // ),
+    on(
+      checkAuthAction,
+      (state): IAuthState => ({
+        ...state,
+        isLoading: true,
+      })
+    ),
+    on(
+      checkAuthSuccessAction,
+      (state, action): IAuthState => ({
+        ...state,
+        isLoading: false,
+        user: action.user,
+        isAuth: true,
+      })
+    ),
+    on(
+      checkAuthFailureAction,
+      (state): IAuthState => ({
+        ...state,
+        isLoading: false,
+      })
+    ),
 
     //$ LOGOUT $//
 

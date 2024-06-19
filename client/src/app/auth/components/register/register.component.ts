@@ -7,6 +7,8 @@ import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
+import { registerAction } from '../../store/actions/register.action';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-register',
@@ -26,17 +28,18 @@ import { RouterModule } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   public fb: FormBuilder = inject(FormBuilder);
+  public readonly store: Store = inject(Store);
   public emailErrorMessage = signal('');
   public hidePass = signal({
     pass1: true,
     pass2: true,
   });
 
-  public form = this.fb.group({
+  public registerForm = this.fb.nonNullable.group({
     name: ['', Validators.required],
     email: ['', Validators.required],
-    firstPassword: ['', Validators.required],
-    secondPassword: ['', Validators.required],
+    password: ['', Validators.required],
+    confirmPassword: ['', Validators.required],
     phone: ['', Validators.required],
   });
 
@@ -48,12 +51,34 @@ export class RegisterComponent implements OnInit {
     }));
   }
 
-  public onSubmit() {}
+  public onSubmit() {
+    if (!this.registerForm.valid) {
+      return;
+    }
+
+    if (
+      this.registerForm.value.confirmPassword !==
+      this.registerForm.value.password
+    ) {
+      console.log('Passwords do not match');
+      return;
+    }
+
+    const request = {
+      name: this.registerForm.getRawValue().name,
+      email: this.registerForm.getRawValue().email,
+      password: this.registerForm.getRawValue().password,
+      phone: this.registerForm.getRawValue().password,
+    };
+    console.log(request);
+
+    this.store.dispatch(registerAction({ request }));
+  }
 
   updateEmailErrorMessage() {
-    if (this.form.controls.email.hasError('required')) {
+    if (this.registerForm.controls.email.hasError('required')) {
       this.emailErrorMessage.set('You must enter a value');
-    } else if (this.form.controls.email.hasError('email')) {
+    } else if (this.registerForm.controls.email.hasError('email')) {
       this.emailErrorMessage.set('Not a valid email');
     } else {
       this.emailErrorMessage.set('');

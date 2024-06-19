@@ -17,20 +17,20 @@ export class AuthService {
 
   register(data: IRegisterRequest): Observable<AuthResponse> {
     const url = environment.URL_API + '/user/registration';
+    console.log('service auth: ', data);
+
     return this.http.post<AuthResponse>(url, data);
   }
 
-  login(data: ILoginRequest): Observable<AuthResponse['token']> {
+  login(data: ILoginRequest): Observable<AuthResponse> {
     const url = environment.URL_API + '/user/login';
     console.log('service auth: ', data);
 
-    return this.http
-      .post<AuthResponse>(url, data)
-      .pipe(map((item) => item.token));
+    return this.http.post<AuthResponse>(url, data);
   }
 
   checkAuth() {
-    const url = environment.URL_API + '/user/login';
+    const url = environment.URL_API + '/user/auth';
     return this.http.get<{ token: string }>(url);
   }
 
