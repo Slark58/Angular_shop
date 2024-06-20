@@ -70,6 +70,7 @@ class UserController {
                 email
             }
         })
+        console.log(user);
         if (!user) {
             return next(ApiError.internal('Пользователь не найден'))
         }
@@ -82,7 +83,7 @@ class UserController {
                 userId: user.id
             }
         })
-        const token = generateJwt(user.id, user.email, user.firstName, user.lastName, user.role)
+        const token = generateJwt(user.id, user.email, user.name, user.phone, user.role)
         return res.json({
             token,
             basket
@@ -90,7 +91,8 @@ class UserController {
     }
 
     async check(req, res, next) {
-        const token = generateJwt(req.user.id, req.user.email, req.user.firstName, req.user.lastName, req.user.role, req.user.phone)
+        console.log(req.user);
+        const token = generateJwt(req.user.id, req.user.email, req.user.name, req.user.phone, req.user.role)
         return res.json({
             token
         })
