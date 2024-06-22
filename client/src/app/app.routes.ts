@@ -37,7 +37,7 @@ export enum UserAccountPaths {
 
 export const routes: Routes = [
   {
-    path: '',
+    path: Paths.Home,
     component: LayoutComponent,
     children: [
       {
@@ -48,6 +48,11 @@ export const routes: Routes = [
         path: '',
         loadChildren: () =>
           import('./auth/auth.routes').then((m) => m.authRoutes),
+      },
+      {
+        path: '',
+        loadChildren: () =>
+          import('./catalog/catalog.routes').then((m) => m.caatalogRoutes),
       },
       // {
       //   path: Paths.Account,

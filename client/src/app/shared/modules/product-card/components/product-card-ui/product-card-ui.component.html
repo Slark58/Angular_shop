@@ -1,0 +1,36 @@
+<div (click)="redirecToProduct(productProps?.id)">
+  <mat-card class="example-card catalog-card">
+
+    <div class="card-wrapper-slider">
+      <swiper-container class="card-preview-slider" slides-per-view="1" pagination="true" space-between="10">
+        @if (productProps) {
+        @for (item of productProps.imgs; track $index) {
+        <swiper-slide>
+          <img [src]="'http://localhost:5000/'+item.img.img" />
+        </swiper-slide>
+        }
+        }
+      </swiper-container>
+    </div>
+    <mat-card-content>
+      <div class="card-title">{{productProps?.name}}</div>
+      <div class="df g10">
+        <div class="price">{{productProps?.price}}</div>
+        <div class="oldPrice">{{productProps?.oldPrice}}</div>
+      </div>
+      <div class="card-rate">4.6</div>
+    </mat-card-content>
+    <mat-card-actions align="end" class="df g10">
+      <button type="button" mat-button class="like">
+        <mat-icon class="cw">
+          favorite
+        </mat-icon>
+      </button>
+      <button type="button" mat-button class="cart">
+        <mat-icon class="bl">
+          shopping_basket
+        </mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

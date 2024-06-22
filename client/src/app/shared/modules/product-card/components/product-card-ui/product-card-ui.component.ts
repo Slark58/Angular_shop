@@ -1,24 +1,25 @@
 import {
-  AfterViewInit,
   CUSTOM_ELEMENTS_SCHEMA,
+  ChangeDetectionStrategy,
   Component,
   Input,
   OnInit,
   inject,
 } from '@angular/core';
-import { FullProduct } from '../../models/Main';
-import { environment } from '../../../environments/environment.development';
+import { FullProduct } from '../../../../../models/Main';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '../../../../../../environments/environment.development';
 
 @Component({
-  selector: 'app-catalog-card',
+  selector: 'app-product-card-ui',
   standalone: true,
-  templateUrl: './catalog-card.component.html',
-  styleUrls: ['./catalog-card.component.scss'],
+  templateUrl: './product-card-ui.component.html',
+  styleUrls: ['./product-card-ui.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class CatalogCardComponent {
-  @Input() product?: FullProduct;
+export class ProductCardUiComponent {
+  @Input('product') productProps?: FullProduct;
   router: Router = inject(Router);
   activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 

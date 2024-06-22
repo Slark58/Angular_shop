@@ -1,0 +1,29 @@
+<div class="filters">
+
+
+  <ng-container *ngFor="let filter of filtersSignal()">
+    <div class="filter-block">
+      <div class="filter-title">{{filter.title}}</div>
+      <div class="df fdc">
+
+        @switch (filter.title) {
+        @case ("Colors") {
+        <div class="df g10 fww">
+          <label (change)="getValue($event)" *ngFor="let item of filter.data" [for]="item.id">
+            <div class="box-color" [ngStyle]="{background: item.code}"></div>
+            <input [id]="item.id" name="color" [value]="item.id" type="checkbox" class="filter-color-inp">
+          </label>
+        </div>
+        }
+        @default {
+        <mat-checkbox [value]="item.id.toString()" (change)="getValueMat($event)" *ngFor="let item of filter.data"
+          class="example-margin">
+          <span>{{item.value}}</span>
+        </mat-checkbox>
+        }
+        }
+      </div>
+    </div>
+  </ng-container>
+
+</div>

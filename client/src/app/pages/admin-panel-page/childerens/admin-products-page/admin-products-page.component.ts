@@ -7,7 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CreateProductDialogComponent } from '../../../../components/UI/create-product-dialog/create-product-dialog.component';
+import { CreateProductDialogComponent } from '../../../../shared/modules/create-product-dialog/create-product-dialog.component';
 import { AdminService } from '../../../../services/admin.service';
 import { ProductCharForm, ProductCreateForm } from '../../../../models/Form';
 import { ProductsService } from '../../../../services/products.service';
