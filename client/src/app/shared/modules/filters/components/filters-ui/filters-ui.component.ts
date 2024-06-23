@@ -1,8 +1,14 @@
 import { CommonModule } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
+  Input,
+  OnChanges,
   OnInit,
+  Output,
+  SimpleChanges,
   inject,
   signal,
 } from '@angular/core';
@@ -20,29 +26,27 @@ import { IFiltersResponse } from '../../types/filterResponse.interface';
   standalone: true,
   templateUrl: './filters-ui.component.html',
   styleUrls: ['./filters-ui.component.scss'],
-  providers: [FiltersService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FiltersUiComponent implements OnInit {
-  private filterService = inject(FiltersService);
-  public filtersSignal = signal([] as IFiltersResponse[]);
+export class FiltersUiComponent implements OnChanges {
+  @Input({ required: true }) filtersProps?: IFiltersResponse[];
 
-  getValue(e: Event) {
-    const value = e.target as HTMLInputElement;
-    console.log(Number(value.value));
+  @Output() emitFilterValue = new EventEmitter<{
+    id: number;
+    category: string;
+    checked: boolean;
+  }>();
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.filtersProps);
   }
 
-  getValueMat(value: MatCheckboxChange) {
-    console.log(value.source.value);
-  }
-
-  ngOnInit() {
-    this.filterService
-      .getFilters()
-      .pipe(
-        take(1),
-        tap((filters) => console.log(filters))
-      )
-      .subscribe((filters) => this.filtersSignal.set(filters));
+  getValue(e: Event, title: string) {
+    const element = e.target as HTMLInputElement;
+    this.emitFilterValue.emit({
+      category: title,
+      checked: element.checked,
+      id: Number(element.value),
+    });
   }
 }

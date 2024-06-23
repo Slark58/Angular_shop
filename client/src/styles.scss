@@ -1,9 +1,15 @@
-
 // @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 
 .container {
@@ -65,18 +71,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .bl {
   color: black;
 }
+
 .fww {
   flex-wrap: wrap;
 }
+
 .g10 {
   gap: 10px;
 }
+
 .g15 {
   gap: 15px;
 }
+
 .g20 {
   gap: 20px;
 }
+
 .g30 {
   gap: 30px;
 }
@@ -102,6 +113,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   justify-content: space-between;
 }
 
+mt15 {
+  margin-top: 15px;
+}
+
+
+.ml10 {
+  margin-left: 10px;
+}
+
 .mt10 {
   margin-top: 10px;
 }
@@ -109,5 +129,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mt5 {
   margin-top: 5px;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

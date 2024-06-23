@@ -1,12 +1,23 @@
 <div class="filters">
 
 
-  <ng-container *ngFor="let filter of filtersSignal()">
+
+  <ng-container *ngFor="let filter of filtersProps">
     <div class="filter-block">
       <div class="filter-title">{{filter.title}}</div>
       <div class="df fdc">
 
-        @switch (filter.title) {
+
+        <div class="g10 df fdc ml10">
+          @for (item of filter.data; track $index) {
+
+          <input (change)="getValue($event, filter.title)" type="checkbox" class="custom-checkbox" [id]="item.value"
+            [name]="filter.title" [value]="item.id.toString()">
+          <label [for]="item.value">{{item.value}}</label>
+          }
+        </div>
+
+        <!-- @switch (filter.title) {
         @case ("Colors") {
         <div class="df g10 fww">
           <label (change)="getValue($event)" *ngFor="let item of filter.data" [for]="item.id">
@@ -16,12 +27,15 @@
         </div>
         }
         @default {
-        <mat-checkbox [value]="item.id.toString()" (change)="getValueMat($event)" *ngFor="let item of filter.data"
-          class="example-margin">
-          <span>{{item.value}}</span>
-        </mat-checkbox>
+        <div class="g10 df fdc ml10">
+          @for (item of filter.data; track $index) {
+          <input type="checkbox" class="custom-checkbox" [id]="item.value" [name]="filter.title"
+            [value]="item.id.toString()">
+          <label [for]="item.value">{{item.value}}</label>
+          }
+        </div>
         }
-        }
+        } -->
       </div>
     </div>
   </ng-container>
