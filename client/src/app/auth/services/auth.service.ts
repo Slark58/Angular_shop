@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../../models/User';
 import { environment } from '../../../environments/environment.development';
 import { Paths } from '../../app.routes';
 import { AuthResponse } from '../types/authRes.interface';

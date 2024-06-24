@@ -1,5 +1,4 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { AuthService } from './services/auth.service';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { checkAuthAction } from './auth/store/actions/checkAuth.action';

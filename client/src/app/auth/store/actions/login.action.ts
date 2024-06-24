@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { ActionTypes } from '../ActionTypes';
 import { ILoginRequest } from '../../types/loginReq.interface';
-import { IUser } from '../../../shared/types/User.interface';
+import { IUser } from '../../../shared/types/user.interface';
 import { IBackendError } from '../../../shared/types/backendError.interface';
 
 export const loginAction = createAction(

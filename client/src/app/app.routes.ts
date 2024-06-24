@@ -1,10 +1,8 @@
 import { Routes } from '@angular/router';
-import { MainPageComponent } from './pages/main-page/main-page.component';
 import { CatalogPageComponent } from './pages/catalog-page/catalog-page.component';
-import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { AccountPageComponent } from './pages/account-page/account-page.component';
 import { AdminPanelPageComponent } from './pages/admin-panel-page/admin-panel-page.component';
-import { LayoutComponent } from './layout/layout.component';
+import { LayoutComponent } from './shared/modules/layout/layout.component';
 import { AdminOrdersPageComponent } from './pages/admin-panel-page/childerens/admin-orders-page/admin-orders-page.component';
 import { AdminUsersPageComponent } from './pages/admin-panel-page/childerens/admin-users-page/admin-users-page.component';
 import { AdminProductsPageComponent } from './pages/admin-panel-page/childerens/admin-products-page/admin-products-page.component';
@@ -12,6 +10,7 @@ import { ProductPageComponent } from './pages/product-page/product-page.componen
 import { AccountProfilePageComponent } from './pages/account-page/account-profile-page/account-profile-page.component';
 import { AccountOrdersPageComponent } from './pages/account-page/account-orders-page/account-orders-page.component';
 import { AccountCartPageComponent } from './pages/account-page/account-cart-page/account-cart-page.component';
+import { HomeComponent } from './home/home.component';
 
 export enum Paths {
   Home = '',
@@ -42,7 +41,7 @@ export const routes: Routes = [
     children: [
       {
         path: Paths.Home,
-        component: MainPageComponent,
+        component: HomeComponent,
       },
       {
         path: '',
@@ -54,6 +53,12 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./catalog/catalog.routes').then((m) => m.caatalogRoutes),
       },
+      {
+        path: '',
+        loadChildren: () =>
+          import('./product/product.routes').then((m) => m.productRoutes),
+      },
+
       // {
       //   path: Paths.Account,
       //   component: AccountPageComponent,

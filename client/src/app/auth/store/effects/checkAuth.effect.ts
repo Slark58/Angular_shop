@@ -8,7 +8,7 @@ import {
 } from '../actions/checkAuth.action';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
-import { IUser } from '../../../shared/types/User.interface';
+import { IUser } from '../../../shared/types/user.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 
 export const checkAuthEffect$ = createEffect(

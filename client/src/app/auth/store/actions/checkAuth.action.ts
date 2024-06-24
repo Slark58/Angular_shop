@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { ActionTypes } from '../ActionTypes';
-import { IUser } from '../../../shared/types/User.interface';
+import { IUser } from '../../../shared/types/user.interface';
 
 export const checkAuthAction = createAction(ActionTypes.CHECK_AUTH);
 export const checkAuthSuccessAction = createAction(

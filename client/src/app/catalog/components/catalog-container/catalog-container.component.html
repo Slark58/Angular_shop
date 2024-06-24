@@ -1,5 +1,18 @@
 <div class="catalog-container">
   <div class="container">
-    <app-filters-ui-container></app-filters-ui-container>
+    <div class="df g30">
+
+      <div>
+        <app-catalog-filter [filtersProps]="filtersSig()" (emitFilterValue)="onEmitFilterValue($event)">
+        </app-catalog-filter>
+      </div>
+
+
+      <div class="catalog-page-list df fww g30 jcc">
+        <ng-container *ngFor="let product of productsSig()">
+          <app-product-card-ui [product]="product"></app-product-card-ui>
+        </ng-container>
+      </div>
+    </div>
   </div>
 </div>

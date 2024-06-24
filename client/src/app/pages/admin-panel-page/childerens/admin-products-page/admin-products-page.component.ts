@@ -8,9 +8,7 @@ import {
 } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CreateProductDialogComponent } from '../../../../shared/modules/create-product-dialog/create-product-dialog.component';
-import { AdminService } from '../../../../services/admin.service';
 import { ProductCharForm, ProductCreateForm } from '../../../../models/Form';
-import { ProductsService } from '../../../../services/products.service';
 import {
   FormArray,
   FormBuilder,
@@ -18,7 +16,6 @@ import {
   NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
-import { FiltersService } from '../../../../services/filters.service';
 
 interface IImgSig {
   imgView: {
@@ -34,8 +31,8 @@ interface IImgSig {
   styleUrls: ['./admin-products-page.component.scss'],
 })
 export class AdminProductsPageComponent {
-  public adminService: ProductsService = inject(ProductsService);
-  public filtersService: FiltersService = inject(FiltersService);
+  // public adminService: ProductsService = inject(ProductsService);
+  // public filtersService: FiltersService = inject(FiltersService);
   // public newFb: NonNullableFormBuilder = inject(NonNullableFormBuilder);
   public formBuilder: FormBuilder = inject(FormBuilder);
 
@@ -43,7 +40,7 @@ export class AdminProductsPageComponent {
   imgs = signal<IImgSig>({} as IImgSig);
 
   ngOnInit(): void {
-    this.filtersService.getAllFilters();
+    // this.filtersService.getAllFilters();
   }
 
   public get chars(): FormArray {
@@ -164,7 +161,7 @@ export class AdminProductsPageComponent {
       formData.append('chars', JSON.stringify(chars));
       formData.append('info', JSON.stringify(info));
 
-      this.adminService.createProduct(formData);
+      // this.adminService.createProduct(formData);
     }
   }
 

@@ -8,12 +8,15 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AuthInterceptor } from './services/interceptors/auth.interceptor';
+import { AuthInterceptor } from './shared/services/interceptors/auth.interceptor';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { authFeature } from './auth/store/reducer';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import * as authEffects from './auth/store/effects';
+import { register as registerSwiperElements } from 'swiper/element/bundle';
+
+registerSwiperElements();
 
 export const appConfig: ApplicationConfig = {
   providers: [

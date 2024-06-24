@@ -1,4 +1,4 @@
-import { IUser } from '../../shared/types/User.interface';
+import { IUser } from '../../shared/types/user.interface';
 
 export interface IAuthState {
   isAuth: boolean | null;
