@@ -11,10 +11,12 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './shared/services/interceptors/auth.interceptor';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import { authFeature } from './auth/store/reducer';
+import { AUTH_FEATURE_KEY, authFeature } from './auth/store/reducer';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import * as authEffects from './auth/store/effects';
+import * as catalogEffects from './catalog/data-access/state/catalog.effects';
 import { register as registerSwiperElements } from 'swiper/element/bundle';
+import { catalogFeature } from './catalog/data-access/state/catalog.reducer';
 
 registerSwiperElements();
 
@@ -22,9 +24,11 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     importProvidersFrom(HttpClientModule),
-    provideStore(),
-    provideState(authFeature),
-    provideEffects(authEffects),
+    provideStore({
+      [AUTH_FEATURE_KEY]: authFeature.reducer,
+      [catalogFeature.name]: catalogFeature.reducer,
+    }),
+    provideEffects(authEffects, catalogEffects),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
