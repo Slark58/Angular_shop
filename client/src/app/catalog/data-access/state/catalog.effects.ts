@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment.development';
 import { CatalogService } from './catalog.service';
 
-export const getProductEffect$ = createEffect(
+export const getProductsEffect$ = createEffect(
   (actions$ = inject(Actions), catalogService = inject(CatalogService)) => {
     return actions$.pipe(
       ofType(CatalogActions.getProducts),

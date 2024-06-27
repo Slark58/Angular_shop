@@ -1,12 +1,10 @@
 import { Routes } from '@angular/router';
-import { CatalogPageComponent } from './pages/catalog-page/catalog-page.component';
 import { AccountPageComponent } from './pages/account-page/account-page.component';
 import { AdminPanelPageComponent } from './pages/admin-panel-page/admin-panel-page.component';
 import { LayoutComponent } from './shared/modules/layout/layout.component';
 import { AdminOrdersPageComponent } from './pages/admin-panel-page/childerens/admin-orders-page/admin-orders-page.component';
 import { AdminUsersPageComponent } from './pages/admin-panel-page/childerens/admin-users-page/admin-users-page.component';
 import { AdminProductsPageComponent } from './pages/admin-panel-page/childerens/admin-products-page/admin-products-page.component';
-import { ProductPageComponent } from './pages/product-page/product-page.component';
 import { AccountProfilePageComponent } from './pages/account-page/account-profile-page/account-profile-page.component';
 import { AccountOrdersPageComponent } from './pages/account-page/account-orders-page/account-orders-page.component';
 import { AccountCartPageComponent } from './pages/account-page/account-cart-page/account-cart-page.component';

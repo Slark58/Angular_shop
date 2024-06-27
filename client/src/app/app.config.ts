@@ -15,8 +15,10 @@ import { AUTH_FEATURE_KEY, authFeature } from './auth/store/reducer';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import * as authEffects from './auth/store/effects';
 import * as catalogEffects from './catalog/data-access/state/catalog.effects';
+import * as productEffects from './product/data-access/product.effects';
 import { register as registerSwiperElements } from 'swiper/element/bundle';
 import { catalogFeature } from './catalog/data-access/state/catalog.reducer';
+import { productFeature } from './product/data-access/product.reducer';
 
 registerSwiperElements();
 
@@ -27,8 +29,9 @@ export const appConfig: ApplicationConfig = {
     provideStore({
       [AUTH_FEATURE_KEY]: authFeature.reducer,
       [catalogFeature.name]: catalogFeature.reducer,
+      [productFeature.name]: productFeature.reducer,
     }),
-    provideEffects(authEffects, catalogEffects),
+    provideEffects(authEffects, catalogEffects, productEffects),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode

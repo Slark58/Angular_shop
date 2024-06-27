@@ -1,0 +1,155 @@
+.product-page-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-page-chrs {}
+
+.slider-container {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  width: max-content;
+  height: 500px;
+}
+
+
+.mySwiper {
+  margin: 0;
+  height: 100%;
+  max-width: 350px;
+  border-radius: 15px;
+  overflow: hidden;
+
+  swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+}
+
+
+
+.mySwiper2 {
+  margin: 0;
+  height: 100%;
+  max-width: 100px;
+
+  swiper-slide {
+    border-radius: 15px;
+    overflow: hidden;
+    opacity: 0.4;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+
+    }
+  }
+}
+
+
+
+.mySwiper2 .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+
+
+.product-page-buy {
+  height: max-content;
+  border-radius: 15px;
+  padding: 15px;
+  width: 300px;
+  // font-size: 25px;
+  // background-color: #4444;
+  -webkit-box-shadow: 0px 0px 22px 9px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 0px 22px 9px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 0px 22px 9px rgba(34, 60, 80, 0.2);
+}
+
+
+.like-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #EBF7FF;
+
+  &:hover {
+    background-color: #d0f5f8;
+  }
+}
+
+.active-like {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #ffebeb;
+
+  &:hover {
+    background-color: #f8d0d0;
+  }
+}
+
+
+.cart-btn {
+  border: none;
+  background-color: #4182E3;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  span {
+    font-size: 18px;
+    color: white;
+
+  }
+
+  &:hover {
+    background-color: #63a1ff;
+  }
+}
+
+.widget-buy-price {
+  font-size: 18px;
+}
+
+
+
+.span-price {
+  border-radius: 8px;
+  padding: 5px;
+  background-color: #4182E3;
+  color: white;
+}
+
+.btn-size {
+  position: relative;
+  padding: 5px;
+  border: 1px solid gray;
+  cursor: pointer;
+}
+
+
+.tooltip-active {
+  display: block;
+  position: absolute;
+  top: -35px;
+  left: 0;
+  transition: all 0.4s;
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 3px;
+  z-index: 1000;
+}
