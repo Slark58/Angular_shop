@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import { IFiltersResponse } from '../../types/filterResponse.interface';
@@ -13,10 +13,20 @@ export class CatalogService {
 
     return this._http.get<IFiltersResponse[]>(url);
   };
-  getPropducts = () => {
+  // colors, types, sizes, genders
+  getPropducts = (filters: Record<string, number[]>) => {
     const url = environment.URL_API + '/product';
+    console.log(filters);
 
-    return this._http.get<TFullProduct[]>(url);
+    let params = new HttpParams();
+    for (const key in filters) {
+      filters[key].forEach((value) => {
+        params = params.append(key, value);
+      });
+
+      console.log(params);
+    }
+    return this._http.get<TFullProduct[]>(url, { params });
   };
 
   // public getProductById(id: number) {

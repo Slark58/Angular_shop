@@ -11,7 +11,7 @@ export const getProductsEffect$ = createEffect(
     return actions$.pipe(
       ofType(CatalogActions.getProducts),
       switchMap(() => {
-        return catalogService.getPropducts().pipe(
+        return catalogService.getPropducts({}).pipe(
           map((products) => {
             return CatalogActions.getProductsSuccess({ products });
           }),

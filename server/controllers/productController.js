@@ -26,35 +26,44 @@ const {
 class ProductController {
     async createProduct(req, res, next) {
         try {
-            let { name,price, oldPrice, chars, colorId, info } = req.body
-            const {imgs} = req.files
+            let {
+                name,
+                price,
+                oldPrice,
+                chars,
+                colorId,
+                info
+            } = req.body
+            const {
+                imgs
+            } = req.files
             console.log("chars: ", JSON.parse(chars));
             // console.log('imgssssss: ', imgs);
 
             console.log("color: ", JSON.parse(chars)[0].color);
             console.log("ColorId: ", Number(colorId));
-            const product = await Product.create({   
+            const product = await Product.create({
                 name,
                 price,
                 oldPrice
             })
-            
+
             const createImg = async (fileName) => {
                 const img = await Img.create({
                     img: fileName,
                 })
                 return img
             }
-        
+
             if (imgs) {
                 for (const img of imgs) {
                     let fileName = uuid.v4() + ".jpg"
-                    img.mv(path.resolve(__dirname, '..', 'static', fileName))   
-    
+                    img.mv(path.resolve(__dirname, '..', 'static', fileName))
+
                     const imgNew = await createImg(fileName)
-                    
+
                     console.log(imgNew);
-    
+
                     ProductImgs.create({
                         productId: product.id,
                         colorId: colorId,
@@ -63,7 +72,7 @@ class ProductController {
                 }
             }
 
-        
+
             if (chars) {
                 chars = JSON.parse(chars)
                 for (const char of chars) {
@@ -75,11 +84,11 @@ class ProductController {
                         colorId: char.color,
                         count: char.count
                     })
-                  
+
                 }
             }
-            
-        
+
+
 
             if (info) {
                 info = JSON.parse(info)
@@ -102,26 +111,39 @@ class ProductController {
 
 
     async getOne(req, res) {
-        const {id} = req.params
+        const {
+            id
+        } = req.params
         const product = await Product.findOne({
-            where: {id},
-            include: [
-                {
+            where: {
+                id
+            },
+            include: [{
                     model: ProductChars,
                     as: 'chars',
-                    include: [
-                        {model: Type},
-                        {model: Color},
-                        {model: Gender},
-                        {model: Size},
+                    include: [{
+                            model: Type
+                        },
+                        {
+                            model: Color
+                        },
+                        {
+                            model: Gender
+                        },
+                        {
+                            model: Size
+                        },
                     ]
                 },
                 {
                     model: ProductImgs,
                     as: "imgs",
-                    include: [
-                        {model: Img},
-                        {model: Color},
+                    include: [{
+                            model: Img
+                        },
+                        {
+                            model: Color
+                        },
                     ]
                 },
             ],
@@ -132,41 +154,66 @@ class ProductController {
 
     async getAllProducts(req, res, next) {
         try {
+            const {
+                Colors,
+                Types,
+                Sizes,
+                Genders
+            } = req.query;
+            const filters = {};
+
+            console.log(Colors, Types, Sizes, Genders);
+            console.log(req.query);
+
+            if (Colors) filters.colorId = Colors;
+            if (Types) filters.typeId = Types;
+            if (Sizes) filters.sizeId = Sizes;
+            if (Genders) filters.genderId = geGendersnders;
             // let {page, limit} = req.query
-      
+
             // page = page || 1
             // limit = limit || 35
             // let offset = page * limit - limit
 
             const products = await Product.findAll({
-                include: [
-                    {
+                include: [{
                         model: ProductChars,
                         as: 'chars',
-                        include: [
-                            {model: Type},
-                            {model: Color},
-                            {model: Gender},
-                            {model: Size},
+                        where: filters,
+                        include: [{
+                                model: Type
+                            },
+                            {
+                                model: Color
+                            },
+                            {
+                                model: Gender
+                            },
+                            {
+                                model: Size
+                            },
                         ]
                     },
                     {
                         model: ProductImgs,
                         as: 'imgs',
-                        include: [
-                            {model: Img},
-                            {model: Color},
+                        include: [{
+                                model: Img
+                            },
+                            {
+                                model: Color
+                            },
                         ]
                     },
                 ],
             })
 
-            console.log(products);
+            console.log('products: ', products);
 
             if (!products) {
                 return next(ApiError.badRequest('Продукты не найдены'))
-              }
-          
+            }
+
             return res.json(products)
 
         } catch (error) {

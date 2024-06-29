@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnInit,
+  computed,
   inject,
   signal,
 } from '@angular/core';
@@ -29,8 +30,10 @@ import { CatalogFacade } from '../../data-access/state/catalog.facade';
 export class CatalogContainerComponent implements OnInit {
   private readonly store: Store = inject(Store);
   private catalogFacade: CatalogFacade = inject(CatalogFacade);
+  private catalogService: CatalogService = inject(CatalogService);
 
   public activeFilters = signal({} as { [key: string]: number[] });
+
   public filters$ = this.catalogFacade.filters$;
   public products$ = this.catalogFacade.products$;
 
@@ -57,7 +60,21 @@ export class CatalogContainerComponent implements OnInit {
       return currentFilters;
     });
 
-    console.log(this.activeFilters()[category]);
+    console.log('activeFilters: ', this.activeFilters());
+    this.fetchProductsWithFilters();
+  }
+
+  private fetchProductsWithFilters() {
+    this.catalogService.getPropducts(this.activeFilters()).subscribe({
+      next: (products) => {
+        console.log(products);
+
+        this.store.dispatch(CatalogActions.getProductsSuccess({ products }));
+      },
+      error: (error) => {
+        console.error('Error fetching products with filters:', error);
+      },
+    });
   }
 
   ngOnInit() {
