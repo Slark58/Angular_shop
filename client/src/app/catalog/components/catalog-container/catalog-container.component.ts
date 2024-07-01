@@ -60,15 +60,12 @@ export class CatalogContainerComponent implements OnInit {
       return currentFilters;
     });
 
-    console.log('activeFilters: ', this.activeFilters());
     this.fetchProductsWithFilters();
   }
 
   private fetchProductsWithFilters() {
     this.catalogService.getPropducts(this.activeFilters()).subscribe({
       next: (products) => {
-        console.log(products);
-
         this.store.dispatch(CatalogActions.getProductsSuccess({ products }));
       },
       error: (error) => {

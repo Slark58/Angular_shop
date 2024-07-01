@@ -140,16 +140,29 @@
   cursor: pointer;
 }
 
+.tooltip-def {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: -20px;
+  left: 0;
+  padding: 5px;
+  border-radius: 3px;
+  transition: visibility 0s, opacity 0.3s linear, top 0.3s;
+  z-index: 1000;
+}
 
 .tooltip-active {
-  display: block;
+  visibility: visible;
+  opacity: 1;
+  background-color: black;
+  color: white;
+  z-index: 1000;
   position: absolute;
   top: -35px;
   left: 0;
-  transition: all 0.4s;
-  background-color: black;
-  color: white;
   padding: 5px;
   border-radius: 3px;
+  transition: visibility 0s, opacity 0.3s linear, top 0.3s;
   z-index: 1000;
 }

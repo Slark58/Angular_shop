@@ -20,10 +20,14 @@ export class CatalogService {
 
     let params = new HttpParams();
     for (const key in filters) {
-      filters[key].forEach((value) => {
-        params = params.append(key, value);
-      });
+      // filters[key].forEach((value) => {
+      //   params = params.append(key, value);
+      // });
 
+      if (filters.hasOwnProperty(key)) {
+        const values = filters[key].join(',');
+        params = params.set(key, values);
+      }
       console.log(params);
     }
     return this._http.get<TFullProduct[]>(url, { params });
