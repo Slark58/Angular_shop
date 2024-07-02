@@ -9,6 +9,10 @@ import { AccountProfilePageComponent } from './pages/account-page/account-profil
 import { AccountOrdersPageComponent } from './pages/account-page/account-orders-page/account-orders-page.component';
 import { AccountCartPageComponent } from './pages/account-page/account-cart-page/account-cart-page.component';
 import { HomeComponent } from './home/home.component';
+import { AdminLayoutComponent } from './admin-panel/components/admin-layout/admin-layout.component';
+import { AdminProductsComponent } from './admin-panel/components/admin-products/admin-products.component';
+import { AdminUsersComponent } from './admin-panel/components/admin-users/admin-users.component';
+import { AdminOrdersComponent } from './admin-panel/components/admin-orders/admin-orders.component';
 
 export enum Paths {
   Home = '',
@@ -87,6 +91,24 @@ export const routes: Routes = [
       //   path: Paths.Product,
       //   component: ProductPageComponent,
       // },
+    ],
+  },
+  {
+    path: Paths.AdminPanel,
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: AdminPaths.Products,
+        component: AdminProductsComponent,
+      },
+      {
+        path: AdminPaths.Orders,
+        component: AdminOrdersComponent,
+      },
+      {
+        path: AdminPaths.Users,
+        component: AdminUsersComponent,
+      },
     ],
   },
   // {

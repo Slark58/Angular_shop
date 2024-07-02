@@ -165,10 +165,12 @@ class ProductController {
             console.log(Colors, Types, Sizes, Genders);
             console.log(req.query);
 
-            if (Colors) filters.colorId = Colors;
-            if (Types) filters.typeId = Types;
-            if (Sizes) filters.sizeId = Sizes;
-            if (Genders) filters.genderId = geGendersnders;
+            if (Colors) filters.colorId = Colors.split(',');
+            if (Types) filters.typeId = Types.split(',');
+            if (Sizes) filters.sizeId = Sizes.split(',');
+            if (Genders) filters.genderId = Genders.split(',');
+
+            console.log(filters);
             // let {page, limit} = req.query
 
             // page = page || 1
