@@ -1,6 +1,3 @@
-<p>
-  admin-products works!
-</p>
 <!-- <button mat-raised-button (click)="openDialog()">Pick one</button> -->
 
 <div class="admin-products">
@@ -39,29 +36,31 @@
             <div class="filters-cahrs" formArrayName="chars">
               @if(filters$ | async; as filters) {
               <div class="df g10 fdc ">
-                @for(char of chars.controls; track $index) {
-                <div class="df g10 row-flex" [formGroupName]="$index">
-                  <div class="signUpForm__label-title">{{$index + 1}} | </div>
-                  @for(filter of filters; track filter.title) {
-                  <mat-form-field>
-                    <mat-label>{{filter.title}}</mat-label>
-                    <mat-select [formControlName]="filter.title | lowercase | LastLetterPipe">
-                      @for (item of filter.data; track item) {
-                      <mat-option [value]="item.id">{{item.value}}</mat-option>
-                      }
-                    </mat-select>
-                  </mat-form-field>
+                <ng-container *ngFor="let item of chars.controls; let i = index">
 
-                  }
-                  <mat-form-field appearance="fill" class="example-full-width auth-label">
-                    <mat-label>count</mat-label>
-                    <input matInput type="number" formControlName="count">
-                  </mat-form-field>
+                  <div class="df g10 row-flex" [formGroupName]="i">
+                    <div class="signUpForm__label-title">{{i + 1}} | </div>
+                    @for(filter of filters; track filter.title) {
+                    <mat-form-field>
+                      <mat-label>{{filter.title}}</mat-label>
+                      <mat-select [formControlName]="filter.title | lowercase | LastLetterPipe">
+                        @for (item of filter.data; track item) {
+                        <mat-option [value]="item.id">{{item.value}}</mat-option>
+                        }
+                      </mat-select>
+                    </mat-form-field>
+
+                    }
+                    <mat-form-field appearance="fill" class="example-full-width auth-label">
+                      <mat-label>count</mat-label>
+                      <input matInput type="number" formControlName="count">
+                    </mat-form-field>
 
 
-                  <button (click)="removeChar($index)">removeChar</button>
-                </div>
-                }
+                    <button (click)="removeChar(i)">removeChar</button>
+                  </div>
+                </ng-container>
+
               </div>
 
               }
@@ -73,21 +72,22 @@
             <p class="header-title">Choise characteristic</p>
             <div class="form-descr-contnet">
 
-              @for(info of info.controls; track $index) {
-              <div class="df alc g10" [formGroupName]="$index">
-                <mat-form-field appearance="outline" class="example-full-width auth-label">
-                  <mat-label>Title</mat-label>
-                  <input required matInput type="text" formControlName="title">
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="example-full-width auth-label">
-                  <mat-label>Description</mat-label>
-                  <input matInput type="text" formControlName="description">
-                </mat-form-field>
-                <button (click)="removeImfo($index)">removeDescription</button>
+              <ng-container *ngFor="let item of info.controls; let i = index">
+                <div class="df alc g10" [formGroupName]="i">
+                  <mat-form-field appearance="outline" class="example-full-width auth-label">
+                    <mat-label>Title</mat-label>
+                    <input required matInput type="text" formControlName="title">
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" class="example-full-width auth-label">
+                    <mat-label>Description</mat-label>
+                    <input matInput type="text" formControlName="description">
+                  </mat-form-field>
+                  <button (click)="removeImfo(i)">removeDescription</button>
 
-              </div>
+                </div>
 
-              }
+              </ng-container>
+
             </div>
             <button (click)="addNewInfo($event)">addNewDescription</button>
 

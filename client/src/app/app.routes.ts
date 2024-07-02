@@ -1,18 +1,14 @@
 import { Routes } from '@angular/router';
-import { AccountPageComponent } from './pages/account-page/account-page.component';
-import { AdminPanelPageComponent } from './pages/admin-panel-page/admin-panel-page.component';
 import { LayoutComponent } from './shared/modules/layout/layout.component';
-import { AdminOrdersPageComponent } from './pages/admin-panel-page/childerens/admin-orders-page/admin-orders-page.component';
-import { AdminUsersPageComponent } from './pages/admin-panel-page/childerens/admin-users-page/admin-users-page.component';
-import { AdminProductsPageComponent } from './pages/admin-panel-page/childerens/admin-products-page/admin-products-page.component';
-import { AccountProfilePageComponent } from './pages/account-page/account-profile-page/account-profile-page.component';
-import { AccountOrdersPageComponent } from './pages/account-page/account-orders-page/account-orders-page.component';
-import { AccountCartPageComponent } from './pages/account-page/account-cart-page/account-cart-page.component';
 import { HomeComponent } from './home/home.component';
 import { AdminLayoutComponent } from './admin-panel/components/admin-layout/admin-layout.component';
 import { AdminProductsComponent } from './admin-panel/components/admin-products/admin-products.component';
 import { AdminUsersComponent } from './admin-panel/components/admin-users/admin-users.component';
 import { AdminOrdersComponent } from './admin-panel/components/admin-orders/admin-orders.component';
+import { ProfileLayoutComponent } from './profile/components/profile-layout/profile-layout.component';
+import { ProfileInfoComponent } from './profile/components/profile-info/profile-info.component';
+import { ProfileCartComponent } from './profile/components/profile-cart/profile-cart.component';
+import { ProfileOrdersComponent } from './profile/components/profile-orders/profile-orders.component';
 
 export enum Paths {
   Home = '',
@@ -61,24 +57,24 @@ export const routes: Routes = [
           import('./product/product.routes').then((m) => m.productRoutes),
       },
 
-      // {
-      //   path: Paths.Account,
-      //   component: AccountPageComponent,
-      //   children: [
-      //     {
-      //       path: UserAccountPaths.Profile,
-      //       component: AccountProfilePageComponent,
-      //     },
-      //     {
-      //       path: UserAccountPaths.Cart,
-      //       component: AccountCartPageComponent,
-      //     },
-      //     {
-      //       path: UserAccountPaths.Orders,
-      //       component: AccountOrdersPageComponent,
-      //     },
-      //   ],
-      // },
+      {
+        path: Paths.Account,
+        component: ProfileLayoutComponent,
+        children: [
+          {
+            path: UserAccountPaths.Profile,
+            component: ProfileInfoComponent,
+          },
+          {
+            path: UserAccountPaths.Cart,
+            component: ProfileCartComponent,
+          },
+          {
+            path: UserAccountPaths.Orders,
+            component: ProfileOrdersComponent,
+          },
+        ],
+      },
       // {
       //   path: Paths.Catalog,
       //   component: CatalogPageComponent,

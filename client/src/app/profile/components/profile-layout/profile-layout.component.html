@@ -1,0 +1,23 @@
+<div class="admin-panel df">
+
+  <div class="sidebar df fdc jcsb">
+    <div class="">log</div>
+
+    <div class="links df fdc ">
+      <ng-container *ngFor="let item of nav">
+        <a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-active" class="sidebar-link"
+          [routerLink]="['/Account/' + item.link]">
+          {{item.title}}
+        </a>
+      </ng-container>
+      <a class="sidebar-link" [routerLink]="['/']">
+        Back to home
+      </a>
+    </div>
+    <div class="">log</div>
+
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

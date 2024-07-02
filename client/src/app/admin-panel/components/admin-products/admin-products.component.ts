@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   OnInit,
@@ -50,10 +51,7 @@ interface IImgSig {
   styleUrls: ['./admin-products.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminProductsComponent implements OnInit {
-  // public adminService: ProductsService = inject(ProductsService);
-  // public filtersService: FiltersService = inject(FiltersService);
-  // public newFb: NonNullableFormBuilder = inject(NonNullableFormBuilder);
+export class AdminProductsComponent implements OnInit, AfterViewInit {
   private readonly adminFacade = inject(AdminFacade);
   public filters$?: Observable<IFiltersResponse[]>;
   public formBuilder: FormBuilder = inject(FormBuilder);
@@ -64,18 +62,16 @@ export class AdminProductsComponent implements OnInit {
     this.filters$ = this.adminFacade.getFilters().pipe(take(1));
   }
 
+  ngAfterViewInit(): void {
+    this.filters$?.subscribe((data) => console.log(data));
+  }
+
   public get chars(): FormArray {
     return this.productFbForm.get('chars') as FormArray;
   }
   public get info(): FormArray {
     return this.productFbForm.get('info') as FormArray;
   }
-
-  // public qiizForm = this.newFb.group({
-  //   nameT: '',
-  //   priceT: null,
-  //   colorT: '',
-  // });
 
   public productFbForm = this.formBuilder.group({
     name: [<string>'', [Validators.required]],
@@ -88,8 +84,8 @@ export class AdminProductsComponent implements OnInit {
 
   private newInfo() {
     return this.formBuilder.group({
-      title: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      title: ['', []],
+      description: ['', []],
     });
   }
 
