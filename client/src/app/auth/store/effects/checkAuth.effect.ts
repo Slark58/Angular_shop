@@ -6,7 +6,7 @@ import {
   checkAuthFailureAction,
   checkAuthSuccessAction,
 } from '../actions/checkAuth.action';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { IUser } from '../../../shared/types/user.interface';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -17,9 +17,10 @@ export const checkAuthEffect$ = createEffect(
       ofType(checkAuthAction),
       switchMap(() => {
         return authService.checkAuth().pipe(
+          tap(({ token }) => localStorage.setItem('token', token)),
           map(({ token }) => {
-            localStorage.setItem('token', token);
             const user = jwtDecode<IUser>(token);
+            console.log(user);
             return checkAuthSuccessAction({ user });
           }),
           catchError(() => of(checkAuthFailureAction()))

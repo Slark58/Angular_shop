@@ -1,3 +1,18 @@
-<p>
-  profile-info works!
-</p>
+<div class="profile-info">
+
+  <div class="profile-info-wrapper df g10">
+
+    <div class="df fdc g10">
+      <div class="profile-info-title">ФИО</div>
+      <div class="profile-info-title">Номер</div>
+      <div class="profile-info-title">Почта</div>
+    </div>
+    <div class="df fdc g10">
+      <div class="profile-info-value">{{(user$ | async)?.name}}</div>
+      <div class="profile-info-value">{{(user$ | async)?.phone}}</div>
+      <div class="profile-info-value">{{(user$ | async)?.email}}</div>
+    </div>
+
+  </div>
+
+</div>

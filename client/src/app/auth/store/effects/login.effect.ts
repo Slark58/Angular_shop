@@ -18,8 +18,11 @@ export const loginEffect$ = createEffect(
       ofType(loginAction),
       switchMap(({ request }) => {
         return authServices.login(request).pipe(
+          tap(({ token, basket }) => {
+            localStorage.setItem('token', token);
+            localStorage.setItem('basketId', basket.id.toString());
+          }),
           map((res) => {
-            localStorage.setItem('token', res.token);
             const user = jwtDecode<IUser>(res.token);
             console.log('User from logineffect:', user);
             return loginSuccessAction({ user });

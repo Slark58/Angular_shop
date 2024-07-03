@@ -30,7 +30,7 @@ export class AuthService {
 
   checkAuth() {
     const url = environment.URL_API + '/user/auth';
-    return this.http.get<{ token: string }>(url);
+    return this.http.get<AuthResponse>(url);
   }
 
   // logout() {

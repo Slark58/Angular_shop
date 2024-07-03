@@ -52,7 +52,7 @@ class UserController {
         const basket = await Basket.create({
             userId: user.id
         })
-        const token = generateJwt(user.id, user.email, user.firstName, user.lastName, user.role)
+        const token = generateJwt(user.id, user.firstName, user.email, user.lastName, user.role)
         return res.json({
             token,
             basket
@@ -83,7 +83,7 @@ class UserController {
                 userId: user.id
             }
         })
-        const token = generateJwt(user.id, user.email, user.name, user.phone, user.role)
+        const token = generateJwt(user.id, user.name, user.email, user.phone, user.role)
         return res.json({
             token,
             basket
@@ -92,9 +92,16 @@ class UserController {
 
     async check(req, res, next) {
         console.log(req.user);
-        const token = generateJwt(req.user.id, req.user.email, req.user.name, req.user.phone, req.user.role)
+        const basket = await Basket.findOne({
+            where: {
+                userId: req.user.id
+            }
+        })
+        const token = generateJwt(req.user.id, req.user.name, req.user.email, req.user.phone, req.user.role)
+
         return res.json({
-            token
+            token,
+            basket
         })
     }
 }

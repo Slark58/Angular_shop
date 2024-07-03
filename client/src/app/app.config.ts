@@ -17,10 +17,12 @@ import * as authEffects from './auth/store/effects';
 import * as catalogEffects from './catalog/data-access/state/catalog.effects';
 import * as productEffects from './product/data-access/product.effects';
 import * as adminEffects from './admin-panel/data-access/admin.effects';
+import * as profileEffects from './profile/data-access/profile.effects';
 import { register as registerSwiperElements } from 'swiper/element/bundle';
 import { catalogFeature } from './catalog/data-access/state/catalog.reducer';
 import { productFeature } from './product/data-access/product.reducer';
 import { adminFeature } from './admin-panel/data-access/admin.reducer';
+import { profileFeatere } from './profile/data-access/profile.reducer';
 
 registerSwiperElements();
 
@@ -33,8 +35,15 @@ export const appConfig: ApplicationConfig = {
       [catalogFeature.name]: catalogFeature.reducer,
       [productFeature.name]: productFeature.reducer,
       [adminFeature.name]: adminFeature.reducer,
+      [profileFeatere.name]: profileFeatere.reducer,
     }),
-    provideEffects(authEffects, catalogEffects, productEffects, adminEffects),
+    provideEffects(
+      authEffects,
+      catalogEffects,
+      productEffects,
+      adminEffects,
+      profileEffects
+    ),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode
