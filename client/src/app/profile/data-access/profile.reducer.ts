@@ -26,6 +26,20 @@ const reducer = createReducer(
     loading: true,
   })),
 
+  //* INCREASE CART ITEM *//
+  on(ProfileActions.increaseCartItem, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(ProfileActions.increaseCartItemSuccess, (state) => ({
+    ...state,
+    loading: false,
+  })),
+  on(ProfileActions.increaseCartItemFailure, (state) => ({
+    ...state,
+    loading: false,
+  })),
+
   //* ORDERS *//
   on(ProfileActions.getOrders, (state) => ({
     ...state,

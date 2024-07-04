@@ -18,3 +18,18 @@ export const getAllCartItemsEffect = createEffect(
   },
   { functional: true }
 );
+
+export const increaseCartItemEffect = createEffect(
+  (actions$ = inject(Actions), profileService = inject(ProfileService)) => {
+    return actions$.pipe(
+      ofType(ProfileActions.increaseCartItem),
+      switchMap(({ basketId, productId }) => {
+        return profileService.incrementProduct(productId, basketId).pipe(
+          map(() => ProfileActions.increaseCartItemSuccess()),
+          catchError(() => EMPTY)
+        );
+      })
+    );
+  },
+  { functional: true }
+);

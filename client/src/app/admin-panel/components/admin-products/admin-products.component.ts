@@ -9,6 +9,7 @@ import {
 import {
   FormArray,
   FormBuilder,
+  NonNullableFormBuilder,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -51,19 +52,15 @@ interface IImgSig {
   styleUrls: ['./admin-products.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminProductsComponent implements OnInit, AfterViewInit {
+export class AdminProductsComponent implements OnInit {
   private readonly adminFacade = inject(AdminFacade);
   public filters$?: Observable<IFiltersResponse[]>;
-  public formBuilder: FormBuilder = inject(FormBuilder);
+  public formBuilder: NonNullableFormBuilder = inject(NonNullableFormBuilder);
   public maxImgs: number = 3;
   public imgs = signal<IImgSig>({} as IImgSig);
 
   ngOnInit(): void {
     this.filters$ = this.adminFacade.getFilters().pipe(take(1));
-  }
-
-  ngAfterViewInit(): void {
-    this.filters$?.subscribe((data) => console.log(data));
   }
 
   public get chars(): FormArray {
@@ -74,10 +71,10 @@ export class AdminProductsComponent implements OnInit, AfterViewInit {
   }
 
   public productFbForm = this.formBuilder.group({
-    name: [<string>'', [Validators.required]],
-    price: [<number | null>null, [Validators.required]],
-    oldPrice: [<number | null>null, [Validators.required]],
-    colorId: [<number | null>null, [Validators.required]],
+    name: ['', [Validators.required]],
+    price: [null, [Validators.required]],
+    oldPrice: [null, [Validators.required]],
+    colorId: [null, [Validators.required]],
     chars: this.formBuilder.array<ProductCharForm>([]),
     info: this.formBuilder.array<{ title: string; description: string }[]>([]),
   });
@@ -91,11 +88,11 @@ export class AdminProductsComponent implements OnInit, AfterViewInit {
 
   private newChar() {
     return this.formBuilder.group({
-      color: [<number | null>null, [Validators.required]],
-      size: [<number | null>null, [Validators.required]],
-      type: [<number | null>null, [Validators.required]],
-      gender: [<number | null>null, [Validators.required]],
-      count: [<number | null>null, [Validators.required]],
+      color: [null, [Validators.required]],
+      size: [null, [Validators.required]],
+      type: [null, [Validators.required]],
+      gender: [null, [Validators.required]],
+      count: [null, [Validators.required]],
     });
   }
 
@@ -164,21 +161,19 @@ export class AdminProductsComponent implements OnInit, AfterViewInit {
     const { chars, name, oldPrice, colorId, price, info } =
       this.productFbForm.value;
 
-    console.log(chars);
+    console.log(name);
 
-    if (name && oldPrice && price && colorId) {
-      const formData = new FormData();
-      formData.append('name', name);
-      formData.append('price', price.toString());
-      formData.append('oldPrice', oldPrice.toString());
-      formData.append('colorId', colorId.toString());
-      this.imgs().imgFormValue.forEach((file, i) => {
-        formData.append('imgs', file);
-      });
-      formData.append('chars', JSON.stringify(chars));
-      formData.append('info', JSON.stringify(info));
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('price', price.toString());
+    formData.append('oldPrice', oldPrice.toString());
+    formData.append('colorId', colorId.toString());
+    this.imgs().imgFormValue.forEach((file, i) => {
+      formData.append('imgs', file);
+    });
+    formData.append('chars', JSON.stringify(chars));
+    formData.append('info', JSON.stringify(info));
 
-      // this.adminService.createProduct(formData);
-    }
+    // this.adminService.createProduct(formData);
   }
 }

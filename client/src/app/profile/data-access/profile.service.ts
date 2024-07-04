@@ -16,10 +16,7 @@ export class ProfileService {
       `${environment.URL_API}/delete?basketId=${basketId}&productId=${productId}`
     );
   }
-  public incrementProduct(
-    productId: string | number | undefined,
-    basketId: number
-  ) {
+  public incrementProduct(productId: number | null, basketId: string | null) {
     return this._http.post(`${environment.URL_API}/cartOrder/increase`, {
       productId,
       basketId,
