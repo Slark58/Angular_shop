@@ -1,3 +1,45 @@
-<p>
-  cart-item works!
-</p>
+<div class='CartOrderItem'>
+  <div class='CartOrderItem__wrapper'>
+    <div class='CartOrderItem__left'>
+      <div class='CartOrderItem__img'>
+        <img [src]="'http://localhost:5000/' + cartItemProps.product_char.product.imgs[0].img.img " alt='asdas' />
+      </div>
+    </div>
+
+    <div class="CartOrderItem__middle">
+      <div class='CartOrderItem__title'>{{cartItemProps.product_char.product.name}}</div>
+      <div class='CartOrderItem__price'>
+        <div class='CartOrderItem__price-total'>
+          {{cartItemProps.product_char.product.price * cartItemProps.quantity }} ₽
+        </div>
+        <div class='CartOrderItem__price-oneItem'>
+          {{cartItemProps.product_char.product.price}} ₽ за Шт.
+        </div>
+      </div>
+    </div>
+    <!-- <div class='CartOrderItem__right'>
+      <div class='CartOrderItem__counter'>
+        <div class='CartOrderItem__orderSetting-flex'>
+          <button class='CartOrderItem__orderSetting-btn' onClick={()=>
+            asyncIncreaseCartQuantity(product.productId, basketId)
+            }
+            >
+            +
+          </button>
+          <div class='CartOrderItem__orderSetting-title'>
+            {product?.quantity}
+          </div>
+          <button class='CartOrderItem__orderSetting-btn' disabled={product?.quantity===1} onClick={()=>
+            asyncDecreaseCartQuantity(product.productId, basketId)}
+            >
+            -
+          </button>
+        </div>
+        <button class='CartOrderItem__orderSetting-btnremove' onClick={()=> removeFromCart(product.productId,
+          basketId)}>
+          Удалить
+        </button>
+      </div>
+    </div> -->
+  </div>
+</div>

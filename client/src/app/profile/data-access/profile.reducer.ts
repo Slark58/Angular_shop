@@ -17,11 +17,12 @@ const reducer = createReducer(
     ...state,
     loading: true,
   })),
-  on(ProfileActions.getCartItems, (state) => ({
+  on(ProfileActions.getCartItemsSuccess, (state, action) => ({
     ...state,
     loading: true,
+    cartItems: action.cartItems,
   })),
-  on(ProfileActions.getCartItems, (state) => ({
+  on(ProfileActions.getCartItemsSuccess, (state) => ({
     ...state,
     loading: true,
   })),

@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductFacade } from '../../../data-access/product.facade';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { CountOfSizeDirective } from '../../../../utils/directives/countOfSize.directive';
+import { PersistService } from '../../../../shared/services/persist.service';
 
 @Component({
   selector: 'app-product-detailed-container',
@@ -22,19 +23,26 @@ import { CountOfSizeDirective } from '../../../../utils/directives/countOfSize.d
 export class ProductDetailedContainerComponent implements OnInit {
   private readonly productFacade: ProductFacade = inject(ProductFacade);
 
-  public size: number | null = null;
+  private readonly persistService: PersistService = inject(PersistService);
+
+  public basketId = this.persistService.get('basketId') as number;
+  public sizeId: number | null = null;
   public productId: number | null = null;
   private activetedRoute: ActivatedRoute = inject(ActivatedRoute);
-  public basketId: string | null = localStorage.getItem('basketId');
+  // public basketId: string | null = localStorage.getItem('basketId');
   public product$ = this.productFacade.product$;
 
   chouseSizeProduct(size: number | null) {
-    this.size = size;
-    console.log(this.size);
+    this.sizeId = size;
+    console.log(this.sizeId);
   }
 
-  increaseCartItemById(productId: number | null, basketId: string | null) {
-    this.productFacade.increaseCartItemById(productId, basketId);
+  increaseCartItemById(
+    productId: number | null,
+    basketId: number,
+    sizeId: number | null
+  ) {
+    this.productFacade.increaseCartItemById(productId, basketId, sizeId);
   }
 
   ngOnInit() {

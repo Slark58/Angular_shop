@@ -5,12 +5,13 @@ export const ProfileActions = createActionGroup({
   source: 'profile',
   events: {
     'get cart items': props<{ basketId: number }>(),
-    'get cart items success': props<{ cartItems: ICartItem[] | undefined }>(),
+    'get cart items success': props<{ cartItems: ICartItem[] | null }>(),
     'get cart items failure': emptyProps(),
 
     'increase cart item': props<{
       productId: number | null;
-      basketId: string | null;
+      basketId: number;
+      sizeId: number | null;
     }>(),
     'increase cart item success': emptyProps(),
     'increase cart item failure': emptyProps(),

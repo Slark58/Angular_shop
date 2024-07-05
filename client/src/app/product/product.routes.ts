@@ -3,5 +3,5 @@ import { Paths } from '../app.routes';
 import { ProductDetailedContainerComponent } from './components/product-detailed/product-detailed-container/product-detailed-container.component';
 
 export const productRoutes: Routes = [
-  { path: Paths.Product, component: ProductDetailedContainerComponent },
+  { path: '', component: ProductDetailedContainerComponent },
 ];

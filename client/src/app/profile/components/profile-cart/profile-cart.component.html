@@ -1,20 +1,22 @@
 <section class='cart'>
 
-  @if (items === 0) {
+  @if (isCartItemsExist$ | async; as carts ) {
   <div class='cart__empty'>
     <div class='cart__empty-title'>Ваша корзина пуста</div>
     <div class='cart__empty-img'>
       (((((((((((((((((((((((((
     </div>
-    <a class='cart__empty-link'>
-      К покупкам
+    <a [routerLink]="['/Catalog']" class='cart__empty-link'>
+      К покупка
     </a>
   </div>
   } @else {
   <div class='cart-main'>
     <div class='cart__list'>
 
-      <app-cart-item></app-cart-item>
+      @for(product of cartItems$ | async; track product.id) {
+      <app-cart-item [cartItem]="product"></app-cart-item>
+      }
       <!-- {cartItems.map((item) => (
       <CartOrderItem key={item.id} product={item} basketId={basketId}
         asyncDecreaseCartQuantity={asyncDecreaseCartQuantity} asyncIncreaseCartQuantity={asyncIncreaseCartQuantity}
@@ -23,13 +25,12 @@
     </div>
     <div class='cart__widget'>
       <h3 class='cart__widget-h3'>Адрес получения : </h3>
-      <!-- <select class='Cart__widget-select' onChange={(e)=> setAddress(e.target.value)}
-        >
+      <select class='Cart__widget-select' (change)="toggleAddress($event)">
         <option value=''>Выберите Адрес</option>
-        {arrAdreses.map((item) => (
-        <option value={item}>{item}</option>
-        ))}
-      </select> -->
+        @for(address of addresses; track address) {
+        <option value={{address}}>{{address}}</option>
+        }
+      </select>
       <h3 class='cart__widget-h3'>Итого : </h3>
       <div class='cart__widget-flex'>
         <div class='cart__widget-title'>

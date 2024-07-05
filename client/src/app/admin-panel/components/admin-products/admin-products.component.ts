@@ -13,7 +13,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ProductCharForm } from '../../../models/Form';
+// import { ProductCharForm } from '../../../models/Form';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -76,8 +76,8 @@ export class AdminProductsComponent implements OnInit {
     price: ['', [Validators.required]],
     oldPrice: ['', [Validators.required]],
     colorId: ['', [Validators.required]],
-    chars: this.formBuilder.array<ProductCharForm>([]),
-    info: this.formBuilder.array<{ title: string; description: string }[]>([]),
+    chars: this.formBuilder.array([]),
+    info: this.formBuilder.array([]),
   });
 
   private newInfo() {

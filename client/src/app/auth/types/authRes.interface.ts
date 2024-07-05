@@ -1,4 +1,4 @@
-import { Basket } from '../../models/Main';
+import { Basket } from '../../shared/types/Basket.interface';
 
 export interface AuthResponse {
   basket: Basket;

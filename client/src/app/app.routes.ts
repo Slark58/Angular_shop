@@ -47,34 +47,22 @@ export const routes: Routes = [
           import('./auth/auth.routes').then((m) => m.authRoutes),
       },
       {
-        path: '',
+        path: Paths.Catalog,
         loadChildren: () =>
           import('./catalog/catalog.routes').then((m) => m.caatalogRoutes),
       },
       {
-        path: '',
+        path: Paths.Product,
         loadChildren: () =>
           import('./product/product.routes').then((m) => m.productRoutes),
       },
 
       {
         path: Paths.Account,
-        component: ProfileLayoutComponent,
-        children: [
-          {
-            path: UserAccountPaths.Profile,
-            component: ProfileInfoComponent,
-          },
-          {
-            path: UserAccountPaths.Cart,
-            component: ProfileCartComponent,
-          },
-          {
-            path: UserAccountPaths.Orders,
-            component: ProfileOrdersComponent,
-          },
-        ],
+        loadChildren: () =>
+          import('./profile/profile.routes').then((m) => m.routes),
       },
+
       // {
       //   path: Paths.Catalog,
       //   component: CatalogPageComponent,

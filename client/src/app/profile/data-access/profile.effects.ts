@@ -23,11 +23,13 @@ export const increaseCartItemEffect = createEffect(
   (actions$ = inject(Actions), profileService = inject(ProfileService)) => {
     return actions$.pipe(
       ofType(ProfileActions.increaseCartItem),
-      switchMap(({ basketId, productId }) => {
-        return profileService.incrementProduct(productId, basketId).pipe(
-          map(() => ProfileActions.increaseCartItemSuccess()),
-          catchError(() => EMPTY)
-        );
+      switchMap(({ basketId, productId, sizeId }) => {
+        return profileService
+          .incrementProduct(productId, basketId, sizeId)
+          .pipe(
+            map(() => ProfileActions.increaseCartItemSuccess()),
+            catchError(() => EMPTY)
+          );
       })
     );
   },

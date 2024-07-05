@@ -49,7 +49,7 @@
               <div class="df g10 alc mt10">
                 @if (product$ | async; as product) {
                 @for(item of product.chars; track item) {
-                <div [ngClass]="{'active-size': size === item.sizeId}" (click)="chouseSizeProduct(item.sizeId)"
+                <div [ngClass]="{'active-size': sizeId === item.sizeId}" (click)="chouseSizeProduct(item.sizeId)"
                   appCountOfSize="{{item.count}}" class="btn-size">
                   {{item.size.value}}</div>
                 }
@@ -57,7 +57,8 @@
               </div>
               <div class="df g10 mt10">
                 <button class="like-btn">like</button>
-                <button class="cart-btn" (click)="increaseCartItemById(productId, basketId)">Add in the cart</button>
+                <button class="cart-btn" (click)="increaseCartItemById(productId, basketId, sizeId)">Add in the
+                  cart</button>
               </div>
             </div>
           </div>

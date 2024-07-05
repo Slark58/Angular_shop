@@ -65,10 +65,10 @@
   &__empty-link {
     padding: 10px 14px;
     font-size: 20px;
-    color: #4182E3;
+    color: #673AB7;
     background-color: white;
     border-radius: 8px;
-    border: 2px solid #4182E3;
+    border: 2px solid #673AB7;
     cursor: pointer;
   }
 
@@ -84,7 +84,7 @@
   &__widget {
     top: 10px;
     position: sticky;
-    border: 2px solid #4182E3;
+    border: 2px solid #673AB7;
     padding: 10px;
     margin-top: 30px;
     flex-basis: 250px;
@@ -110,7 +110,7 @@
     &-select {
       margin: 10px;
       padding: 5px;
-      border: 2px solid #4182E3;
+      border: 2px solid #673AB7;
       font-size: 18px;
 
     }
@@ -126,7 +126,7 @@
     font-size: 20px;
     text-align: center;
     color: white;
-    background-color: #4182E3;
+    background-color: #673AB7;
     border-radius: 8px;
     cursor: pointer;
     border: none;

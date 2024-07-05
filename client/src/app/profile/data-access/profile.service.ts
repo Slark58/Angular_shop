@@ -16,10 +16,15 @@ export class ProfileService {
       `${environment.URL_API}/delete?basketId=${basketId}&productId=${productId}`
     );
   }
-  public incrementProduct(productId: number | null, basketId: string | null) {
+  public incrementProduct(
+    productId: number | null,
+    basketId: number,
+    sizeId: number | null
+  ) {
     return this._http.post(`${environment.URL_API}/cartOrder/increase`, {
       productId,
       basketId,
+      sizeId,
     });
   }
 
@@ -38,10 +43,8 @@ export class ProfileService {
       params: { basketId },
     });
   }
-  public getAllCartItems(
-    basketId: number
-  ): Observable<ICartItem[] | undefined> {
-    return this._http.get<ICartItem[] | undefined>(
+  public getAllCartItems(basketId: number): Observable<ICartItem[] | null> {
+    return this._http.get<ICartItem[] | null>(
       `${environment.URL_API}/cartOrder/all`,
       {
         params: { basketId },
