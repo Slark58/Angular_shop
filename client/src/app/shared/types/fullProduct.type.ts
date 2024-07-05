@@ -2,6 +2,10 @@ import { Brand, Gender, Imgs, Size, Type } from './chars.interface';
 import { Product } from './product.interface';
 
 export type TFullProduct = Product & {
+  info: {
+    title: string;
+    description: string;
+  }[];
   chars: {
     size: Size;
     type: Type;

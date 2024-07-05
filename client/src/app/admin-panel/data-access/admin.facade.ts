@@ -2,6 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectProducts } from './admin.selectors';
 import { AdminService } from './admin.service';
+import { CreateProductInterface } from '../types/createProduct.interface';
+import { AdminActions } from './admin.actions';
 
 @Injectable({ providedIn: 'root' })
 export class AdminFacade {
@@ -14,5 +16,7 @@ export class AdminFacade {
   getFilters() {
     return this.adminService.getFilters();
   }
-  createProducts() {}
+  createProduct(product: FormData) {
+    this.store.dispatch(AdminActions.createProduct({ product }));
+  }
 }

@@ -1,9 +1,9 @@
 import { EntityState } from '@ngrx/entity';
-import { FullProduct } from '../../models/Main';
 import { IUser } from '../../shared/types/user.interface';
+import { TFullProduct } from '../../shared/types/fullProduct.type';
 
 export interface IAdmintStore {
-  products: FullProduct[] | null;
+  products: TFullProduct[] | null;
   users: IUser[] | null;
   // orders: [];
   isLoading: boolean;

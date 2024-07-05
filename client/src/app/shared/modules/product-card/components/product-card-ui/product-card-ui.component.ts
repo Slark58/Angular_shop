@@ -6,13 +6,13 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
-import { FullProduct } from '../../../../../models/Main';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../../../environments/environment.development';
 import { CommonModule } from '@angular/common';
 import { MatCard } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { TFullProduct } from '../../../../types/fullProduct.type';
 
 @Component({
   selector: 'app-product-card-ui',
@@ -24,7 +24,7 @@ import { MatIcon } from '@angular/material/icon';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ProductCardUiComponent {
-  @Input('product') productProps?: FullProduct;
+  @Input('product') productProps?: TFullProduct;
   router: Router = inject(Router);
   activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 

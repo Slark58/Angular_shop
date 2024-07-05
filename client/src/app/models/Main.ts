@@ -41,24 +41,3 @@ export interface Comments {
   product_id: number;
   user_id: number;
 }
-
-export type FullProduct = Product & {
-  chars: {
-    size: Size;
-    type: Type;
-    brand: Brand;
-    gender: Gender;
-    typeId: number;
-    brandId: number;
-    genderId: number;
-    productId: number;
-    sizeId: number;
-    count: number;
-  }[];
-  imgs: {
-    id: number;
-    img: Imgs;
-    imgId: number;
-    productId: number;
-  }[];
-};

@@ -21,10 +21,10 @@ export const getProductsEffect$ = createEffect(
 export const createProductsEffect$ = createEffect(
   (actions$ = inject(Actions), adminService = inject(AdminService)) => {
     return actions$.pipe(
-      ofType(AdminActions.createProducts),
-      switchMap(() => {
-        return adminService.getProducts().pipe(
-          map((products) => AdminActions.getProductsSuccess({ products })),
+      ofType(AdminActions.createProduct),
+      switchMap(({ product }) => {
+        return adminService.createProduct(product).pipe(
+          map(() => AdminActions.createProductSuccess()),
           catchError(() => EMPTY)
         );
       })

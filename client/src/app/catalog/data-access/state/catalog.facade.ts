@@ -4,7 +4,7 @@ import { CatalogActions } from './catalog.actions';
 import { IFiltersResponse } from '../../types/filterResponse.interface';
 import { selectFilters, selectProducts } from './catalog.selectors';
 import { Observable } from 'rxjs';
-import { FullProduct } from '../../../models/Main';
+import { TFullProduct } from '../../../shared/types/fullProduct.type';
 
 @Injectable({ providedIn: 'root' })
 export class CatalogFacade {
@@ -12,7 +12,7 @@ export class CatalogFacade {
 
   public readonly filters$: Observable<IFiltersResponse[] | null> =
     this.store.select(selectFilters);
-  public readonly products$: Observable<FullProduct[] | null> =
+  public readonly products$: Observable<TFullProduct[] | null> =
     this.store.select(selectProducts);
 
   getFilters() {

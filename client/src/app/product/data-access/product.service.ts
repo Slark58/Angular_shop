@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { FullProduct } from '../../models/Main';
 import { environment } from '../../../environments/environment.development';
+import { TFullProduct } from '../../shared/types/fullProduct.type';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
@@ -9,7 +9,7 @@ export class ProductService {
 
   public getProductById(id: number) {
     const url = environment.URL_API + `/product/${id}`;
-    return this._http.get<FullProduct>(url);
+    return this._http.get<TFullProduct>(url);
   }
 
   // public createProduct (formData: FormData) {

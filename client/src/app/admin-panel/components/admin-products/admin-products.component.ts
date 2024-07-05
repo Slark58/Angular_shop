@@ -27,6 +27,7 @@ import { AdminActions } from '../../data-access/admin.actions';
 import { Observable, take } from 'rxjs';
 import { IFiltersResponse } from '../../../catalog/types/filterResponse.interface';
 import { AdminFacade } from '../../data-access/admin.facade';
+import { CreateProductInterface } from '../../types/createProduct.interface';
 
 interface IImgSig {
   imgView: {
@@ -72,9 +73,9 @@ export class AdminProductsComponent implements OnInit {
 
   public productFbForm = this.formBuilder.group({
     name: ['', [Validators.required]],
-    price: [null, [Validators.required]],
-    oldPrice: [null, [Validators.required]],
-    colorId: [null, [Validators.required]],
+    price: ['', [Validators.required]],
+    oldPrice: ['', [Validators.required]],
+    colorId: ['', [Validators.required]],
     chars: this.formBuilder.array<ProductCharForm>([]),
     info: this.formBuilder.array<{ title: string; description: string }[]>([]),
   });
@@ -159,21 +160,22 @@ export class AdminProductsComponent implements OnInit {
 
   public onSubmit() {
     const { chars, name, oldPrice, colorId, price, info } =
-      this.productFbForm.value;
-
-    console.log(name);
+      this.productFbForm.getRawValue();
 
     const formData = new FormData();
     formData.append('name', name);
-    formData.append('price', price.toString());
-    formData.append('oldPrice', oldPrice.toString());
-    formData.append('colorId', colorId.toString());
+    formData.append('price', price);
+    formData.append('oldPrice', oldPrice);
+    formData.append('colorId', colorId);
     this.imgs().imgFormValue.forEach((file, i) => {
       formData.append('imgs', file);
     });
     formData.append('chars', JSON.stringify(chars));
     formData.append('info', JSON.stringify(info));
 
-    // this.adminService.createProduct(formData);
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
+    this.adminFacade.createProduct(formData);
   }
 }

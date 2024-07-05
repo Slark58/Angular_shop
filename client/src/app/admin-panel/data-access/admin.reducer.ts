@@ -1,7 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { IAdmintStore } from '../types/adminStore.interface';
 import { createEntityAdapter } from '@ngrx/entity';
-import { FullProduct } from '../../models/Main';
 import { IUser } from '../../shared/types/user.interface';
 import { AdminActions } from './admin.actions';
 
@@ -32,15 +31,15 @@ const reducer = createReducer(
     isLoading: false,
   })),
 
-  on(AdminActions.createProducts, (state) => ({
+  on(AdminActions.createProduct, (state) => ({
     ...state,
     isLoading: false,
   })),
-  on(AdminActions.createProductsSuccess, (state) => ({
+  on(AdminActions.createProductSuccess, (state) => ({
     ...state,
     isLoading: false,
   })),
-  on(AdminActions.createProductsFailure, (state) => ({
+  on(AdminActions.createProductFailure, (state) => ({
     ...state,
     isLoading: false,
   })),

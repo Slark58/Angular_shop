@@ -28,10 +28,10 @@
 
           <div class="product-page-chrs">
             @if (product$ | async; as product) {
-            @for (item of product.chars; track item) {
-            <div class="df g15 alc">
-              <div class="">{{item.size.value}}</div>
-              <div class=""></div>
+            @for (item of product.info; track item) {
+            <div class="product-chrs-wrap">
+              <div class="chrs-wrap-title">{{item.title}}</div>
+              <div class="chrs-wrap-description">{{item.description}}</div>
             </div>
             }
             }

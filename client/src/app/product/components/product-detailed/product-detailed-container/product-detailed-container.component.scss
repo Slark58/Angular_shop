@@ -54,9 +54,20 @@
   background-color: #d0f5f8;
 }
 
+.product-chrs-wrap {
+  display: grid;
+  gap: 50px;
+  grid-template-columns: 1fr 1fr;
+  // gap: 50px;
+}
+
+
+
 .mySwiper2 .swiper-slide-thumb-active {
   opacity: 1;
 }
+
+
 
 
 

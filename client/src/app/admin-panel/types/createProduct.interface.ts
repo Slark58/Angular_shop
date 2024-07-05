@@ -2,9 +2,9 @@ import { ProductCharForm } from '../../models/Form';
 
 export interface CreateProductInterface {
   name: string;
-  price: number;
-  oldPrice: number;
-  colorId: number;
+  price: string;
+  oldPrice: string;
+  colorId: string;
   chars: ProductCharForm[];
   info: {
     title: string;

@@ -37,11 +37,10 @@ class ProductController {
             const {
                 imgs
             } = req.files
-            console.log("chars: ", JSON.parse(chars));
-            // console.log('imgssssss: ', imgs);
+            // console.log("chars: ", JSON.parse(chars));
 
-            console.log("color: ", JSON.parse(chars)[0].color);
-            console.log("ColorId: ", Number(colorId));
+            // console.log("color: ", JSON.parse(chars)[0].color);
+            // console.log("ColorId: ", Number(colorId));
             const product = await Product.create({
                 name,
                 price,
@@ -103,6 +102,7 @@ class ProductController {
 
 
             return res.json(product)
+            // return res.json({})
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
@@ -145,6 +145,10 @@ class ProductController {
                             model: Color
                         },
                     ]
+                },
+                {
+                    model: ProductInfo,
+                    as: "info",
                 },
             ],
         }, )
