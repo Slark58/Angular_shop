@@ -3,7 +3,7 @@ import { TFullProduct } from '../../shared/types/fullProduct.type';
 import { Product } from '../../shared/types/product.interface';
 
 export interface ICartItem {
-  id: number | undefined;
+  id: number;
   quantity: number;
   product_char: {
     id: number;

@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
 } from '@angular/core';
 import { ICartItem } from '../../../types/cartItem.interface';
 
@@ -17,6 +19,33 @@ import { ICartItem } from '../../../types/cartItem.interface';
 })
 export class CartItemComponent implements OnInit {
   @Input('cartItem') cartItemProps!: ICartItem;
+  @Input('basketId') basketIdProps!: number;
+
+  @Output() evantIncreaseCartItem = new EventEmitter<{
+    productId: number;
+    basketId: number;
+    sizeId: number;
+  }>();
+  @Output() evantDecreaseCartItem = new EventEmitter<{
+    productId: number;
+    basketId: number;
+    sizeId: number;
+  }>();
+  @Output() evantClearCartItem = new EventEmitter<{
+    productId: number;
+    basketId: number;
+    sizeId: number;
+  }>();
+
+  handleIncreaseCartItem(productId: number, basketId: number, sizeId: number) {
+    this.evantIncreaseCartItem.emit({ productId, basketId, sizeId });
+  }
+  handleDecreaseCartItem(productId: number, basketId: number, sizeId: number) {
+    this.evantDecreaseCartItem.emit({ productId, basketId, sizeId });
+  }
+  handleClearCartItem(productId: number, basketId: number, sizeId: number) {
+    this.evantClearCartItem.emit({ productId, basketId, sizeId });
+  }
 
   ngOnInit() {}
 }

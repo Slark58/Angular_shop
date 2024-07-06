@@ -2,10 +2,9 @@
   <div class='CartOrderItem__wrapper'>
     <div class='CartOrderItem__left'>
       <div class='CartOrderItem__img'>
-        <img [src]="'http://localhost:5000/' + cartItemProps.product_char.product.imgs[0].img.img " alt='asdas' />
+        <img [src]="'http://localhost:5000/' + cartItemProps.product_char.product.imgs[0].img.img" alt='asdas' />
       </div>
     </div>
-
     <div class="CartOrderItem__middle">
       <div class='CartOrderItem__title'>{{cartItemProps.product_char.product.name}}</div>
       <div class='CartOrderItem__price'>
@@ -17,29 +16,27 @@
         </div>
       </div>
     </div>
-    <!-- <div class='CartOrderItem__right'>
+    <div class='CartOrderItem__right'>
       <div class='CartOrderItem__counter'>
         <div class='CartOrderItem__orderSetting-flex'>
-          <button class='CartOrderItem__orderSetting-btn' onClick={()=>
-            asyncIncreaseCartQuantity(product.productId, basketId)
-            }
-            >
+          <button class='CartOrderItem__orderSetting-btn'
+            (click)="handleIncreaseCartItem(cartItemProps.product_char.product.id, basketIdProps, cartItemProps.size.id)">
             +
           </button>
           <div class='CartOrderItem__orderSetting-title'>
-            {product?.quantity}
+            {{cartItemProps.quantity}}
           </div>
-          <button class='CartOrderItem__orderSetting-btn' disabled={product?.quantity===1} onClick={()=>
-            asyncDecreaseCartQuantity(product.productId, basketId)}
-            >
+          <button class='CartOrderItem__orderSetting-btn'
+            (click)="handleDecreaseCartItem(cartItemProps.product_char.product.id, basketIdProps, cartItemProps.size.id )"
+            [disabled]="cartItemProps.quantity === 1">
             -
           </button>
         </div>
-        <button class='CartOrderItem__orderSetting-btnremove' onClick={()=> removeFromCart(product.productId,
-          basketId)}>
+        <button class='CartOrderItem__orderSetting-btnremove'
+          (click)="handleClearCartItem(cartItemProps.product_char.product.id, basketIdProps, cartItemProps.size.id )">
           Удалить
         </button>
       </div>
-    </div> -->
+    </div>
   </div>
 </div>

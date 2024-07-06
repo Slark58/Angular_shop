@@ -39,4 +39,14 @@ export class ProfileFacade {
       ProfileActions.getCartItems({ basketId: this.basketId })
     );
   }
+
+  public increaseCartItem(productId: number, basketId: number, sizeId: number) {
+    this.store.dispatch(
+      ProfileActions.increaseCartItem({
+        productId,
+        basketId,
+        sizeId,
+      })
+    );
+  }
 }

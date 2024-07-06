@@ -3,9 +3,7 @@
   @if (isCartItemsExist$ | async; as carts ) {
   <div class='cart__empty'>
     <div class='cart__empty-title'>Ваша корзина пуста</div>
-    <div class='cart__empty-img'>
-      (((((((((((((((((((((((((
-    </div>
+
     <a [routerLink]="['/Catalog']" class='cart__empty-link'>
       К покупка
     </a>
@@ -15,7 +13,10 @@
     <div class='cart__list'>
 
       @for(product of cartItems$ | async; track product.id) {
-      <app-cart-item [cartItem]="product"></app-cart-item>
+      <app-cart-item (evantClearCartItem)="handleClearCartItem($event)"
+        (evantDecreaseCartItem)="handleDecreaseCartItem($event)"
+        (evantIncreaseCartItem)="handleIncreaseCartItem($event)" [basketId]="basketId" [cartItem]="product">
+      </app-cart-item>
       }
       <!-- {cartItems.map((item) => (
       <CartOrderItem key={item.id} product={item} basketId={basketId}
@@ -25,7 +26,7 @@
     </div>
     <div class='cart__widget'>
       <h3 class='cart__widget-h3'>Адрес получения : </h3>
-      <select class='Cart__widget-select' (change)="toggleAddress($event)">
+      <select class='cart__widget-select' (change)="toggleAddress($event)">
         <option value=''>Выберите Адрес</option>
         @for(address of addresses; track address) {
         <option value={{address}}>{{address}}</option>

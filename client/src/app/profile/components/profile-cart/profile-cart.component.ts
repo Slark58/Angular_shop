@@ -21,12 +21,11 @@ import { RouterModule } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileCartComponent implements OnInit {
-  items: number = 1;
+  private readonly profileFacade: ProfileFacade = inject(ProfileFacade);
   public activeAddress = signal<string>('');
   public addresses: string[] = arrAdreses;
 
-  private readonly profileFacade: ProfileFacade = inject(ProfileFacade);
-
+  public basketId = this.profileFacade.basketId;
   public cartItems$ = this.profileFacade.cartItems$;
   public isCartItemsExist$ = this.cartItems$.pipe(
     map((products) => !products || products.length === 0)
@@ -38,6 +37,40 @@ export class ProfileCartComponent implements OnInit {
     const value = (e.target as HTMLInputElement).value;
     this.activeAddress.set(value);
     console.log(this.activeAddress());
+  }
+
+  handleIncreaseCartItem(value: {
+    productId: number;
+    basketId: number;
+    sizeId: number;
+  }) {
+    this.profileFacade.increaseCartItem(
+      value.productId,
+      value.basketId,
+      value.sizeId
+    );
+  }
+  handleDecreaseCartItem(value: {
+    productId: number;
+    basketId: number;
+    sizeId: number;
+  }) {
+    this.profileFacade.increaseCartItem(
+      value.productId,
+      value.basketId,
+      value.sizeId
+    );
+  }
+  handleClearCartItem(value: {
+    productId: number;
+    basketId: number;
+    sizeId: number;
+  }) {
+    this.profileFacade.increaseCartItem(
+      value.productId,
+      value.basketId,
+      value.sizeId
+    );
   }
 
   ngOnInit() {

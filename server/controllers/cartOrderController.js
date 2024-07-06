@@ -67,6 +67,32 @@ class CartOrderController {
       return next(ApiError.badRequest('Товары не найдены'))
     }
 
+    console.log(orderItems);
+
+    //* Группируем изображения по цвету
+    orderItems.forEach(item => {
+      const productChars = item.product_char;
+      const product = productChars.product;
+      const imgs = product.imgs;
+      const colorId = productChars.colorId; //* Предполагаем, что colorId есть в ProductChars
+
+      const filteredImgs = imgs.filter(img => img.colorId === colorId)
+
+      const modifiedProduct = {
+        ...product.dataValues,
+        filteredImgs,
+      };
+
+      return {
+        ...item.dataValues,
+        product_chars: {
+          ...productChars.dataValues,
+          product: modifiedProduct
+        }
+      }
+
+    });
+
     return res.json(orderItems)
 
   }
