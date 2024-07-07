@@ -15,9 +15,9 @@ export interface ICartItem {
         };
       }[];
     };
+    type: Type;
+    size: Size;
+    color: Color;
+    gender: Gender;
   };
-  type: Type;
-  size: Size;
-  color: Color;
-  gender: Gender;
 }

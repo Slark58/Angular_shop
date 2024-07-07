@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ProfileService } from './profile.service';
 import { ProfileActions } from './profile.actions';
-import { EMPTY, catchError, map, switchMap, tap } from 'rxjs';
+import { EMPTY, catchError, map, of, switchMap, tap } from 'rxjs';
 import { PersistService } from '../../shared/services/persist.service';
 import { ActionCreator } from '@ngrx/store';
 
@@ -11,9 +11,11 @@ export const getAllCartItemsEffect = createEffect(
     return actions$.pipe(
       ofType(ProfileActions.getCartItems),
       switchMap(({ basketId }) => {
+        console.log('getAllCartItemsEffect basketId: ', basketId);
+
         return profileService.getAllCartItems(basketId).pipe(
           map((cartItems) => ProfileActions.getCartItemsSuccess({ cartItems })),
-          catchError(() => EMPTY)
+          catchError(() => of(ProfileActions.getCartItemsFailure()))
         );
       })
     );
@@ -30,7 +32,23 @@ export const increaseCartItemEffect = createEffect(
           .incrementProduct(productId, basketId, sizeId)
           .pipe(
             map(() => ProfileActions.increaseCartItemSuccess()),
-            catchError(() => EMPTY)
+            catchError(() => of(ProfileActions.increaseCartItemFailure()))
+          );
+      })
+    );
+  },
+  { functional: true }
+);
+export const decreaseCartItemEffect = createEffect(
+  (actions$ = inject(Actions), profileService = inject(ProfileService)) => {
+    return actions$.pipe(
+      ofType(ProfileActions.decreaseCartItem),
+      switchMap(({ basketId, productId, sizeId }) => {
+        return profileService
+          .decrementProduct(productId, basketId, sizeId)
+          .pipe(
+            map(() => ProfileActions.decreaseCartItemSuccess()),
+            catchError(() => of(ProfileActions.decreaseCartItemFailure()))
           );
       })
     );
@@ -38,24 +56,49 @@ export const increaseCartItemEffect = createEffect(
   { functional: true }
 );
 
+export const deleteCartItemEffect = createEffect(
+  (actions$ = inject(Actions), profileService = inject(ProfileService)) => {
+    return actions$.pipe(
+      ofType(ProfileActions.deleteCartItem),
+      switchMap(({ basketId, productId, sizeId }) => {
+        return profileService.deleteProduct(productId, basketId, sizeId).pipe(
+          map(() => ProfileActions.deleteCartItemSuccess()),
+          catchError(() => of(ProfileActions.deleteCartItemFailure()))
+        );
+      })
+    );
+  },
+  { functional: true }
+);
+
 const warpperAfterActionEffect = (action: string | ActionCreator) => {
-  const getCartItemsAfetrAction = createEffect(
+  return createEffect(
     (actions$ = inject(Actions), persistService = inject(PersistService)) => {
       return actions$.pipe(
         ofType(action),
-        map(() =>
-          ProfileActions.getCartItems({
-            basketId: persistService.get('backetId') as number,
-          })
-        )
+        map(() => {
+          const basketId = persistService.get('basketId');
+          if (!basketId) {
+            return ProfileActions.getCartItemsFailure();
+          }
+          console.log('basketId after check: ', basketId);
+          return ProfileActions.getCartItems({
+            basketId: basketId as number,
+          });
+        }),
+        catchError(() => of(ProfileActions.clearCartItemFailure))
       );
     },
     { functional: true }
   );
-
-  return getCartItemsAfetrAction;
 };
 
-warpperAfterActionEffect(ProfileActions.increaseCartItemSuccess);
-warpperAfterActionEffect(ProfileActions.decreaseCartItemSuccess);
-warpperAfterActionEffect(ProfileActions.clearCartItemSuccess);
+export const getCartItemsAfterSuccessInc = warpperAfterActionEffect(
+  ProfileActions.increaseCartItemSuccess
+);
+export const getCartItemsAfterSuccessВус = warpperAfterActionEffect(
+  ProfileActions.decreaseCartItemSuccess
+);
+export const getCartItemsAfterSuccessDel = warpperAfterActionEffect(
+  ProfileActions.deleteCartItemSuccess
+);

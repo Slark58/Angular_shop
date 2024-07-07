@@ -26,22 +26,18 @@ export class ProductDetailedContainerComponent implements OnInit {
   private readonly persistService: PersistService = inject(PersistService);
 
   public basketId = this.persistService.get('basketId') as number;
-  public sizeId: number | null = null;
-  public productId: number | null = null;
+  public sizeId!: number;
+  public productId!: number;
   private activetedRoute: ActivatedRoute = inject(ActivatedRoute);
   // public basketId: string | null = localStorage.getItem('basketId');
   public product$ = this.productFacade.product$;
 
-  chouseSizeProduct(size: number | null) {
+  chouseSizeProduct(size: number) {
     this.sizeId = size;
     console.log(this.sizeId);
   }
 
-  increaseCartItemById(
-    productId: number | null,
-    basketId: number,
-    sizeId: number | null
-  ) {
+  increaseCartItemById(productId: number, basketId: number, sizeId: number) {
     this.productFacade.increaseCartItemById(productId, basketId, sizeId);
   }
 

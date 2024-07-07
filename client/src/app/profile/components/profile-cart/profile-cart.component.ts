@@ -55,18 +55,18 @@ export class ProfileCartComponent implements OnInit {
     basketId: number;
     sizeId: number;
   }) {
-    this.profileFacade.increaseCartItem(
+    this.profileFacade.decreaseCartItem(
       value.productId,
       value.basketId,
       value.sizeId
     );
   }
-  handleClearCartItem(value: {
+  handleDeleteCartItem(value: {
     productId: number;
     basketId: number;
     sizeId: number;
   }) {
-    this.profileFacade.increaseCartItem(
+    this.profileFacade.deleteCartItem(
       value.productId,
       value.basketId,
       value.sizeId
@@ -74,6 +74,8 @@ export class ProfileCartComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('this.basketId profile: ', this.basketId);
+
     this.profileFacade.getAllCartItems();
   }
 }

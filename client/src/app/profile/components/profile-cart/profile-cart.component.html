@@ -13,16 +13,12 @@
     <div class='cart__list'>
 
       @for(product of cartItems$ | async; track product.id) {
-      <app-cart-item (evantClearCartItem)="handleClearCartItem($event)"
+      <app-cart-item (evantDeleteCartItem)="handleDeleteCartItem($event)"
         (evantDecreaseCartItem)="handleDecreaseCartItem($event)"
         (evantIncreaseCartItem)="handleIncreaseCartItem($event)" [basketId]="basketId" [cartItem]="product">
       </app-cart-item>
       }
-      <!-- {cartItems.map((item) => (
-      <CartOrderItem key={item.id} product={item} basketId={basketId}
-        asyncDecreaseCartQuantity={asyncDecreaseCartQuantity} asyncIncreaseCartQuantity={asyncIncreaseCartQuantity}
-        removeFromCart={removeFromCart} />
-      ))} -->
+
     </div>
     <div class='cart__widget'>
       <h3 class='cart__widget-h3'>Адрес получения : </h3>

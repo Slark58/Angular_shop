@@ -49,4 +49,22 @@ export class ProfileFacade {
       })
     );
   }
+  public decreaseCartItem(productId: number, basketId: number, sizeId: number) {
+    this.store.dispatch(
+      ProfileActions.decreaseCartItem({
+        productId,
+        basketId,
+        sizeId,
+      })
+    );
+  }
+  public deleteCartItem(productId: number, basketId: number, sizeId: number) {
+    this.store.dispatch(
+      ProfileActions.deleteCartItem({
+        productId,
+        basketId,
+        sizeId,
+      })
+    );
+  }
 }

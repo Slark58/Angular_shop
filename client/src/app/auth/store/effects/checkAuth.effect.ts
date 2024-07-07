@@ -20,7 +20,6 @@ export const checkAuthEffect$ = createEffect(
           tap(({ token }) => localStorage.setItem('token', token)),
           map(({ token }) => {
             const user = jwtDecode<IUser>(token);
-            console.log(user);
             return checkAuthSuccessAction({ user });
           }),
           catchError(() => of(checkAuthFailureAction()))

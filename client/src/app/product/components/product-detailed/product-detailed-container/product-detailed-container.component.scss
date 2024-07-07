@@ -131,6 +131,10 @@
   &:hover {
     background-color: #63a1ff;
   }
+
+  &:disabled {
+    background-color: red;
+  }
 }
 
 .widget-buy-price {

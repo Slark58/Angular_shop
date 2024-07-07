@@ -50,14 +50,15 @@
                 @if (product$ | async; as product) {
                 @for(item of product.chars; track item) {
                 <div [ngClass]="{'active-size': sizeId === item.sizeId}" (click)="chouseSizeProduct(item.sizeId)"
-                  appCountOfSize="{{item.count}}" class="btn-size">
+                  appCountOfSize="{{item.count}}" class="bt n-size">
                   {{item.size.value}}</div>
                 }
                 }
               </div>
               <div class="df g10 mt10">
                 <button class="like-btn">like</button>
-                <button class="cart-btn" (click)="increaseCartItemById(productId, basketId, sizeId)">Add in the
+                <button [disabled]="!sizeId" class="cart-btn"
+                  (click)="increaseCartItemById(productId, basketId, sizeId)">Add in the
                   cart</button>
               </div>
             </div>

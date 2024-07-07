@@ -8,19 +8,16 @@ import { ICartItem } from '../types/cartItem.interface';
 export class ProfileService {
   private readonly _http: HttpClient = inject(HttpClient);
 
-  public removeFromCart(
-    productId: string | number | undefined,
-    basketId: number
-  ) {
-    return this._http.delete(
-      `${environment.URL_API}/delete?basketId=${basketId}&productId=${productId}`
-    );
-  }
-  public incrementProduct(
+  public deleteProduct(
     productId: number | null,
     basketId: number,
     sizeId: number | null
   ) {
+    return this._http.delete(
+      `${environment.URL_API}/cartOrder/delete?basketId=${basketId}&productId=${productId}&sizeId=${sizeId}`
+    );
+  }
+  public incrementProduct(productId: number, basketId: number, sizeId: number) {
     return this._http.post(`${environment.URL_API}/cartOrder/increase`, {
       productId,
       basketId,
@@ -28,17 +25,15 @@ export class ProfileService {
     });
   }
 
-  public decrementProduct(
-    productId: string | number | undefined,
-    basketId: number
-  ) {
+  public decrementProduct(productId: number, basketId: number, sizeId: number) {
     return this._http.post(`${environment.URL_API}/cartOrder/decrease`, {
       productId,
       basketId,
+      sizeId,
     });
   }
 
-  public clearProduct(basketId: number) {
+  public clearBasket(basketId: number) {
     return this._http.delete(`${environment.URL_API}/cartOrder/clear`, {
       params: { basketId },
     });
@@ -52,8 +47,9 @@ export class ProfileService {
     );
   }
   public getOneCartItem(
-    productId: string | number | undefined,
-    basketId: number
+    productId: number | null,
+    basketId: number,
+    sizeId: number | null
   ) {
     return this._http.get(
       `${environment.URL_API}/cartOrder/one?basketId=${basketId}&productId=${productId}`

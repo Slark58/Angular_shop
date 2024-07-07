@@ -13,11 +13,7 @@ export class ProductFacade {
   public readonly product$: Observable<TFullProduct | null> =
     this.store.select(selectProduct);
 
-  increaseCartItemById(
-    productId: number | null,
-    basketId: number,
-    sizeId: number | null
-  ) {
+  increaseCartItemById(productId: number, basketId: number, sizeId: number) {
     console.log('productId: ', productId, 'basketId: ', basketId);
 
     this.store.dispatch(

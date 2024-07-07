@@ -31,21 +31,55 @@ export class CartItemComponent implements OnInit {
     basketId: number;
     sizeId: number;
   }>();
-  @Output() evantClearCartItem = new EventEmitter<{
+  @Output() evantDeleteCartItem = new EventEmitter<{
     productId: number;
     basketId: number;
     sizeId: number;
   }>();
 
   handleIncreaseCartItem(productId: number, basketId: number, sizeId: number) {
+    console.log(
+      'INCREASE::::',
+      'productId: ',
+      productId,
+      'basketId: ',
+      basketId,
+      'sizeId: ',
+      sizeId
+    );
+
     this.evantIncreaseCartItem.emit({ productId, basketId, sizeId });
   }
   handleDecreaseCartItem(productId: number, basketId: number, sizeId: number) {
+    console.log(
+      'DECREASE::::',
+      'productId: ',
+      productId,
+      'basketId: ',
+      basketId,
+      'sizeId: ',
+      sizeId
+    );
+
     this.evantDecreaseCartItem.emit({ productId, basketId, sizeId });
   }
-  handleClearCartItem(productId: number, basketId: number, sizeId: number) {
-    this.evantClearCartItem.emit({ productId, basketId, sizeId });
+  handleDeleteCartItem(productId: number, basketId: number, sizeId: number) {
+    console.log(
+      'DELETE::::',
+      'productId: ',
+      productId,
+      'basketId: ',
+      basketId,
+      'sizeId: ',
+      sizeId
+    );
+
+    this.evantDeleteCartItem.emit({ productId, basketId, sizeId });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('cartItemProps: ', this.cartItemProps.product_char.size.id);
+
+    console.log('basketIdProps: ', this.basketIdProps);
+  }
 }

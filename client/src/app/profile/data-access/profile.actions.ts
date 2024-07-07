@@ -9,14 +9,18 @@ export const ProfileActions = createActionGroup({
     'get cart items failure': emptyProps(),
 
     'increase cart item': props<{
-      productId: number | null;
+      productId: number;
       basketId: number;
-      sizeId: number | null;
+      sizeId: number;
     }>(),
     'increase cart item success': emptyProps(),
     'increase cart item failure': emptyProps(),
 
-    'decrease cart item': emptyProps(),
+    'decrease cart item': props<{
+      productId: number;
+      basketId: number;
+      sizeId: number;
+    }>(),
     'decrease cart item success': emptyProps(),
     'decrease cart item failure': emptyProps(),
 
@@ -24,7 +28,11 @@ export const ProfileActions = createActionGroup({
     'clear cart item success': emptyProps(),
     'clear cart item failure': emptyProps(),
 
-    'delete cart item': emptyProps(),
+    'delete cart item': props<{
+      productId: number;
+      basketId: number;
+      sizeId: number;
+    }>(),
     'delete cart item success': emptyProps(),
     'delete cart item failure': emptyProps(),
 

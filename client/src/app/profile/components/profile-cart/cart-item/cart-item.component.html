@@ -4,6 +4,10 @@
       <div class='CartOrderItem__img'>
         <img [src]="'http://localhost:5000/' + cartItemProps.product_char.product.imgs[0].img.img" alt='asdas' />
       </div>
+      <div class="df alc g10">
+        <div class="">Размер: {{cartItemProps.product_char.size.value}}</div>
+        <div class="">{{cartItemProps.product_char.gender.value}}</div>
+      </div>
     </div>
     <div class="CartOrderItem__middle">
       <div class='CartOrderItem__title'>{{cartItemProps.product_char.product.name}}</div>
@@ -20,20 +24,20 @@
       <div class='CartOrderItem__counter'>
         <div class='CartOrderItem__orderSetting-flex'>
           <button class='CartOrderItem__orderSetting-btn'
-            (click)="handleIncreaseCartItem(cartItemProps.product_char.product.id, basketIdProps, cartItemProps.size.id)">
+            (click)="handleIncreaseCartItem(cartItemProps.product_char.product.id, basketIdProps, cartItemProps.product_char.size.id)">
             +
           </button>
           <div class='CartOrderItem__orderSetting-title'>
             {{cartItemProps.quantity}}
           </div>
           <button class='CartOrderItem__orderSetting-btn'
-            (click)="handleDecreaseCartItem(cartItemProps.product_char.product.id, basketIdProps, cartItemProps.size.id )"
+            (click)="handleDecreaseCartItem(cartItemProps.product_char.product.id, basketIdProps, cartItemProps.product_char.size.id)"
             [disabled]="cartItemProps.quantity === 1">
             -
           </button>
         </div>
         <button class='CartOrderItem__orderSetting-btnremove'
-          (click)="handleClearCartItem(cartItemProps.product_char.product.id, basketIdProps, cartItemProps.size.id )">
+          (click)="handleDeleteCartItem(cartItemProps.product_char.product.id, basketIdProps, cartItemProps.product_char.size.id )">
           Удалить
         </button>
       </div>
