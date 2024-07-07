@@ -15,6 +15,7 @@ const ApiError = require('../error/ApiError');
 
 class CartOrderController {
 
+  ////* GET ALL ITEM *////
 
   async getAllCartItems(req, res, next) {
 
@@ -22,7 +23,7 @@ class CartOrderController {
       basketId
     } = req.query
 
-    console.log(basketId);
+    console.log("BASKET ID sssssssssssssssssssss: ", basketId);
 
     const orderItems = await BasketProduct.findAll({
       where: {
@@ -67,8 +68,6 @@ class CartOrderController {
       return next(ApiError.badRequest('Товары не найдены'))
     }
 
-    console.log(orderItems);
-
     //* Группируем изображения по цвету
     orderItems.forEach(item => {
       const productChars = item.product_char;
@@ -96,6 +95,8 @@ class CartOrderController {
     return res.json(orderItems)
 
   }
+  ////* GET ONE ITEM *////
+
   async getOneCartItem(req, res, next) {
 
     const {
@@ -117,6 +118,7 @@ class CartOrderController {
     return res.json(orderItem)
 
   }
+  ////* INCREASE ITEM *////
 
   async increaseCartOrdersItem(req, res, next) {
     const {
@@ -130,10 +132,8 @@ class CartOrderController {
         productId,
         sizeId
       },
-
     })
 
-    console.log(productChar);
 
     const orderItem = await BasketProduct.findOne({
       where: {
@@ -169,16 +169,26 @@ class CartOrderController {
 
   }
 
+  ////* DECREASE ITEM *////
+
   async decreaseCartOrdersItem(req, res, next) {
     const {
       basketId,
-      productId
+      productId,
+      sizeId,
     } = req.body
+
+    const productChar = await ProductChars.findOne({
+      where: {
+        productId,
+        sizeId
+      },
+    })
 
     const orderItem = await BasketProduct.findOne({
       where: {
         basketId: basketId,
-        productId
+        productCharId: productChar.id
       }
     })
 
@@ -190,7 +200,7 @@ class CartOrderController {
         const item = await BasketProduct.findOne({
           where: {
             basketId: basketId,
-            productId
+            productCharId: productChar.id
           }
         })
         item.destroy()
@@ -200,7 +210,7 @@ class CartOrderController {
     const cartItem = await BasketProduct.findOne({
       where: {
         basketId: basketId,
-        productId
+        productCharId: productChar.id
       }
     })
 
@@ -211,16 +221,26 @@ class CartOrderController {
     return res.json(cartItem)
   }
 
-  async deleteCartOrdersItems(req, res, next) {
+  ////* DELETE ITEM *////
+
+  async deleteCartOrdersItem(req, res, next) {
     const {
       basketId,
-      productId
+      productId,
+      sizeId
     } = req.query
+
+    const productChar = await ProductChars.findOne({
+      where: {
+        productId,
+        sizeId
+      },
+    })
 
     const orderItem = await BasketProduct.findOne({
       where: {
         basketId: basketId,
-        productId
+        productCharId: productChar.id
       }
     })
 
@@ -233,6 +253,9 @@ class CartOrderController {
     return res.json(deleteItem)
 
   }
+
+  ////* CLEAR BASKET *////
+
 
   async clearBasket(req, res, next) {
     const {

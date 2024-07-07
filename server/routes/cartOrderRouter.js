@@ -9,7 +9,7 @@ router.get('/one', cartOrderController.getOneCartItem)
 router.post('/increase', cartOrderController.increaseCartOrdersItem)
 router.post('/decrease', cartOrderController.decreaseCartOrdersItem)
 
-router.delete('/delete', cartOrderController.deleteCartOrdersItems)
+router.delete('/delete', cartOrderController.deleteCartOrdersItem)
 router.delete('/clear', cartOrderController.clearBasket)
 
 
