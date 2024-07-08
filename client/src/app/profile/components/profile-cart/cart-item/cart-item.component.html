@@ -1,12 +1,19 @@
 <div class='CartOrderItem'>
   <div class='CartOrderItem__wrapper'>
     <div class='CartOrderItem__left'>
-      <div class='CartOrderItem__img'>
-        <img [src]="'http://localhost:5000/' + cartItemProps.product_char.product.imgs[0].img.img" alt='asdas' />
-      </div>
-      <div class="df alc g10">
-        <div class="">Размер: {{cartItemProps.product_char.size.value}}</div>
+      <a [routerLink]="['/Catalog/', cartItemProps.product_char.product.id]">
+        <div class='CartOrderItem__img'>
+          <img [src]="'http://localhost:5000/' + cartItemProps.product_char.product.imgs[0].img.img" alt='asdas' />
+        </div>
+      </a>
+      <div class="df alc g10 mt10">
+        <div class="">{{cartItemProps.product_char.size.value}}</div>
+        /
         <div class="">{{cartItemProps.product_char.gender.value}}</div>
+        /
+        <div class="">{{cartItemProps.product_char.type.value}}</div>
+        /
+        <div class="">{{cartItemProps.product_char.color.value}}</div>
       </div>
     </div>
     <div class="CartOrderItem__middle">
@@ -20,6 +27,11 @@
         </div>
       </div>
     </div>
+
+    @if (isLoadingProps$ | async) {
+    <mat-spinner [diameter]="30" class="mt10"></mat-spinner>
+
+    } @else {
     <div class='CartOrderItem__right'>
       <div class='CartOrderItem__counter'>
         <div class='CartOrderItem__orderSetting-flex'>
@@ -42,5 +54,8 @@
         </button>
       </div>
     </div>
+
+    }
+
   </div>
 </div>

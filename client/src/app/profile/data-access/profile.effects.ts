@@ -71,6 +71,16 @@ export const deleteCartItemEffect = createEffect(
   { functional: true }
 );
 
+export const reduceQuantityEffect = createEffect(
+  (actions$ = inject(Actions)) => {
+    return actions$.pipe(
+      ofType(ProfileActions.getCartItemsSuccess),
+      map(() => ProfileActions.reduceCartQuantity())
+    );
+  },
+  { functional: true }
+);
+
 const warpperAfterActionEffect = (action: string | ActionCreator) => {
   return createEffect(
     (actions$ = inject(Actions), persistService = inject(PersistService)) => {

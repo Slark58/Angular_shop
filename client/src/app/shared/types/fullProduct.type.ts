@@ -7,6 +7,7 @@ export type TFullProduct = Product & {
     description: string;
   }[];
   chars: {
+    id: number;
     size: Size;
     type: Type;
     brand: Brand;

@@ -60,6 +60,13 @@
                 <button [disabled]="!sizeId" class="cart-btn"
                   (click)="increaseCartItemById(productId, basketId, sizeId)">Add in the
                   cart</button>
+                <!-- @if (inCart$ |async) {
+                <button>Lox</button>
+                } @else {
+                <button [disabled]="!sizeId" class="cart-btn"
+                  (click)="increaseCartItemById(productId, basketId, sizeId)">Add in the
+                  cart</button>
+                } -->
               </div>
             </div>
           </div>

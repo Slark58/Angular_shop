@@ -38,8 +38,10 @@ export class ProfileService {
       params: { basketId },
     });
   }
-  public getAllCartItems(basketId: number): Observable<ICartItem[] | null> {
-    return this._http.get<ICartItem[] | null>(
+  public getAllCartItems(
+    basketId: number
+  ): Observable<ICartItem[] | undefined> {
+    return this._http.get<ICartItem[] | undefined>(
       `${environment.URL_API}/cartOrder/all`,
       {
         params: { basketId },

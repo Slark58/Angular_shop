@@ -18,7 +18,6 @@ import {
 @Injectable({ providedIn: 'root' })
 export class ProfileFacade {
   private readonly store: Store = inject(Store);
-  private readonly profileService: ProfileService = inject(ProfileService);
   private readonly persistService: PersistService = inject(PersistService);
 
   public cartItems$ = this.store.select(selectCartItems);

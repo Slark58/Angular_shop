@@ -12,36 +12,44 @@
   <div class='cart-main'>
     <div class='cart__list'>
 
+      <!-- @if(isLoadingCartItems$ | async) {
+      <mat-spinner [diameter]="40" class="mt10"></mat-spinner>
+
+      } @else { -->
+
       @for(product of cartItems$ | async; track product.id) {
-      <app-cart-item (evantDeleteCartItem)="handleDeleteCartItem($event)"
+      <app-cart-item [isLoading$]="isLoadingCartItems$" (evantDeleteCartItem)="handleDeleteCartItem($event)"
         (evantDecreaseCartItem)="handleDecreaseCartItem($event)"
         (evantIncreaseCartItem)="handleIncreaseCartItem($event)" [basketId]="basketId" [cartItem]="product">
       </app-cart-item>
       }
+      <!-- } -->
 
     </div>
     <div class='cart__widget'>
-      <h3 class='cart__widget-h3'>Адрес получения : </h3>
+      <h3 class='cart__widget-h3'>Address receiving : </h3>
       <select class='cart__widget-select' (change)="toggleAddress($event)">
-        <option value=''>Выберите Адрес</option>
+        <option value=''>Chouse address</option>
         @for(address of addresses; track address) {
         <option value={{address}}>{{address}}</option>
         }
       </select>
-      <h3 class='cart__widget-h3'>Итого : </h3>
+      <h3 class='cart__widget-h3'>Total : </h3>
       <div class='cart__widget-flex'>
         <div class='cart__widget-title'>
-          <!-- Товары ({cartItems.length}) -->
+          Items {{(cartItems$ | async)?.length}}
         </div>
-        <!-- <div class='Cart__widget-price'>{cartQuantity}₽</div> -->
+        <div class='cart__widget-price'>{{cartQuantity$ | async}}₽</div>
       </div>
-      <!-- <button disabled={address===null || address==='' } type='button' class='Cart__widget-btn'
-        onClick={handleCreateOrder(userId, basketId, cartQuantity, address)}>
+      <button [disabled]="activeAddress()===null || activeAddress() === '' " type='button' class='cart__widget-btn'>
         Перейти к оформлению
-      </button> -->
+      </button>
 
     </div>
   </div>
   }
 
 </section>
+
+
+<!-- onClick={handleCreateOrder(userId, basketId, cartQuantity, address)} -->

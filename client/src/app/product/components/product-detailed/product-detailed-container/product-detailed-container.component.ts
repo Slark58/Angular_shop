@@ -10,6 +10,10 @@ import { ProductFacade } from '../../../data-access/product.facade';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { CountOfSizeDirective } from '../../../../utils/directives/countOfSize.directive';
 import { PersistService } from '../../../../shared/services/persist.service';
+import { combineLatest, map, Observable } from 'rxjs';
+import { TFullProduct } from '../../../../shared/types/fullProduct.type';
+import { ProfileFacade } from '../../../../profile/data-access/profile.facade';
+import { ICartItem } from '../../../../profile/types/cartItem.interface';
 
 @Component({
   selector: 'app-product-detailed-container',
@@ -22,15 +26,44 @@ import { PersistService } from '../../../../shared/services/persist.service';
 })
 export class ProductDetailedContainerComponent implements OnInit {
   private readonly productFacade: ProductFacade = inject(ProductFacade);
-
+  private readonly profileFacade: ProfileFacade = inject(ProfileFacade);
   private readonly persistService: PersistService = inject(PersistService);
+  private activetedRoute: ActivatedRoute = inject(ActivatedRoute);
 
   public basketId = this.persistService.get('basketId') as number;
   public sizeId!: number;
   public productId!: number;
-  private activetedRoute: ActivatedRoute = inject(ActivatedRoute);
-  // public basketId: string | null = localStorage.getItem('basketId');
   public product$ = this.productFacade.product$;
+  public cartItems$ = this.profileFacade.cartItems$;
+
+  inCart$ = combineLatest([this.product$, this.cartItems$]).pipe(
+    map(
+      ([product, cartProducts]: [
+        product: TFullProduct | null,
+        cartProducts: ICartItem[] | undefined
+      ]) => {
+        if (!product || !cartProducts) return false;
+
+        const charProductID = product.chars.find(
+          (item) => item.sizeId === this.sizeId
+        )?.id;
+
+        console.log('charProductID: ', charProductID);
+
+        const quantityFindProduct = cartProducts.find(
+          (item) => item.product_char.id === charProductID
+        )?.quantity;
+
+        console.log('quantityFindProduct: ', quantityFindProduct);
+
+        if (quantityFindProduct) {
+          return quantityFindProduct > 0;
+        }
+
+        return false;
+      }
+    )
+  );
 
   chouseSizeProduct(size: number) {
     this.sizeId = size;

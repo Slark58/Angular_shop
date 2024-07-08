@@ -19,12 +19,12 @@ const reducer = createReducer(
   })),
   on(ProfileActions.getCartItemsSuccess, (state, action) => ({
     ...state,
-    loading: true,
+    loading: false,
     cartItems: action.cartItems,
   })),
   on(ProfileActions.getCartItemsSuccess, (state) => ({
     ...state,
-    loading: true,
+    loading: false,
   })),
 
   //* INCREASE CART ITEM *//
@@ -67,6 +67,19 @@ const reducer = createReducer(
   on(ProfileActions.getOrderByIdFailure, (state) => ({
     ...state,
     loading: true,
+  })),
+
+  on(ProfileActions.reduceCartQuantity, (state) => ({
+    ...state,
+    cartQuantity: state.cartItems
+      ? state.cartItems.reduce((acc, item) => {
+          if (item) {
+            return acc + (item.product_char.product.price ?? 0) * item.quantity;
+          } else {
+            return acc;
+          }
+        }, 0)
+      : 0,
   }))
 );
 

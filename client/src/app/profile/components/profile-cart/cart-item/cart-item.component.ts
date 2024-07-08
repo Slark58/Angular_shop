@@ -8,11 +8,14 @@ import {
   Output,
 } from '@angular/core';
 import { ICartItem } from '../../../types/cartItem.interface';
+import { RouterModule } from '@angular/router';
+import { Observable } from 'rxjs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-cart-item',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule, MatProgressSpinnerModule],
   templateUrl: './cart-item.component.html',
   styleUrls: ['./cart-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,6 +23,7 @@ import { ICartItem } from '../../../types/cartItem.interface';
 export class CartItemComponent implements OnInit {
   @Input('cartItem') cartItemProps!: ICartItem;
   @Input('basketId') basketIdProps!: number;
+  @Input('isLoading$') isLoadingProps$!: Observable<boolean>;
 
   @Output() evantIncreaseCartItem = new EventEmitter<{
     productId: number;
