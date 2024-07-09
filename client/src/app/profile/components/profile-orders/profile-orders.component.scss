@@ -1,0 +1,40 @@
+.Orders {
+  border-radius: 32px;
+  padding: 15px;
+
+  &__wrapper {
+    display: flex;
+    gap: 150px;
+  }
+
+  &__flex {
+    align-items: center;
+    display: flex;
+    gap: 15px;
+  }
+
+  &__icon {}
+
+  &__title {
+    font-size: 26px;
+  }
+
+  &__select {
+    border-radius: 8px;
+    border: 2px solid #47b;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  &__list {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+  }
+
+
+}

@@ -39,6 +39,17 @@ export class ProfileFacade {
     );
   }
 
+  public createOrder(
+    userId: number | undefined,
+    basketId: number,
+    price: number,
+    address: string
+  ) {
+    this.store.dispatch(
+      ProfileActions.createOrder({ userId, basketId, price, address })
+    );
+  }
+
   public increaseCartItem(productId: number, basketId: number, sizeId: number) {
     this.store.dispatch(
       ProfileActions.increaseCartItem({

@@ -1,5 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { ICartItem } from '../types/cartItem.interface';
+import { IOrderItem } from '../types/orderItem.interface';
 
 export const ProfileActions = createActionGroup({
   source: 'profile',
@@ -36,8 +37,17 @@ export const ProfileActions = createActionGroup({
     'delete cart item success': emptyProps(),
     'delete cart item failure': emptyProps(),
 
-    'get orders': emptyProps(),
-    'get orders success': emptyProps(),
+    'create order': props<{
+      userId: number | undefined;
+      basketId: number;
+      price: number;
+      address: string;
+    }>(),
+    'create order success': emptyProps(),
+    'create order failure': emptyProps(),
+
+    'get orders': props<{ userId: number }>(),
+    'get orders success': props<{ orderItems: IOrderItem[] | undefined }>(),
     'get orders failure': emptyProps(),
 
     'get order by id': emptyProps(),

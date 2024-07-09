@@ -70,6 +70,36 @@ export const deleteCartItemEffect = createEffect(
   },
   { functional: true }
 );
+export const createOrderById = createEffect(
+  (actions$ = inject(Actions), profileService = inject(ProfileService)) => {
+    return actions$.pipe(
+      ofType(ProfileActions.createOrder),
+      switchMap(({ userId, basketId, price, address }) => {
+        return profileService
+          .createOrder(userId, basketId, price, address)
+          .pipe(
+            map(() => ProfileActions.createOrderSuccess()),
+            catchError(() => of(ProfileActions.createOrderFailure()))
+          );
+      })
+    );
+  },
+  { functional: true }
+);
+export const getAllOrderItemsById = createEffect(
+  (actions$ = inject(Actions), profileService = inject(ProfileService)) => {
+    return actions$.pipe(
+      ofType(ProfileActions.getOrders),
+      switchMap(({ userId }) => {
+        return profileService.getAllOrdersById(userId).pipe(
+          map((orderItems) => ProfileActions.getOrdersSuccess({ orderItems })),
+          catchError(() => of(ProfileActions.getOrdersFailure()))
+        );
+      })
+    );
+  },
+  { functional: true }
+);
 
 export const reduceQuantityEffect = createEffect(
   (actions$ = inject(Actions)) => {

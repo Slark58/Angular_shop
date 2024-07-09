@@ -8,10 +8,11 @@ import {
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { CommonModule } from '@angular/common';
 import { ProfileFacade } from '../../data-access/profile.facade';
-import { map } from 'rxjs';
+import { combineLatest, map, take, tap } from 'rxjs';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { IUser } from '../../../shared/types/user.interface';
 
 @Component({
   selector: 'app-profile-cart',
@@ -32,19 +33,35 @@ export class ProfileCartComponent implements OnInit {
   public addresses: string[] = arrAdreses;
 
   public basketId = this.profileFacade.basketId;
+  public user$ = this.profileFacade.user$;
   public cartItems$ = this.profileFacade.cartItems$;
   public cartQuantity$ = this.profileFacade.selectCartQuantity$;
   public isLoadingCartItems$ = this.profileFacade.selectLoadingCartItems$;
+  public selectErrorCartItems$ = this.profileFacade.selectErrorCartItems$;
+  public selectLoadingCartItems$ = this.profileFacade.selectLoadingCartItems$;
   public isCartItemsExist$ = this.cartItems$.pipe(
     map((products) => !products || products.length === 0)
   );
-  public selectErrorCartItems$ = this.profileFacade.selectErrorCartItems$;
-  public selectLoadingCartItems$ = this.profileFacade.selectLoadingCartItems$;
 
   public toggleAddress(e: Event) {
     const value = (e.target as HTMLInputElement).value;
     this.activeAddress.set(value);
     console.log(this.activeAddress());
+  }
+
+  public handleCreateOrder() {
+    combineLatest([this.user$, this.cartQuantity$])
+      .pipe(take(1))
+      .subscribe({
+        next: ([user, cartQiantity]: [IUser | null, number]) => {
+          this.profileFacade.createOrder(
+            user?.id,
+            this.basketId,
+            cartQiantity,
+            this.activeAddress()
+          );
+        },
+      });
   }
 
   public handleIncreaseCartItem(value: {

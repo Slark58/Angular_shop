@@ -4,6 +4,7 @@ import { ProfileActions } from './profile.actions';
 
 const initialState: ProfileState = {
   cartItems: [],
+  orderItems: undefined,
   cartQuantity: 0,
   error: null,
   loading: false,
@@ -46,13 +47,27 @@ const reducer = createReducer(
     ...state,
     loading: true,
   })),
-  on(ProfileActions.getOrdersSuccess, (state) => ({
+  on(ProfileActions.getOrdersSuccess, (state, action) => ({
     ...state,
     loading: true,
+    orderItems: action.orderItems,
   })),
   on(ProfileActions.getOrdersFailure, (state) => ({
     ...state,
     loading: true,
+  })),
+  //* CREATE ORDER BY ID *//
+  on(ProfileActions.createOrder, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(ProfileActions.createOrderSuccess, (state, action) => ({
+    ...state,
+    loading: false,
+  })),
+  on(ProfileActions.createOrderFailure, (state) => ({
+    ...state,
+    loading: false,
   })),
 
   //* ORDERS BY ID *//

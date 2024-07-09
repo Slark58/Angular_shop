@@ -41,7 +41,8 @@
         </div>
         <div class='cart__widget-price'>{{cartQuantity$ | async}}₽</div>
       </div>
-      <button [disabled]="activeAddress()===null || activeAddress() === '' " type='button' class='cart__widget-btn'>
+      <button (click)="handleCreateOrder()" [disabled]="activeAddress()===null || activeAddress() === '' " type='button'
+        class='cart__widget-btn'>
         Перейти к оформлению
       </button>
 
