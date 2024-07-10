@@ -7,7 +7,11 @@ const {
   OrderProduct,
   ProductChars,
   Img,
-  ProductImgs
+  ProductImgs,
+  Type,
+  Size,
+  Color,
+  Gender
 } = require('../models/models')
 const ApiError = require('../error/ApiError');
 
@@ -73,21 +77,35 @@ class OrderController {
       },
       include: [{
         model: OrderProduct,
+        attributes: ['id', 'quantity'],
         include: [{
           model: ProductChars,
           attributes: ['id'],
           include: [{
-            model: Product,
-            include: [{
-              model: ProductImgs,
-              attributes: ['id'],
-              as: 'imgs',
+              model: Product,
               include: [{
-                model: Img,
-                attributes: ['img']
+                model: ProductImgs,
+                attributes: ['id'],
+                as: 'imgs',
+                include: [{
+                  model: Img,
+                  attributes: ['img']
+                }]
               }]
-            }]
-          }]
+            },
+            {
+              model: Type,
+            },
+            {
+              model: Size
+            },
+            {
+              model: Color,
+            },
+            {
+              model: Gender,
+            },
+          ]
         }]
       }]
     })

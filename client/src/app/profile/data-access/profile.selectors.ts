@@ -5,4 +5,5 @@ export const {
   selectCartQuantity,
   selectError,
   selectLoading,
+  selectOrderItems,
 } = profileFeatere;

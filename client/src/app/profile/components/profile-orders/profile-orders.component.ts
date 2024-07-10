@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import { ProfileActions } from '../../data-access/profile.actions';
 import { userSelector } from '../../../auth/store/selectors';
 import { filter, map, take } from 'rxjs';
+import { selectOrderItems } from '../../data-access/profile.selectors';
 
 @Component({
   selector: 'app-profile-orders',
@@ -24,6 +25,7 @@ export class ProfileOrdersComponent implements OnInit {
   private readonly store: Store = inject(Store);
 
   public userId$ = this.store.select(userSelector);
+  public orderItems$ = this.store.select(selectOrderItems);
 
   public getOrdersById() {
     this.userId$

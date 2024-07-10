@@ -1,14 +1,20 @@
-<div className='Orders'>
+<div class='Orders'>
 
 
 
-  <div className="Orders__list">
+  <div class="Orders__list">
+
+    @if(orderItems$ | async; as orderItems) {
+    @for(order of orderItems; track order.id) {
+    <app-order-item [orderItem]="order"></app-order-item>
+    }
+    }
     <!-- <TransitionGroup  component={null}>
       {filtredOrders.map((item, i) => (
         <CSSTransition
         key={i}
         timeout={300}
-        classNames="Catalog__item"
+        classs="Catalog__item"
         >
           <OrderItem item={item}/>
         </CSSTransition>
