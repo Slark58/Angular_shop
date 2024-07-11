@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { environment } from '../../../environments/environment.development';
+import { inject, Injectable } from '@angular/core';
+import { environment } from '../../../../../../../environments/environment.development';
 import { Observable } from 'rxjs';
-import { ICartItem } from '../profile-cart/data-access/src/lib/models/cartItem.interface';
-import { IOrderItem } from '../types/orderItem.interface';
+import { ICartItem } from '../models/cartItem.interface';
 
 @Injectable({ providedIn: 'root' })
-export class ProfileService {
+export class CartService {
   private readonly _http: HttpClient = inject(HttpClient);
 
   public deleteProduct(
@@ -49,37 +48,4 @@ export class ProfileService {
       }
     );
   }
-
-  public createOrder(
-    userId: number | undefined,
-    basketId: number,
-    price: number,
-    address: string
-  ) {
-    return this._http.post(`${environment.URL_API}/order/create`, {
-      userId,
-      basketId,
-      price,
-      address,
-    });
-  }
-
-  public getAllOrdersById(
-    userId: number
-  ): Observable<IOrderItem[] | undefined> {
-    return this._http.get<IOrderItem[] | undefined>(
-      `${environment.URL_API}/order/getAll`,
-      { params: { userId } }
-    );
-  }
-  // public getOneCartItem(
-  //   productId: number | null,
-  //   basketId: number,
-  //   sizeId: number | null
-  // ) {
-  //   return this._http.get(
-  //     `${environment.URL_API}/cartOrder/one?basketId=${basketId}&productId=${productId}`
-  //   );
-  // }
-  // public reduceCartProdict() {}
 }

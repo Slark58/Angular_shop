@@ -13,7 +13,7 @@ import { PersistService } from '../../../../shared/services/persist.service';
 import { combineLatest, map, Observable } from 'rxjs';
 import { TFullProduct } from '../../../../shared/types/fullProduct.type';
 import { ProfileFacade } from '../../../../profile/data-access/profile.facade';
-import { ICartItem } from '../../../../profile/types/cartItem.interface';
+import { ICartItem } from '../../../../profile/profile-cart/data-access/src/lib/models/cartItem.interface';
 
 @Component({
   selector: 'app-product-detailed-container',

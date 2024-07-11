@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,17 +6,15 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { CartItemComponent } from './cart-item/cart-item.component';
-import { CommonModule } from '@angular/common';
-import { ProfileFacade } from '../../data-access/profile.facade';
-import { combineLatest, map, take, tap } from 'rxjs';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { IUser } from '../../../shared/types/user.interface';
+import { CartItemComponent } from '../cart-item/cart-item.component';
+import { combineLatest, map, take } from 'rxjs';
+import { IUser } from '../../../../../shared/types/user.interface';
+import { CartFacade } from '../../../data-access/src';
 
 @Component({
-  selector: 'app-profile-cart',
+  selector: 'app-cart-container',
   standalone: true,
   imports: [
     CartItemComponent,
@@ -23,22 +22,21 @@ import { IUser } from '../../../shared/types/user.interface';
     RouterModule,
     MatProgressSpinnerModule,
   ],
-  templateUrl: './profile-cart.component.html',
-  styleUrls: ['./profile-cart.component.scss'],
+  templateUrl: './cart-container.component.html',
+  styleUrls: ['./cart-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileCartComponent implements OnInit {
-  private readonly profileFacade: ProfileFacade = inject(ProfileFacade);
+export class CartContainerComponent implements OnInit {
+  private readonly cartFacade = inject(CartFacade);
   public activeAddress = signal<string>('');
   public addresses: string[] = arrAdreses;
 
-  public basketId = this.profileFacade.basketId;
-  public user$ = this.profileFacade.user$;
-  public cartItems$ = this.profileFacade.cartItems$;
-  public cartQuantity$ = this.profileFacade.selectCartQuantity$;
-  public isLoadingCartItems$ = this.profileFacade.selectLoadingCartItems$;
-  public selectErrorCartItems$ = this.profileFacade.selectErrorCartItems$;
-  public selectLoadingCartItems$ = this.profileFacade.selectLoadingCartItems$;
+  public basketId = this.cartFacade.basketId;
+  public cartItems$ = this.cartFacade.cartItems$;
+  public cartQuantity$ = this.cartFacade.selectCartQuantity$;
+  public isLoadingCartItems$ = this.cartFacade.selectLoadingCartItems$;
+  public selectErrorCartItems$ = this.cartFacade.selectErrorCartItems$;
+  public selectLoadingCartItems$ = this.cartFacade.selectLoadingCartItems$;
   public isCartItemsExist$ = this.cartItems$.pipe(
     map((products) => !products || products.length === 0)
   );
@@ -54,7 +52,7 @@ export class ProfileCartComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: ([user, cartQiantity]: [IUser | null, number]) => {
-          this.profileFacade.createOrder(
+          this.cartFacade.createOrder(
             user?.id,
             this.basketId,
             cartQiantity,
@@ -69,7 +67,7 @@ export class ProfileCartComponent implements OnInit {
     basketId: number;
     sizeId: number;
   }) {
-    this.profileFacade.increaseCartItem(
+    this.cartFacade.increaseCartItem(
       value.productId,
       value.basketId,
       value.sizeId
@@ -80,7 +78,7 @@ export class ProfileCartComponent implements OnInit {
     basketId: number;
     sizeId: number;
   }) {
-    this.profileFacade.decreaseCartItem(
+    this.cartFacade.decreaseCartItem(
       value.productId,
       value.basketId,
       value.sizeId
@@ -91,7 +89,7 @@ export class ProfileCartComponent implements OnInit {
     basketId: number;
     sizeId: number;
   }) {
-    this.profileFacade.deleteCartItem(
+    this.cartFacade.deleteCartItem(
       value.productId,
       value.basketId,
       value.sizeId
@@ -101,10 +99,9 @@ export class ProfileCartComponent implements OnInit {
   ngOnInit() {
     console.log('this.basketId profile: ', this.basketId);
 
-    this.profileFacade.getAllCartItems();
+    this.cartFacade.getAllCartItems();
   }
 }
-
 const arrAdreses = [
   'Str. Roayn, 11',
   'Str. Novella, 20',

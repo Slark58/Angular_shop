@@ -1,9 +1,8 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { ICartItem } from '../profile-cart/data-access/src/lib/models/cartItem.interface';
-import { IOrderItem } from '../types/orderItem.interface';
+import { ICartItem } from '../models/cartItem.interface';
 
-export const ProfileActions = createActionGroup({
-  source: 'profile',
+export const CartActions = createActionGroup({
+  source: 'Cart',
   events: {
     'get cart items': props<{ basketId: number }>(),
     'get cart items success': props<{ cartItems: ICartItem[] | undefined }>(),
@@ -36,23 +35,6 @@ export const ProfileActions = createActionGroup({
     }>(),
     'delete cart item success': emptyProps(),
     'delete cart item failure': emptyProps(),
-
-    'create order': props<{
-      userId: number | undefined;
-      basketId: number;
-      price: number;
-      address: string;
-    }>(),
-    'create order success': emptyProps(),
-    'create order failure': emptyProps(),
-
-    'get orders': props<{ userId: number }>(),
-    'get orders success': props<{ orderItems: IOrderItem[] | undefined }>(),
-    'get orders failure': emptyProps(),
-
-    'get order by id': emptyProps(),
-    'get order by id success': emptyProps(),
-    'get order by id failure': emptyProps(),
 
     'reduce cart quantity': emptyProps(),
   },

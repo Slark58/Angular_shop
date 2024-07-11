@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { ICartItem } from './cartItem.interface';
+import { ICartItem } from '../profile-cart/data-access/src/lib/models/cartItem.interface';
 import { IOrderItem } from './orderItem.interface';
 
 export interface ProfileState {
