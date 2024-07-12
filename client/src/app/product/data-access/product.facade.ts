@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { ProductActions } from './product.actions';
 import { Observable } from 'rxjs';
 import { selectProduct } from './product.selectors';
-import { ProfileActions } from '../../profile/data-access/profile.actions';
 import { TFullProduct } from '../../shared/types/fullProduct.type';
+import { CartActions } from '../../profile/profile-cart/data-access/src';
 
 @Injectable({ providedIn: 'root' })
 export class ProductFacade {
@@ -17,7 +17,7 @@ export class ProductFacade {
     console.log('productId: ', productId, 'basketId: ', basketId);
 
     this.store.dispatch(
-      ProfileActions.increaseCartItem({ productId, basketId, sizeId })
+      CartActions.increaseCartItem({ productId, basketId, sizeId })
     );
   }
 

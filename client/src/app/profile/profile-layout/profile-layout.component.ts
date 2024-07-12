@@ -5,8 +5,8 @@ import {
   inject,
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { AdminPaths, UserAccountPaths } from '../../../app.routes';
 import { CommonModule } from '@angular/common';
+import { UserAccountPaths } from '../../app.routes';
 
 @Component({
   selector: 'app-profile-layout',

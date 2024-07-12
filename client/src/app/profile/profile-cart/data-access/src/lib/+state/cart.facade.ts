@@ -8,6 +8,10 @@ import {
   selectLoading,
 } from './cart.selectors';
 import { CartActions } from './cart.actions';
+import {
+  selectUserID,
+  userSelector,
+} from '../../../../../../auth/store/selectors';
 
 @Injectable({ providedIn: 'root' })
 export class CartFacade {
@@ -15,6 +19,7 @@ export class CartFacade {
   private readonly persistService: PersistService = inject(PersistService);
   public basketId = this.persistService.get('basketId') as number;
 
+  public userId$ = this.store.select(selectUserID);
   public cartItems$ = this.store.select(selectCartItems);
   public selectCartQuantity$ = this.store.select(selectCartQuantity);
   public selectLoadingCartItems$ = this.store.select(selectLoading);

@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ProfileOrdersComponent } from './profile-orders.component';
+import { OrderContainerComponent } from './order-container.component';
 
-describe('ProfileOrdersComponent', () => {
-  let component: ProfileOrdersComponent;
-  let fixture: ComponentFixture<ProfileOrdersComponent>;
+describe('OrderContainerComponent', () => {
+  let component: OrderContainerComponent;
+  let fixture: ComponentFixture<OrderContainerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileOrdersComponent ]
+      declarations: [ OrderContainerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProfileOrdersComponent);
+    fixture = TestBed.createComponent(OrderContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -12,6 +12,7 @@ import { CartItemComponent } from '../cart-item/cart-item.component';
 import { combineLatest, map, take } from 'rxjs';
 import { IUser } from '../../../../../shared/types/user.interface';
 import { CartFacade } from '../../../data-access/src';
+import { OrderFacade } from '../../../../profile-orders/data-access/src';
 
 @Component({
   selector: 'app-cart-container',
@@ -28,15 +29,16 @@ import { CartFacade } from '../../../data-access/src';
 })
 export class CartContainerComponent implements OnInit {
   private readonly cartFacade = inject(CartFacade);
+  private readonly orderFacade = inject(OrderFacade);
   public activeAddress = signal<string>('');
   public addresses: string[] = arrAdreses;
 
   public basketId = this.cartFacade.basketId;
   public cartItems$ = this.cartFacade.cartItems$;
+  public userID$ = this.cartFacade.userId$;
   public cartQuantity$ = this.cartFacade.selectCartQuantity$;
   public isLoadingCartItems$ = this.cartFacade.selectLoadingCartItems$;
-  public selectErrorCartItems$ = this.cartFacade.selectErrorCartItems$;
-  public selectLoadingCartItems$ = this.cartFacade.selectLoadingCartItems$;
+  public isErrorCartItems$ = this.cartFacade.selectErrorCartItems$;
   public isCartItemsExist$ = this.cartItems$.pipe(
     map((products) => !products || products.length === 0)
   );
@@ -48,12 +50,12 @@ export class CartContainerComponent implements OnInit {
   }
 
   public handleCreateOrder() {
-    combineLatest([this.user$, this.cartQuantity$])
+    combineLatest([this.userID$, this.cartQuantity$])
       .pipe(take(1))
       .subscribe({
-        next: ([user, cartQiantity]: [IUser | null, number]) => {
-          this.cartFacade.createOrder(
-            user?.id,
+        next: ([userID, cartQiantity]: [number | undefined, number]) => {
+          this.orderFacade.createOrder(
+            userID,
             this.basketId,
             cartQiantity,
             this.activeAddress()

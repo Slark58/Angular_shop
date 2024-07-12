@@ -5,10 +5,6 @@ import { AdminLayoutComponent } from './admin-panel/components/admin-layout/admi
 import { AdminProductsComponent } from './admin-panel/components/admin-products/admin-products.component';
 import { AdminUsersComponent } from './admin-panel/components/admin-users/admin-users.component';
 import { AdminOrdersComponent } from './admin-panel/components/admin-orders/admin-orders.component';
-import { ProfileLayoutComponent } from './profile/components/profile-layout/profile-layout.component';
-import { ProfileInfoComponent } from './profile/components/profile-info/profile-info.component';
-import { ProfileCartComponent } from './profile/components/profile-cart/profile-cart.component';
-import { ProfileOrdersComponent } from './profile/components/profile-orders/profile-orders.component';
 
 export enum Paths {
   Home = '',

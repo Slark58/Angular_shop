@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { ProfileLayoutComponent } from './components/profile-layout/profile-layout.component';
 import { UserAccountPaths } from '../app.routes';
-import { ProfileInfoComponent } from './components/profile-info/profile-info.component';
-import { ProfileCartComponent } from './components/profile-cart/profile-cart.component';
-import { ProfileOrdersComponent } from './components/profile-orders/profile-orders.component';
+import { ProfileLayoutComponent } from './profile-layout/profile-layout.component';
+import { ProfileInfoComponent } from './profile-info/profile-info.component';
+import { CartContainerComponent } from './profile-cart/src';
+import { OrderContainerComponent } from './profile-orders/src';
 
 export const routes: Routes = [
   {
@@ -16,11 +16,11 @@ export const routes: Routes = [
       },
       {
         path: UserAccountPaths.Cart,
-        component: ProfileCartComponent,
+        component: CartContainerComponent,
       },
       {
         path: UserAccountPaths.Orders,
-        component: ProfileOrdersComponent,
+        component: OrderContainerComponent,
       },
     ],
   },

@@ -7,10 +7,10 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { ICartItem } from '../../../types/cartItem.interface';
 import { RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ICartItem } from '../../../data-access/src';
 
 @Component({
   selector: 'app-cart-item',
@@ -82,7 +82,7 @@ export class CartItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('cartItemProps: ', this.cartItemProps.product_char.size.id);
+    console.log('cartItemProps: ', this.cartItemProps?.product_char.size.id);
 
     console.log('basketIdProps: ', this.basketIdProps);
   }

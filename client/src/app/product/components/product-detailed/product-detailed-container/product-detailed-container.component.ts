@@ -12,7 +12,6 @@ import { CountOfSizeDirective } from '../../../../utils/directives/countOfSize.d
 import { PersistService } from '../../../../shared/services/persist.service';
 import { combineLatest, map, Observable } from 'rxjs';
 import { TFullProduct } from '../../../../shared/types/fullProduct.type';
-import { ProfileFacade } from '../../../../profile/data-access/profile.facade';
 import { ICartItem } from '../../../../profile/profile-cart/data-access/src/lib/models/cartItem.interface';
 
 @Component({
@@ -26,7 +25,7 @@ import { ICartItem } from '../../../../profile/profile-cart/data-access/src/lib/
 })
 export class ProductDetailedContainerComponent implements OnInit {
   private readonly productFacade: ProductFacade = inject(ProductFacade);
-  private readonly profileFacade: ProfileFacade = inject(ProfileFacade);
+  // private readonly profileFacade: ProfileFacade = inject(ProfileFacade);
   private readonly persistService: PersistService = inject(PersistService);
   private activetedRoute: ActivatedRoute = inject(ActivatedRoute);
 
@@ -34,36 +33,36 @@ export class ProductDetailedContainerComponent implements OnInit {
   public sizeId!: number;
   public productId!: number;
   public product$ = this.productFacade.product$;
-  public cartItems$ = this.profileFacade.cartItems$;
+  // public cartItems$ = this.profileFacade.cartItems$;
 
-  inCart$ = combineLatest([this.product$, this.cartItems$]).pipe(
-    map(
-      ([product, cartProducts]: [
-        product: TFullProduct | null,
-        cartProducts: ICartItem[] | undefined
-      ]) => {
-        if (!product || !cartProducts) return false;
+  // inCart$ = combineLatest([this.product$, this.cartItems$]).pipe(
+  //   map(
+  //     ([product, cartProducts]: [
+  //       product: TFullProduct | null,
+  //       cartProducts: ICartItem[] | undefined
+  //     ]) => {
+  //       if (!product || !cartProducts) return false;
 
-        const charProductID = product.chars.find(
-          (item) => item.sizeId === this.sizeId
-        )?.id;
+  //       const charProductID = product.chars.find(
+  //         (item) => item.sizeId === this.sizeId
+  //       )?.id;
 
-        console.log('charProductID: ', charProductID);
+  //       console.log('charProductID: ', charProductID);
 
-        const quantityFindProduct = cartProducts.find(
-          (item) => item.product_char.id === charProductID
-        )?.quantity;
+  //       const quantityFindProduct = cartProducts.find(
+  //         (item) => item.product_char.id === charProductID
+  //       )?.quantity;
 
-        console.log('quantityFindProduct: ', quantityFindProduct);
+  //       console.log('quantityFindProduct: ', quantityFindProduct);
 
-        if (quantityFindProduct) {
-          return quantityFindProduct > 0;
-        }
+  //       if (quantityFindProduct) {
+  //         return quantityFindProduct > 0;
+  //       }
 
-        return false;
-      }
-    )
-  );
+  //       return false;
+  //     }
+  //   )
+  // );
 
   chouseSizeProduct(size: number) {
     this.sizeId = size;

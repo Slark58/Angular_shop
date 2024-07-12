@@ -5,9 +5,8 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { IProductChar } from '../../../../shared/types/productChar.interface';
 import { RouterModule } from '@angular/router';
-import { IOrderItem } from '../../../types/orderItem.interface';
+import { IOrderItem } from '../../../data-access/src/lib/models/orderItem.interface';
 
 @Component({
   selector: 'app-order-item',
