@@ -3,7 +3,18 @@
   justify-content: space-between;
 }
 
-.product-page-chrs {}
+.chrs-wrap-title {
+  font-size: 20px;
+}
+
+.chrs-wrap-description {
+  font-size: 20px;
+
+}
+
+.product-page-chrs {
+  margin-top: 20px;
+}
 
 .slider-container {
   margin-top: 20px;
@@ -58,7 +69,14 @@
   display: grid;
   gap: 50px;
   grid-template-columns: 1fr 1fr;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #b2c0d0;
+
   // gap: 50px;
+  &:nth-last-child(1) {
+    border-bottom: none;
+
+  }
 }
 
 

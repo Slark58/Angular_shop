@@ -26,7 +26,7 @@
             </swiper-container>
           </div>
 
-          <div class="product-page-chrs">
+          <div class="product-page-chrs df fdc g10">
             @if (product$ | async; as product) {
             @for (item of product.info; track item) {
             <div class="product-chrs-wrap">
@@ -50,7 +50,7 @@
                 @if (product$ | async; as product) {
                 @for(item of product.chars; track item) {
                 <div [ngClass]="{'active-size': sizeId === item.sizeId}" (click)="chouseSizeProduct(item.sizeId)"
-                  appCountOfSize="{{item.count}}" class="bt n-size">
+                  appCountOfSize="{{item.count}}" class="btn-size">
                   {{item.size.value}}</div>
                 }
                 }

@@ -15,7 +15,7 @@ import {
   selector: '[appCountOfSize]',
 })
 export class CountOfSizeDirective implements OnInit {
-  @Input('appCountOfSize') valueSize?: number | string;
+  @Input('appCountOfSize') valueSize?: string;
 
   private tooltipElement?: HTMLElement;
 
