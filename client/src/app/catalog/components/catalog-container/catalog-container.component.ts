@@ -6,6 +6,7 @@ import {
   computed,
   inject,
   signal,
+  effect,
 } from '@angular/core';
 import { CatalogFilterComponent } from '../catalog-filter/catalog-filter.component';
 import { IFiltersResponse } from '../../types/filterResponse.interface';
@@ -37,61 +38,37 @@ export class CatalogContainerComponent implements OnInit {
   public filters$ = this.catalogFacade.filters$;
   public products$ = this.catalogFacade.products$;
 
-  // public filtersSig = signal<IFiltersResponse[] | null>([]);
-  // public productsSig = signal<TFullProduct[] | null>([]);
-
   onEmitFilterValue(value: { id: number; category: string; checked: boolean }) {
     const { id, category, ...props } = value;
 
     this.activeFilters.update((currentFilters) => {
-      if (!currentFilters[category]) {
-        currentFilters[category] = [id];
+      const categoryFilters = currentFilters[category]
+        ? [...currentFilters[category]]
+        : [];
+
+      const index = categoryFilters.indexOf(id);
+
+      if (index === -1) {
+        categoryFilters.push(id);
       } else {
-        const itemIndex = currentFilters[category].findIndex(
-          (item) => item === id
-        );
-        if (itemIndex === -1) {
-          currentFilters[category].push(id);
-        } else {
-          currentFilters[category].splice(itemIndex, 1);
-        }
+        categoryFilters.splice(index, 1);
       }
 
-      return currentFilters;
+      if (categoryFilters.length > 0) {
+        return { ...currentFilters, [category]: categoryFilters };
+      } else {
+        const { [category]: _, ...rest } = currentFilters;
+        return rest;
+      }
     });
 
-    this.fetchProductsWithFilters();
-  }
-
-  private fetchProductsWithFilters() {
-    this.catalogService.getPropducts(this.activeFilters()).subscribe({
-      next: (products) => {
-        this.store.dispatch(CatalogActions.getProductsSuccess({ products }));
-      },
-      error: (error) => {
-        console.error('Error fetching products with filters:', error);
-      },
-    });
+    this.catalogFacade.getProducts(this.activeFilters());
   }
 
   ngOnInit() {
-    this.catalogFacade.getProducts();
-    this.catalogFacade.getFilters();
+    console.log('init');
 
-    // combineLatest([
-    //   this.catalogService.getFilters(),
-    //   this.catalogService.getPropducts(),
-    // ])
-    //   .pipe(take(1))
-    //   .subscribe(
-    //     ([filters, products]: [
-    //       IFiltersResponse[] | null,
-    //       TFullProduct[] | null
-    //     ]) => {
-    //       this.filtersSig.set(filters);
-    //       this.productsSig.set(products);
-    //       console.log(...[filters, products]);
-    //     }
-    //   );
+    this.catalogFacade.getProducts({});
+    this.catalogFacade.getFilters();
   }
 }

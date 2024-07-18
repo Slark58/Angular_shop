@@ -18,7 +18,7 @@ export class CatalogFacade {
   getFilters() {
     this.store.dispatch(CatalogActions.getFilters());
   }
-  getProducts() {
-    this.store.dispatch(CatalogActions.getProducts());
+  getProducts(filters: Record<string, number[]> | null) {
+    this.store.dispatch(CatalogActions.getProducts({ filters }));
   }
 }

@@ -10,8 +10,8 @@ export const getProductsEffect$ = createEffect(
   (actions$ = inject(Actions), catalogService = inject(CatalogService)) => {
     return actions$.pipe(
       ofType(CatalogActions.getProducts),
-      switchMap(() => {
-        return catalogService.getPropducts({}).pipe(
+      switchMap(({ filters }) => {
+        return catalogService.getPropducts(filters).pipe(
           map((products) => {
             return CatalogActions.getProductsSuccess({ products });
           }),

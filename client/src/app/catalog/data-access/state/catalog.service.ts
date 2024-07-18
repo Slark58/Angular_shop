@@ -14,9 +14,9 @@ export class CatalogService {
     return this._http.get<IFiltersResponse[]>(url);
   };
   // colors, types, sizes, genders
-  getPropducts = (filters: Record<string, number[]>) => {
+  getPropducts = (filters: Record<string, number[]> | null) => {
     const url = environment.URL_API + '/product';
-    console.log(filters);
+    console.log('filters in service: ', filters);
 
     let params = new HttpParams();
     for (const key in filters) {
@@ -28,7 +28,6 @@ export class CatalogService {
         const values = filters[key].join(',');
         params = params.set(key, values);
       }
-      console.log(params);
     }
     return this._http.get<TFullProduct[]>(url, { params });
   };
