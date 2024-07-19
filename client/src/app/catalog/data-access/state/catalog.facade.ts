@@ -2,7 +2,11 @@ import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CatalogActions } from './catalog.actions';
 import { IFiltersResponse } from '../../types/filterResponse.interface';
-import { selectFilters, selectProducts } from './catalog.selectors';
+import {
+  selectFilters,
+  selectIsLoading,
+  selectProducts,
+} from './catalog.selectors';
 import { Observable } from 'rxjs';
 import { TFullProduct } from '../../../shared/types/fullProduct.type';
 
@@ -14,6 +18,8 @@ export class CatalogFacade {
     this.store.select(selectFilters);
   public readonly products$: Observable<TFullProduct[] | null> =
     this.store.select(selectProducts);
+
+  public isLoading$ = this.store.select(selectIsLoading);
 
   getFilters() {
     this.store.dispatch(CatalogActions.getFilters());

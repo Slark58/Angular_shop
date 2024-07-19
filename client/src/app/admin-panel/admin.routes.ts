@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import { AdminPaths, Paths } from '../app.routes';
-import { AdminProductsComponent } from './components/admin-products/admin-products.component';
-import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
-import { AdminUsersComponent } from './components/admin-users/admin-users.component';
-import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
+import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
+import { AdminProductsContainerComponent } from './admin-products/src';
+import { AdminOrdersContainerComponent } from './admin-orders/src';
+import { AdminUsersContainerComponent } from './admin-users/src';
 
 export const adminRoutes: Routes = [
   {
@@ -12,15 +12,15 @@ export const adminRoutes: Routes = [
     children: [
       {
         path: AdminPaths.Products,
-        component: AdminProductsComponent,
+        component: AdminProductsContainerComponent,
       },
       {
         path: AdminPaths.Orders,
-        component: AdminOrdersComponent,
+        component: AdminOrdersContainerComponent,
       },
       {
         path: AdminPaths.Users,
-        component: AdminUsersComponent,
+        component: AdminUsersContainerComponent,
       },
     ],
   },

@@ -17,25 +17,7 @@
           }
         </div>
 
-        <!-- @switch (filter.title) {
-        @case ("Colors") {
-        <div class="df g10 fww">
-          <label (change)="getValue($event)" *ngFor="let item of filter.data" [for]="item.id">
-            <div class="box-color" [ngStyle]="{background: item.code}"></div>
-            <input [id]="item.id" name="color" [value]="item.id" type="checkbox" class="filter-color-inp">
-          </label>
-        </div>
-        }
-        @default {
-        <div class="g10 df fdc ml10">
-          @for (item of filter.data; track $index) {
-          <input type="checkbox" class="custom-checkbox" [id]="item.value" [name]="filter.title"
-            [value]="item.id.toString()">
-          <label [for]="item.value">{{item.value}}</label>
-          }
-        </div>
-        }
-        } -->
+
       </div>
     </div>
   </ng-container>

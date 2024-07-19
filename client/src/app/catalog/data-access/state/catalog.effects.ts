@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { CatalogActions } from './catalog.actions';
-import { EMPTY, catchError, map, of, switchMap } from 'rxjs';
+import { EMPTY, catchError, delay, map, of, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment.development';
 import { CatalogService } from './catalog.service';
@@ -12,6 +12,7 @@ export const getProductsEffect$ = createEffect(
       ofType(CatalogActions.getProducts),
       switchMap(({ filters }) => {
         return catalogService.getPropducts(filters).pipe(
+          delay(2100),
           map((products) => {
             return CatalogActions.getProductsSuccess({ products });
           }),
@@ -28,6 +29,7 @@ export const getFiltersEffect$ = createEffect(
       ofType(CatalogActions.getFilters),
       switchMap(() => {
         return catalogService.getFilters().pipe(
+          delay(2100),
           map((filters) => {
             return CatalogActions.getFiltersSuccess({ filters });
           }),

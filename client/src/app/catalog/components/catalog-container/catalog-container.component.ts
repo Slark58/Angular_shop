@@ -18,11 +18,17 @@ import { ProductCardUiComponent } from '../../../shared/modules/product-card/com
 import { Store } from '@ngrx/store';
 import { CatalogActions } from '../../data-access/state/catalog.actions';
 import { CatalogFacade } from '../../data-access/state/catalog.facade';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-catalog-container',
   standalone: true,
-  imports: [CatalogFilterComponent, CommonModule, ProductCardUiComponent],
+  imports: [
+    CatalogFilterComponent,
+    CommonModule,
+    ProductCardUiComponent,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './catalog-container.component.html',
   styleUrls: ['./catalog-container.component.scss'],
   // schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -36,6 +42,7 @@ export class CatalogContainerComponent implements OnInit {
   public activeFilters = signal({} as { [key: string]: number[] });
 
   public filters$ = this.catalogFacade.filters$;
+  public isLoading$ = this.catalogFacade.isLoading$;
   public products$ = this.catalogFacade.products$;
 
   onEmitFilterValue(value: { id: number; category: string; checked: boolean }) {

@@ -16,7 +16,14 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import * as authEffects from './auth/store/effects';
 import * as catalogEffects from './catalog/data-access/state/catalog.effects';
 import * as productEffects from './product/data-access/product.effects';
-import * as adminEffects from './admin-panel/data-access/admin.effects';
+import {
+  adminProductsEffect,
+  adminProductFeature,
+} from './admin-panel/admin-products/data-access/src';
+import {
+  adminUsersEffects,
+  adminUsersFeature,
+} from './admin-panel/admin-users/data-access/src';
 import {
   cartFeatere,
   cartEffects,
@@ -28,7 +35,6 @@ import {
 import { register as registerSwiperElements } from 'swiper/element/bundle';
 import { catalogFeature } from './catalog/data-access/state/catalog.reducer';
 import { productFeature } from './product/data-access/product.reducer';
-import { adminFeature } from './admin-panel/data-access/admin.reducer';
 registerSwiperElements();
 
 export const appConfig: ApplicationConfig = {
@@ -39,7 +45,8 @@ export const appConfig: ApplicationConfig = {
       [AUTH_FEATURE_KEY]: authFeature.reducer,
       [catalogFeature.name]: catalogFeature.reducer,
       [productFeature.name]: productFeature.reducer,
-      [adminFeature.name]: adminFeature.reducer,
+      [adminProductFeature.name]: adminProductFeature.reducer,
+      [adminUsersFeature.name]: adminUsersFeature.reducer,
       [cartFeatere.name]: cartFeatere.reducer,
       [orderFeature.name]: orderFeature.reducer,
     }),
@@ -47,7 +54,8 @@ export const appConfig: ApplicationConfig = {
       authEffects,
       catalogEffects,
       productEffects,
-      adminEffects,
+      adminProductsEffect,
+      adminUsersEffects,
       cartEffects,
       orderEffects
     ),
