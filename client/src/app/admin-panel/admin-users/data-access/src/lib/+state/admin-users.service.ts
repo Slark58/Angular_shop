@@ -9,6 +9,8 @@ export class AdminUsersService {
   private readonly _http: HttpClient = inject(HttpClient);
 
   getUsers(): Observable<IUser[]> {
-    return this._http.get<IUser[]>(`${environment.URL_API}/products`);
+    console.log('call getUsers');
+
+    return this._http.get<IUser[]>(`${environment.URL_API}/admin/users`);
   }
 }

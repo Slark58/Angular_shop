@@ -1,10 +1,10 @@
 const Router = require('express')
-// const adminController = require('../controllers/adminController')
+const adminController = require('../controllers/adminController')
 const productController = require('../controllers/productController')
 const router = new Router()
 
 
-// router.get('/users', adminController.getUsers)
+router.get('/users', adminController.getUsers)
 // router.get('/products', adminController.getProducts)
 // router.get('/orders', adminController.getOrders)
 // router.get('/products-in-order', adminController.getProductsInOrder)
