@@ -11,7 +11,9 @@ export class AdminProductsFacade {
     inject(AdminProductsService);
   public products$ = this.store.select(selectProducts);
 
-  getProducts() {}
+  getProducts() {
+    this.store.dispatch(AdminProductsActions.getProducts());
+  }
   getUsers() {}
   getFilters() {
     return this.adminService.getFilters();

@@ -1,0 +1,3 @@
+@if(products$ | async; as products) {
+<app-table [headerData]="['id', 'name', 'price', 'oldPrice']" [bodyData]="products.rows"></app-table>
+}

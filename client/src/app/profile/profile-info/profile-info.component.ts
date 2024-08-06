@@ -8,6 +8,9 @@ import {
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PersistService } from '../../shared/services/persist.service';
+import { Store } from '@ngrx/store';
+import { logoutAction } from '../../auth/store/actions/logout.action';
 
 @Component({
   selector: 'app-profile-info',
@@ -17,4 +20,10 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./profile-info.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileInfoComponent {}
+export class ProfileInfoComponent {
+  public readonly store: Store = inject(Store);
+
+  logout() {
+    this.store.dispatch(logoutAction());
+  }
+}

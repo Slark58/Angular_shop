@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { TableComponent } from '../../../../../shared/modules/UI/table/table.component';
 import { AdminUsersFacade } from '../../../data-access/src';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-admin-users-container',
@@ -18,6 +19,8 @@ import { AdminUsersFacade } from '../../../data-access/src';
 })
 export class AdminUsersContainerComponent implements OnInit {
   private readonly adminUsersFacade = inject(AdminUsersFacade);
+
+  public users$ = this.adminUsersFacade.users$;
 
   ngOnInit() {
     this.adminUsersFacade.getAllUsers();

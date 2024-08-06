@@ -61,9 +61,7 @@
   }
 }
 
-.active-size {
-  background-color: #d0f5f8;
-}
+
 
 .product-chrs-wrap {
   display: grid;
@@ -164,15 +162,22 @@
 .span-price {
   border-radius: 8px;
   padding: 5px;
-  background-color: #4182E3;
+  background-color: #9f41e3;
   color: white;
 }
 
 .btn-size {
   position: relative;
   padding: 5px;
-  border: 1px solid gray;
+  border: 2px solid rgba(128, 128, 128, 0.4);
+  border-radius: 5px;
   cursor: pointer;
+}
+
+.active-size {
+  // background-color: #14a7b2;
+  // border-radius: 5px;
+  border: 2px solid #d041e3;
 }
 
 .tooltip-def {

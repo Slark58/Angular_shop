@@ -1,9 +1,11 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { IAdminProductsState } from '../models/adminProductsState.interface';
 import { AdminProductsActions } from './admin-products.actions';
+import { TFullProduct } from '../../../../../../shared/types/fullProduct.type';
+import { CountAndRows } from '../../../../../../shared/types/countAndRows.interface';
 
 const initialState: IAdminProductsState = {
-  products: [],
+  products: {} as CountAndRows<TFullProduct[]>,
   isLoading: false,
   error: null,
 };

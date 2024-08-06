@@ -9,6 +9,13 @@ export class PersistService {
       console.log(error);
     }
   }
+  remove(key: string): void {
+    try {
+      localStorage.removeItem(key);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   get(key: string): unknown {
     try {

@@ -5,7 +5,7 @@ const router = new Router()
 
 
 router.get('/users', adminController.getUsers)
-// router.get('/products', adminController.getProducts)
+router.get('/products', adminController.getProducts)
 // router.get('/orders', adminController.getOrders)
 // router.get('/products-in-order', adminController.getProductsInOrder)
 

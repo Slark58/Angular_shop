@@ -8,41 +8,13 @@
       </tr>
     </thead>
     <tbody class="table-tbody">
+      @for (item of bodyData; track $index) {
       <tr class="table-tr">
-        <td class="table-td">Cell 1</td>
-        <td class="table-td">Cell 2</td>
-        <td class="table-td">Cell 3</td>
-        <td class="table-td">Cell 4</td>
-        <td class="table-td">Cell 5</td>
+        @for(column of headerData; track $index) {
+        <td class="table-td">{{item[column]}}</td>
+        }
       </tr>
-      <tr class="table-tr">
-        <td class="table-td">Cell 1</td>
-        <td class="table-td">Cell 2</td>
-        <td class="table-td">Cell 3</td>
-        <td class="table-td">Cell 4</td>
-        <td class="table-td">Cell 5</td>
-      </tr>
-      <tr class="table-tr">
-        <td class="table-td">Cell 1</td>
-        <td class="table-td">Cell 2</td>
-        <td class="table-td">Cell 3</td>
-        <td class="table-td">Cell 4</td>
-        <td class="table-td">Cell 5</td>
-      </tr>
-      <tr class="table-tr">
-        <td class="table-td">Cell 1</td>
-        <td class="table-td">Cell 2</td>
-        <td class="table-td">Cell 3</td>
-        <td class="table-td">Cell 4</td>
-        <td class="table-td">Cell 5</td>
-      </tr>
-      <tr class="table-tr">
-        <td class="table-td">Cell 1</td>
-        <td class="table-td">Cell 2</td>
-        <td class="table-td">Cell 3</td>
-        <td class="table-td">Cell 4</td>
-        <td class="table-td">Cell 5</td>
-      </tr>
+      }
     </tbody>
   </table>
 </div>

@@ -26,3 +26,18 @@
   color: rgb(40, 40, 40);
 
 }
+
+
+.logout-btn {
+  padding: 10px;
+  background-color: red;
+  font-size: 16px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}

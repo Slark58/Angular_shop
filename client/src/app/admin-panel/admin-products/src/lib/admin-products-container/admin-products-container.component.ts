@@ -11,11 +11,18 @@ import { IFiltersResponse } from '../../../../../catalog/types/filterResponse.in
 import { Observable, take } from 'rxjs';
 import { FormArray, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { IImgSig } from '../../../data-access/src/lib/models/imgsSignal.interface';
+import { TableComponent } from '../../../../../shared/modules/UI/table/table.component';
+import { AdminProductInfoComponent } from '../admin-product-info/admin-product-info.component';
+import { AdminProductCreateComponent } from '../admin-product-create/admin-product-create.component';
 
 @Component({
   selector: 'app-admin-products-container',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    AdminProductInfoComponent,
+    AdminProductCreateComponent,
+  ],
   templateUrl: './admin-products-container.component.html',
   styleUrls: ['./admin-products-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

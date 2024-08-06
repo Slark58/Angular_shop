@@ -4,13 +4,16 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../../../environments/environment.development';
 import { IFiltersResponse } from '../../../../../../catalog/types/filterResponse.interface';
+import { CountAndRows } from '../../../../../../shared/types/countAndRows.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AdminProductsService {
   private readonly _http: HttpClient = inject(HttpClient);
 
-  getProducts(): Observable<TFullProduct[]> {
-    return this._http.get<TFullProduct[]>(`${environment.URL_API}/admin-a`);
+  getProducts(): Observable<CountAndRows<TFullProduct[]>> {
+    return this._http.get<CountAndRows<TFullProduct[]>>(
+      `${environment.URL_API}/admin/products`
+    );
   }
 
   getFilters(): Observable<IFiltersResponse[]> {

@@ -1,9 +1,11 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { IAdminUsersState } from '../models/adminUsersState.interface';
 import { AdminUsersActions } from './admin-users.actions';
+import { CountAndRows } from '../../../../../../shared/types/countAndRows.interface';
+import { IUser } from '../../../../../../shared/types/user.interface';
 
 const initialState: IAdminUsersState = {
-  users: [],
+  users: {} as CountAndRows<IUser[]>,
   isLoading: false,
   error: null,
 };

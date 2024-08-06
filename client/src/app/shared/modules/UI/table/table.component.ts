@@ -16,7 +16,7 @@ import {
 })
 export class TableComponent implements OnInit {
   @Input({ required: true }) headerData?: string[];
-  @Input({ required: true }) bodyData?: string[];
+  @Input({ required: true }) bodyData?: any[];
   constructor() {}
 
   ngOnInit() {}

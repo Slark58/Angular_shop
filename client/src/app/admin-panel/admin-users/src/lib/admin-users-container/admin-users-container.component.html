@@ -1,1 +1,7 @@
-<app-table [headerData]="['id', 'name', 'phone', 'email', 'action']" [bodyData]=""></app-table>
+<!-- <ng-container *ngIf="users$ | async as users">
+
+</ng-container> -->
+
+@if (users$ | async; as users) {
+<app-table [headerData]="['id', 'name', 'phone', 'email', 'action']" [bodyData]="users.rows"></app-table>
+}

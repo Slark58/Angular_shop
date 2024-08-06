@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, EMPTY, map, switchMap } from 'rxjs';
+import { catchError, EMPTY, map, switchMap, tap } from 'rxjs';
 import { AdminUsersActions } from './admin-users.actions';
 import { AdminUsersService } from './admin-users.service';
 
@@ -14,6 +14,7 @@ export const getUsersEffect$ = createEffect(
       switchMap(() => {
         return adminUsersService.getUsers().pipe(
           map((users) => AdminUsersActions.getUsersSuccess({ users })),
+          tap((users) => console.log(users)),
           catchError(() => EMPTY)
         );
       })
