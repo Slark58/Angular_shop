@@ -1,3 +1,5 @@
+@if (product$ | async; as product) {
+
 <div class="product-detailed-container">
   <div class="container">
 
@@ -27,33 +29,28 @@
           </div>
 
           <div class="product-page-chrs df fdc g10">
-            @if (product$ | async; as product) {
             @for (item of product.info; track item) {
             <div class="product-chrs-wrap">
               <div class="chrs-wrap-title">{{item.title}}</div>
               <div class="chrs-wrap-description">{{item.description}}</div>
             </div>
             }
-            }
           </div>
           <div class="product-page-buy">
             <div class="widget-buy">
               <div class="df g10 alc">
-                @if (product$ | async; as product) {
                 <div class="widget-buy-price span-price">{{product.price}}</div>
                 <s>
                   <div class="widget-buy-oldprice ">{{product.oldPrice}}</div>
                 </s>
-                }
               </div>
               <div class="df g10 alc mt10">
-                @if (product$ | async; as product) {
                 @for(item of product.chars; track item) {
                 <div [ngClass]="{'active-size': sizeId === item.sizeId}" (click)="chouseSizeProduct(item.sizeId)"
                   appCountOfSize="{{item.count}}" class="btn-size">
                   {{item.size.value}}</div>
                 }
-                }
+
               </div>
               <div class="df g10 mt10">
                 <button class="like-btn">like</button>
@@ -61,12 +58,12 @@
                   (click)="increaseCartItemById(productId, basketId, sizeId)">Add in the
                   cart</button>
                 <!-- @if (inCart$ |async) {
-                <button>Lox</button>
-                } @else {
-                <button [disabled]="!sizeId" class="cart-btn"
-                  (click)="increaseCartItemById(productId, basketId, sizeId)">Add in the
-                  cart</button>
-                } -->
+                  <button>Lox</button>
+                  } @else {
+                  <button [disabled]="!sizeId" class="cart-btn"
+                    (click)="increaseCartItemById(productId, basketId, sizeId)">Add in the
+                    cart</button>
+                  } -->
               </div>
             </div>
           </div>
@@ -78,3 +75,6 @@
     </div>
   </div>
 </div>
+
+
+}

@@ -73,8 +73,6 @@ export class CatalogContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('init');
-
     this.catalogFacade.getProducts({});
     this.catalogFacade.getFilters();
   }

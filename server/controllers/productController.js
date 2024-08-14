@@ -16,7 +16,10 @@ const {
     Brand,
     Gender,
     Size,
-    Color
+    Color,
+    Comments,
+    User,
+    Rating
 } = require('../models/models')
 const ApiError = require('../error/ApiError');
 const {
@@ -152,6 +155,7 @@ class ProductController {
                 },
             ],
         }, )
+
         return res.json(product)
     }
 

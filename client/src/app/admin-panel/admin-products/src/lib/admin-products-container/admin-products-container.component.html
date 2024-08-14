@@ -1,2 +1,10 @@
-<app-admin-product-create></app-admin-product-create>
-<app-admin-product-info></app-admin-product-info>
+<!-- <app-admin-product-create></app-admin-product-create>
+<app-admin-product-info></app-admin-product-info> -->
+<div class="admin-product-tabs">
+  <a href="" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-active" [routerLink]="['info']"
+    class="links-admin-prod">info</a>
+  <a href="" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="link-active" [routerLink]="['create']"
+    class="links-admin-prod">create</a>
+</div>
+
+<router-outlet></router-outlet>

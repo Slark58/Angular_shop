@@ -12,7 +12,7 @@ export const getProductsEffect$ = createEffect(
       ofType(CatalogActions.getProducts),
       switchMap(({ filters }) => {
         return catalogService.getPropducts(filters).pipe(
-          delay(2100),
+          // delay(2100),
           map((products) => {
             return CatalogActions.getProductsSuccess({ products });
           }),
@@ -29,7 +29,7 @@ export const getFiltersEffect$ = createEffect(
       ofType(CatalogActions.getFilters),
       switchMap(() => {
         return catalogService.getFilters().pipe(
-          delay(2100),
+          // delay(2100),
           map((filters) => {
             return CatalogActions.getFiltersSuccess({ filters });
           }),

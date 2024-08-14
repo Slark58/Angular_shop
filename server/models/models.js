@@ -71,28 +71,44 @@ const Product = sequelize.define('product', {
     },
 })
 
-const Rating = sequelize.define('rating', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    rate: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-    },
-})
-const Comments = sequelize.define('comments', {
+const Review = sequelize.define('review', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
     comment: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    rating: {
         type: DataTypes.INTEGER,
         allowNull: true
     },
 })
+
+// const Rating = sequelize.define('rating', {
+//     id: {
+//         type: DataTypes.INTEGER,
+//         primaryKey: true,
+//         autoIncrement: true
+//     },
+//     rate: {
+//         type: DataTypes.INTEGER,
+//         allowNull: true
+//     },
+// })
+// const Comments = sequelize.define('comments', {
+//     id: {
+//         type: DataTypes.INTEGER,
+//         primaryKey: true,
+//         autoIncrement: true
+//     },
+//     comment: {
+//         type: DataTypes.STRING,
+//         allowNull: true
+//     },
+// })
 const ProductInfo = sequelize.define('product_info', {
     id: {
         type: DataTypes.INTEGER,
@@ -127,10 +143,6 @@ const Order = sequelize.define('order', {
     address: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-    paymentId: {
-        type: DataTypes.STRING,
-        allowNull: true
     },
 })
 const OrderProduct = sequelize.define('order_product', {
@@ -197,10 +209,6 @@ const Color = sequelize.define('color', {
     value: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-    code: {
-        type: DataTypes.STRING,
-        allowNull: true
     },
 }, {
     timestamps: false
@@ -275,7 +283,7 @@ const Promocode = sequelize.define('promocode', {
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////0
-//////////////////////////////////////////0 Связи ?///////////////////////////////////////////////////0
+//////////////////////////////////////////0 Связи 0///////////////////////////////////////////////////0
 //////////////////////////////////////////////////////////////////////////////////////////////////////0
 
 
@@ -284,14 +292,14 @@ const Promocode = sequelize.define('promocode', {
 User.hasOne(Basket)
 Basket.belongsTo(User)
 
-User.hasMany(Rating)
-Rating.belongsTo(User)
+User.hasMany(Review)
+Review.belongsTo(User)
 
 User.hasMany(Order)
 Order.belongsTo(User)
 
-User.hasMany(Comments)
-Comments.belongsTo(User)
+// User.hasMany(Comments)
+// Comments.belongsTo(User)
 
 //////! BASKET //////!
 
@@ -305,11 +313,11 @@ OrderProduct.belongsTo(Order)
 
 //////! PRODUCT //////!
 
-Product.hasMany(Rating)
-Rating.belongsTo(Product)
+Product.hasMany(Review)
+Review.belongsTo(Product)
 
-Product.hasMany(Comments)
-Comments.belongsTo(Product)
+// Product.hasMany(Comments)
+// Comments.belongsTo(Product)
 
 Product.hasMany(ProductInfo, {
     as: 'info'
@@ -360,10 +368,10 @@ module.exports = {
     User,
     Basket,
     BasketProduct,
-
-    Comments,
+    Review,
+    // Comments,
     Product,
-    Rating,
+    // Rating,
     ProductInfo,
     Order,
     OrderProduct,
