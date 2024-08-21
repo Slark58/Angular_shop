@@ -4,6 +4,7 @@ import { ProfileLayoutComponent } from './profile-layout/profile-layout.componen
 import { ProfileInfoComponent } from './profile-info/profile-info.component';
 import { CartContainerComponent } from './profile-cart/src';
 import { OrderContainerComponent } from './profile-orders/src';
+import { OrderDetailedComponent } from './profile-orders/src/lib/order-detailed/order-detailed.component';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,10 @@ export const routes: Routes = [
       {
         path: UserAccountPaths.Orders,
         component: OrderContainerComponent,
+      },
+      {
+        path: UserAccountPaths.OrderByID,
+        component: OrderDetailedComponent,
       },
     ],
   },

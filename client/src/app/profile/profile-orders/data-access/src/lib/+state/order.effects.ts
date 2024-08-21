@@ -18,7 +18,7 @@ export const createOrderById = createEffect(
   },
   { functional: true }
 );
-export const getAllOrderItemsById = createEffect(
+export const getAllOrdersById = createEffect(
   (actions$ = inject(Actions), orderService = inject(OrderService)) => {
     return actions$.pipe(
       ofType(OrderActions.getOrders),
@@ -32,3 +32,34 @@ export const getAllOrderItemsById = createEffect(
   },
   { functional: true }
 );
+
+
+export const getOrderById = createEffect(
+  (actions$ = inject(Actions), orderService = inject(OrderService)) => {
+    return actions$.pipe(
+      ofType(OrderActions.getOrderById),
+      switchMap(({orderId}) => {
+        return orderService.getOrderById(orderId).pipe(
+          map((order) => OrderActions.getOrderByIdSuccess({order})),
+          catchError(() => of(OrderActions.getOrderByIdFailure()))
+        )
+      })
+    )
+  },
+  { functional: true }
+)
+
+export const paymantOrder = createEffect(
+  (actions = inject(Actions), orderService = inject(OrderService)) => {
+    return actions.pipe(
+      ofType(OrderActions.createPaymentOrder),
+      switchMap(({price}) => {
+        return orderService.createPaymentOrder(price).pipe(
+          map(() => OrderActions.createPaymentOrderSuccess()),
+          catchError(() => of(OrderActions.createPaymentOrderFailure()))
+        )
+      })
+    )
+  },
+  {functional: true}
+)

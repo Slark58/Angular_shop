@@ -47,7 +47,7 @@
               <div class="df g10 alc mt10">
                 @for(item of product.chars; track item) {
                 <div [ngClass]="{'active-size': sizeId === item.sizeId}" (click)="chouseSizeProduct(item.sizeId)"
-                  appCountOfSize="{{item.count}}" class="btn-size">
+                  appCountOfSize="remained {{item.count}}" class="btn-size">
                   {{item.size.value}}</div>
                 }
 

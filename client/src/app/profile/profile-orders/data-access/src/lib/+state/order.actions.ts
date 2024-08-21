@@ -17,8 +17,12 @@ export const OrderActions = createActionGroup({
     'get orders success': props<{ orderItems: IOrderItem[] | undefined }>(),
     'get orders failure': emptyProps(),
 
-    'get order by id': emptyProps(),
-    'get order by id success': emptyProps(),
+    'get order by id': props<{ orderId: number}>(),
+    'get order by id success': props<{order: IOrderItem | undefined}>(),
     'get order by id failure': emptyProps(),
+  
+    'create payment order': props<{price: number}>(),
+    'create payment order success': emptyProps(),
+    'create payment order failure': emptyProps(),
   },
 });

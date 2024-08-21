@@ -19,5 +19,8 @@ import { IOrderItem } from '../../../data-access/src/lib/models/orderItem.interf
 export class OrderItemComponent implements OnInit {
   @Input('orderItem') orderItemProps?: IOrderItem;
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.orderItemProps);
+    
+  }
 }

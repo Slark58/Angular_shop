@@ -195,6 +195,7 @@
 .tooltip-active {
   visibility: visible;
   opacity: 1;
+  width: max-content;
   background-color: black;
   color: white;
   z-index: 1000;

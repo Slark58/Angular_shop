@@ -2,7 +2,7 @@
   <div class="OrderItem__header">
     <div class="OrderItem__left">
       <!-- {/* <div class="OrderItem__title">{moment(item.createdAt).locale('ru').format('YYYY-MM-DD')}</div> */} -->
-      <a [routerLink]="['/my/order/', orderItemProps?.id]" class="OrderItem__title">Посмотреть подробнее №
+      <a [routerLink]="[orderItemProps?.id]" class="OrderItem__title">Посмотреть подробнее №
         {{orderItemProps?.id}}</a>
     </div>
     <div><span>{{orderItemProps?.status}}</span></div>

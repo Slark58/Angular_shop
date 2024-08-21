@@ -5,4 +5,5 @@ export const {
   selectLoading,
   selectOrderItems,
   selectOrderState,
+  selectOrderDetailed,
 } = orderFeature;

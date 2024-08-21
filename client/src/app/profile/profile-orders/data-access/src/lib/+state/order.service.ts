@@ -30,6 +30,21 @@ export class OrderService {
       { params: { userId } }
     );
   }
+
+
+  public getOrderById(orderId: number): Observable<IOrderItem | undefined> {
+    return this._http.get<IOrderItem | undefined>(
+      `${environment.URL_API}/order/getOne`,
+      { params: { orderId } }
+    )
+  }
+
+  public createPaymentOrder(price: number) {
+    return this._http.post(
+      `${environment.URL_API}/order/pay`,
+      {price}
+    )
+  }
   // public getOneCartItem(
   //   productId: number | null,
   //   basketId: number,

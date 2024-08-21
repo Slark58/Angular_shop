@@ -1,0 +1,63 @@
+
+@if(selectOrderDetailed$ | async; as order) {
+  <section class='PaymentPage'>
+    <div class="PaymentPage__id">Заказ № {{order.id}}</div>
+  
+    <div class="PaymentPage__info-flex">
+          <div class="PaymentPage__list">
+            @for(item of order.order_products; track $index) {
+              <div class="PaymentPage__item">
+                <div class="PaymentPage__item-img">
+                  <img [src]="'http://localhost:5000/'+item.product_char.product.imgs[0].img.img" alt="" />
+                </div> 
+                <div class="PaymentPage__item-info">
+                  <div  class="PaymentPage__item-title">{{item.product_char.product.name}}</div> 
+                  <div class="PaymentPage__item-price">{{item.product_char.product.price}} ₽ x {{item.quantity}}</div> 
+                </div>
+            </div>
+            }
+          </div>
+      <div class="PaymentPage__info">
+              <div class="PaymentPage__grid">
+                  <div class="PaymentPage__info-block">
+                    <div class="PaymentPage__info-title">Дата создания</div>
+                    <div class="PaymentPage__info-description">{{order.createdAt | date}}</div>
+                  </div>
+                  <div class="PaymentPage__info-block">
+                    <div class="PaymentPage__info-title">Пункт получения</div>
+                    <div class="PaymentPage__info-description">{{order.address}}</div>
+                  </div>
+                  <div class="PaymentPage__info-block">
+                    <div class="PaymentPage__info-title">Получатель</div>
+                    @if(user$ | async; as user) {
+                      <div class="PaymentPage__info-description">{{user.name}}</div>
+                      <div class="PaymentPage__info-description">{{user.email}}</div>
+                      <div class="PaymentPage__info-description">{{user.phone}}</div>
+                    }
+                  </div>
+              </div>
+  
+              @if(order.status === 'Не оплачен') {
+                <div class="PaymentPage__info-block flex-block">
+                  <div class="PaymentPage__info-title">Итого</div>
+                  <div class="PaymentPage__info-description">{{order.price}} ₽</div>
+                </div>
+                <button class='PaymentPage__info-buybtn' (click)="openDialog()" >Оплатить</button>
+              }
+              <!-- {
+                currentOrder.status === 'Не оплачен' ?
+                <>
+                <div class="PaymentPage__info-block flex-block">
+                  <div class="PaymentPage__info-title">Итого</div>
+                  <div class="PaymentPage__info-description">{currentOrder.price} ₽</div>
+                </div>
+                <button class='PaymentPage__info-buybtn' onClick={() => handlePayment()}>Оплатить</button>
+                </>
+                : null
+              }
+   -->
+        </div>
+    </div>
+  
+  </section>
+}

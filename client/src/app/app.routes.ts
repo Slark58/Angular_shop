@@ -22,6 +22,7 @@ export enum UserAccountPaths {
   Profile = 'profile',
   Cart = 'cart',
   Orders = 'orders',
+  OrderByID = 'orders/:id',
 }
 
 export const routes: Routes = [

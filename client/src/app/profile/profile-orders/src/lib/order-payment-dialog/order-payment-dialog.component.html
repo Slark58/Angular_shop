@@ -1,0 +1,16 @@
+<h1>Hi {{data.price}}</h1>
+<!-- {{data | json}} -->
+<div >
+  <div class="">
+    <label >Put your card number</label>
+  </div>
+  <div class="">
+    <input type="number" >
+    <!-- [(ngModel)]="data.animal" -->
+  </div>
+</div>
+
+<div>
+  <button (click)="dialogRef.close(data.animal)">OK</button>
+  <button (click)="dialogRef.close()">Cancel</button>
+</div>

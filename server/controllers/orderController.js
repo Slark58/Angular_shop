@@ -64,6 +64,23 @@ class OrderController {
     }
   }
 
+  async createPayment(req, res, next) {
+    let {
+      price
+    } = req.body
+
+    
+    const n = Math.random() * 10
+    console.log(n);
+    if (n < 1.3) {
+      return res.json({message: 'Error of payment'})
+    } else {
+      return res.json({message: 'ok'})
+
+    }
+    
+  }
+
 
   async getAllOrdersById(req, res, next) {
     let {
@@ -119,7 +136,7 @@ class OrderController {
     res.json(orders)
 
   }
-  async getOneOrdersById(req, res, next) {
+  async getOrderById(req, res, next) {
     let {
       orderId
     } = req.query
@@ -131,7 +148,36 @@ class OrderController {
       },
       include: {
         model: OrderProduct,
-        include: Product
+        attributes: ['id', 'quantity'],
+        include: [{
+          model: ProductChars,
+          attributes: ['id'],
+          include: [{
+              model: Product,
+              include: [{
+                model: ProductImgs,
+                attributes: ['id'],
+                as: 'imgs',
+                include: [{
+                  model: Img,
+                  attributes: ['img']
+                }]
+              }]
+            },
+            {
+              model: Type,
+            },
+            {
+              model: Size
+            },
+            {
+              model: Color,
+            },
+            {
+              model: Gender,
+            },
+          ]
+        }]
       }
     })
 

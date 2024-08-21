@@ -4,4 +4,5 @@ export interface IOrderState {
   orderItems: IOrderItem[] | undefined;
   error: string | null;
   loading: boolean;
+  orderDetailed: IOrderItem | undefined
 }
