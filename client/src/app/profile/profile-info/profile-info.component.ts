@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { PersistService } from '../../shared/services/persist.service';
 import { Store } from '@ngrx/store';
 import { logoutAction } from '../../auth/store/actions/logout.action';
+import { userSelector } from '../../auth/store/selectors';
 
 @Component({
   selector: 'app-profile-info',
@@ -23,6 +24,7 @@ import { logoutAction } from '../../auth/store/actions/logout.action';
 export class ProfileInfoComponent {
   public readonly store: Store = inject(Store);
 
+  user$ = this.store.select(userSelector);
   logout() {
     this.store.dispatch(logoutAction());
   }

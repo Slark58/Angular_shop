@@ -16,6 +16,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import * as authEffects from './auth/store/effects';
 import * as catalogEffects from './catalog/data-access/state/catalog.effects';
 import * as productEffects from './product/data-access/product.effects';
+import * as reviewsEffects from './product/data-access/reviews/reviews.effects';
 import {
   adminProductsEffect,
   adminProductFeature,
@@ -35,6 +36,7 @@ import {
 import { register as registerSwiperElements } from 'swiper/element/bundle';
 import { catalogFeature } from './catalog/data-access/state/catalog.reducer';
 import { productFeature } from './product/data-access/product.reducer';
+import { reviewsReducer } from './product/data-access/reviews/reviews.reducer';
 registerSwiperElements();
 
 export const appConfig: ApplicationConfig = {
@@ -45,6 +47,7 @@ export const appConfig: ApplicationConfig = {
       [AUTH_FEATURE_KEY]: authFeature.reducer,
       [catalogFeature.name]: catalogFeature.reducer,
       [productFeature.name]: productFeature.reducer,
+      [reviewsReducer.name]: reviewsReducer.reducer,
       [adminProductFeature.name]: adminProductFeature.reducer,
       [adminUsersFeature.name]: adminUsersFeature.reducer,
       [cartFeatere.name]: cartFeatere.reducer,
@@ -54,10 +57,11 @@ export const appConfig: ApplicationConfig = {
       authEffects,
       catalogEffects,
       productEffects,
+      reviewsEffects,
       adminProductsEffect,
       adminUsersEffects,
       cartEffects,
-      orderEffects
+      orderEffects,
     ),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states

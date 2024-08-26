@@ -66,15 +66,25 @@ class OrderController {
 
   async createPayment(req, res, next) {
     let {
-      price
+      price,
+      orderId
     } = req.body
+    
+    console.log('orderId: ', orderId);
+    
 
+    const order = await Order.findOne({where: orderId})
+    
+    console.log(order);
     
     const n = Math.random() * 10
     console.log(n);
     if (n < 1.3) {
-      return res.json({message: 'Error of payment'})
-    } else {
+      next(ApiError.badRequest('Ошибка оплаты'))
+      // return res.json({message: 'Error of payment', status: 404})
+    } else {  
+      order.status = 'Оплачен'
+      order.save()
       return res.json({message: 'ok'})
 
     }

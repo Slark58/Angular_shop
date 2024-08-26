@@ -5,12 +5,16 @@
     <label >Put your card number</label>
   </div>
   <div class="">
-    <input type="number" >
+    <input type="number"  >
     <!-- [(ngModel)]="data.animal" -->
   </div>
 </div>
 
 <div>
-  <button (click)="dialogRef.close(data.animal)">OK</button>
-  <button (click)="dialogRef.close()">Cancel</button>
+  <button [disabled]="isLoading$ | async" (click)="paymentHanler()">OK</button>
+  <button [disabled]="isLoading$ | async" (click)="dialogRef.close()">Cancel</button>
+
+  @if (isLoading$ | async) {
+    {{'Loading...'}}
+  }
 </div>

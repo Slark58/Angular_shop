@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, delay, map, of, switchMap } from 'rxjs';
 import { OrderActions } from './order.actions';
 import { OrderService } from './order.service';
 
@@ -53,8 +53,9 @@ export const paymantOrder = createEffect(
   (actions = inject(Actions), orderService = inject(OrderService)) => {
     return actions.pipe(
       ofType(OrderActions.createPaymentOrder),
-      switchMap(({price}) => {
-        return orderService.createPaymentOrder(price).pipe(
+      delay(2000),
+      switchMap(({price, orderId}) => {
+        return orderService.createPaymentOrder(price, orderId).pipe(
           map(() => OrderActions.createPaymentOrderSuccess()),
           catchError(() => of(OrderActions.createPaymentOrderFailure()))
         )

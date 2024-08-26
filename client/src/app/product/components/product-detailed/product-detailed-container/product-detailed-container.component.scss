@@ -207,3 +207,21 @@
   transition: visibility 0s, opacity 0.3s linear, top 0.3s;
   z-index: 1000;
 }
+
+
+.product-reviews {
+  margin-top: 50px;
+}
+
+.product-reviews-title {
+  font-size: 35px;
+}
+
+.product-reviews-button {
+
+} 
+
+.product-reviews-list {
+  display: flex;
+  flex-direction: column;
+}

@@ -13,60 +13,53 @@ import { PersistService } from '../../../../shared/services/persist.service';
 import { combineLatest, map, Observable } from 'rxjs';
 import { TFullProduct } from '../../../../shared/types/fullProduct.type';
 import { ICartItem } from '../../../../profile/profile-cart/data-access/src/lib/models/cartItem.interface';
+import { ReviewsFacade } from '../../../data-access/reviews/reviews.facade';
+import { Store } from '@ngrx/store';
+import { selectUserID } from '../../../../auth/store/selectors';
+import { ReviewModalFeedbackComponent } from '../review-modal-feedback/review-modal-feedback.component';
+import { Dialog, DialogModule } from '@angular/cdk/dialog';
+import { FormsModule } from '@angular/forms';
+import { ReviewBlockComponent } from '../review-block/review-block.component';
 
 @Component({
   selector: 'app-product-detailed-container',
   standalone: true,
-  imports: [CommonModule, CountOfSizeDirective],
+  imports: [CommonModule, CountOfSizeDirective, DialogModule, FormsModule, ReviewBlockComponent],
   templateUrl: './product-detailed-container.component.html',
   styleUrls: ['./product-detailed-container.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailedContainerComponent implements OnInit {
+  private readonly store: Store = inject(Store);
   private readonly productFacade: ProductFacade = inject(ProductFacade);
-  // private readonly profileFacade: ProfileFacade = inject(ProfileFacade);
+  private readonly reviewsFacade: ReviewsFacade = inject(ReviewsFacade);
   private readonly persistService: PersistService = inject(PersistService);
   private activetedRoute: ActivatedRoute = inject(ActivatedRoute);
+  public dialog = inject(Dialog);
 
+  public userId$ = this.store.select(selectUserID)
   public basketId = this.persistService.get('basketId') as number;
   public sizeId!: number;
   public productId!: number;
   public product$ = this.productFacade.product$;
-  // public cartItems$ = this.profileFacade.cartItems$;
 
-  // inCart$ = combineLatest([this.product$, this.cartItems$]).pipe(
-  //   map(
-  //     ([product, cartProducts]: [
-  //       product: TFullProduct | null,
-  //       cartProducts: ICartItem[] | undefined
-  //     ]) => {
-  //       if (!product || !cartProducts) return false;
+  public data$ = this.reviewsFacade.data$;
 
-  //       const charProductID = product.chars.find(
-  //         (item) => item.sizeId === this.sizeId
-  //       )?.id;
-
-  //       console.log('charProductID: ', charProductID);
-
-  //       const quantityFindProduct = cartProducts.find(
-  //         (item) => item.product_char.id === charProductID
-  //       )?.quantity;
-
-  //       console.log('quantityFindProduct: ', quantityFindProduct);
-
-  //       if (quantityFindProduct) {
-  //         return quantityFindProduct > 0;
-  //       }
-
-  //       return false;
-  //     }
-  //   )
-  // );
 
   chouseSizeProduct(size: number) {
     this.sizeId = size;
     console.log(this.sizeId);
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open<string>(ReviewModalFeedbackComponent, {
+      width: 'max-width',
+    });
+    
+    dialogRef.closed.subscribe(result => {
+      console.log('The dialog was closed', result);
+    });
   }
 
   increaseCartItemById(productId: number, basketId: number, sizeId: number) {
@@ -74,10 +67,22 @@ export class ProductDetailedContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activetedRoute.paramMap.subscribe((param) => {
-      this.productId = Number(param.get('id'));
-      console.log(this.productId);
-      this.productFacade.getProductById(this.productId);
-    });
+
+    combineLatest([
+      this.activetedRoute.paramMap,
+      this.userId$,
+    ]).pipe(
+      map(([paramMap, userId]) => ({
+        productId: Number(paramMap.get('id')),
+        userId: userId,
+      }))
+    ).subscribe(({productId, userId}) => {
+      this.productFacade.getProductById(productId);
+      if(userId){
+        this.reviewsFacade.getAllReviews(productId, userId)
+      }
+    })
+
+
   }
 }

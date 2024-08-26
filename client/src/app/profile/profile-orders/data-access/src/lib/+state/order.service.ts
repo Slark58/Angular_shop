@@ -39,10 +39,10 @@ export class OrderService {
     )
   }
 
-  public createPaymentOrder(price: number) {
+  public createPaymentOrder(price: number, orderId: number) {
     return this._http.post(
       `${environment.URL_API}/order/pay`,
-      {price}
+      {price, orderId}
     )
   }
   // public getOneCartItem(

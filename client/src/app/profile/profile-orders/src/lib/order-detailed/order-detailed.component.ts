@@ -31,15 +31,11 @@ export class OrderDetailedComponent implements OnInit {
 
     const dialogRef = this.dialog.open<string>(OrderPaymentDialogComponent, {
       width: 'max-width',
-      data: {price: this.price},
+      data: {price: this.price, orderId: this.orderId},
     });
     
     dialogRef.closed.subscribe(result => {
-      console.log(result);
-      if (this.price) {
-        this.orderFacade.createPayment(this.price)
-      }
-      console.log('The dialog was closed');
+      console.log('The dialog was closed', result);
     });
   }
 

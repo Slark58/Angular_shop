@@ -30,6 +30,10 @@ class UserController {
             phone,
             role
         } = req.body
+
+        console.log('name: ' + name, 'email: ' +  email, 'phone: ' +  phone, 'role: ' +  role);
+        
+
         if (!email || !password) {
             return next(ApiError.badRequest('Некорректный email или пароль'))
         }

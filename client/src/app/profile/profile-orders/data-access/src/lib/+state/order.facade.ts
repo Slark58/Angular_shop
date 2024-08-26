@@ -19,7 +19,7 @@ export class OrderFacade {
   // public basketId = this.persistService.get('basketId') as number;
   public selectOrderDetailed$ = this.store.select(selectOrderDetailed);
   public user$ = this.store.select(userSelector);
-  public isLoadingOrderItems$ = this.store.select(selectLoading);
+  public isLoading$ = this.store.select(selectLoading);
   public isErrorOrderItems$ = this.store.select(selectError);
   public userId$ = this.store.select(selectUserID);
   public orderItems$ = this.store.select(selectOrderItems);
@@ -40,9 +40,9 @@ export class OrderFacade {
       OrderActions.getOrderById({orderId})
     )
   }
-  public createPayment(price: number) {
+  public createPayment(price: number, orderId: number) {
     this.store.dispatch(
-      OrderActions.createPaymentOrder({price})
+      OrderActions.createPaymentOrder({price, orderId})
     )
   }
 
