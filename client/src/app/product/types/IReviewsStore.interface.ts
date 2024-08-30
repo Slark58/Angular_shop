@@ -1,4 +1,4 @@
-import { IReviews } from './IReviews.interface';
+import { IReview } from './IReviews.interface';
 
 export interface IReviewsStore {
   data: IReviewsData
@@ -8,7 +8,7 @@ export interface IReviewsStore {
 
 
 export interface IReviewsData {
-  reviews:IReviews[] | undefined
+  reviews:IReview[] | undefined
   isPaid: boolean
-  currentUserReview: IReviews | null
+  currentUserReview: IReview | null
 }

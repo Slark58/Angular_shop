@@ -68,7 +68,7 @@
             <div class="product-reviews">
               <div class="df jcsb">
                 <div class="product-reviews-title">Reviews</div>
-                @if (data.isPaid && data.currentUserReview === null) {
+                @if (data.isPaid && data.currentUserReview === null ) {
                   <button (click)="openDialog()" class="product-reviews-button">left review</button>
                 }
               </div>
@@ -79,13 +79,16 @@
                 </div>
               }
               <div class="product-reviews-list">
-                @if(data.reviews?.length === 0) {
+                <!-- @if(data.reviews?.length === 0) {
                   <div class="">Not Reviews ((</div>
                 } @else {
                   @for(review of data.reviews; track $index) {
                     <app-review-block></app-review-block>
                   }
-                }
+                } -->
+                    <app-review-block [name]="'2'"></app-review-block>
+                    <app-review-block [name]="'3'"></app-review-block>
+                    <app-review-block [name]="'4'"></app-review-block>
               </div>
             </div>
           }

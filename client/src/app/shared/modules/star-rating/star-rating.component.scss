@@ -1,0 +1,117 @@
+
+
+.full-stars {
+  text-align: center;
+}
+.rating-group {
+  display: inline-flex;
+}
+.input-star {
+  position: absolute;
+  left: -9999px;
+}
+.label-svg {
+  margin: 0;
+  cursor: pointer;
+}
+.label-svg svg {
+  margin: 2px;
+  height: 25px;
+  width: 25px;
+  fill: #e9c410;
+  transition: fill 0.3s;
+}
+.input-star:checked ~ .label-svg svg {
+  fill: #b3b3b3;
+}
+.rating-group:hover .label-svg svg {
+  fill: #e9c410;
+}
+.input-star:hover ~ .label-svg svg {
+  fill: #b3b3b3;
+}
+
+// .half-stars {
+//     text-align: center;
+// }
+
+
+// .half-stars .rating-group {
+//     display: inline-flex;
+// }
+// .half-stars input {
+//     position: absolute;
+//     left: -9999px;
+
+// }
+// .half-stars label {
+//     margin: 0;
+
+//     cursor: pointer;
+// }
+// .half-stars label svg {
+//     margin: 2px;
+//     height: 25px;
+//     width: 25px;
+//     fill: #ffca1d;
+//     transition: fill 0.3s;
+//     stroke: #000000;
+//     stroke-width: 10px;
+//     stroke-dasharray: 2,2;
+//     stroke-linejoin: round;
+
+// }
+// .half-stars .hsr {
+//     padding-right: 0;
+//     margin-right: -22px;
+//     width: 22px;
+//     overflow: hidden;
+//     z-index: 2;
+    
+// }
+// .half-stars input:checked ~ label svg {
+//     fill: #b1b1b1;
+//     stroke: #000000;
+//     stroke-width: 3px;
+//     stroke-dasharray: 2,2;
+//     stroke-linejoin: round;
+// }
+// .half-stars .rating-group:hover label svg {
+//     fill: #ffca1d;
+//     stroke: #000000;
+//     stroke-width: 3px;
+//     stroke-dasharray: 2,2;
+//     stroke-linejoin: round;
+// }
+// .half-stars .rating-group input:hover ~ label svg {
+//     fill: #b1b1b1;
+//     stroke: #000000;
+//     stroke-width: 3px;
+//     stroke-dasharray: 2,2;
+//     stroke-linejoin: round;
+// }
+
+// .userselectnon {
+//   user-select: none;
+// }
+
+.stars-wrapper {
+  position: relative;
+}
+.stars-wall {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 20;
+  user-select: none;
+}
+
+
+// .half-stars .rating-group:not(.readonly) label:hover svg {
+//   fill: #ffca1d; /* Цвет при наведении */
+// }
+
+// .half-stars .rating-group:not(.readonly) label:hover ~ label svg {
+//   fill: #b1b1b1; /* Цвет для звезд после наведенной */
+// }

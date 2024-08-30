@@ -1,4 +1,14 @@
 
-@if(review) {
-  
-}
+<!-- @if(review) { -->
+  <div class="review-block">
+    <div class="df g15 alc">
+      <!-- <div class="review-block-name">{{review.user.name}}</div> -->
+      <div class="review-block-name">Иван</div>
+      <!-- <div class="review-block-rate">{{review.rating}}</div> -->
+      <app-star-rating [readOnly]="true" [rating]="3" [groupName]="name"></app-star-rating>
+
+    </div>
+    <!-- <div class="review-block-comment">{{review.content}}</div> -->
+    <div class="review-block-comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor hic, odio maxime nesciunt corporis aliquid repellendus neque tenetur earum rem ducimus tempora voluptatem enim aliquam sapiente nihil! Asperiores, perspiciatis non.</div>
+  </div>
+<!-- } -->

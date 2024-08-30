@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { IReviews } from '../../types/IReviews.interface';
+import { IReview } from '../../types/IReviews.interface';
 import { IReviewsData } from '../../types/IReviewsStore.interface';
 
 export const ReviewsActions = createActionGroup({

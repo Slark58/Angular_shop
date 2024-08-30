@@ -27,9 +27,9 @@ class ReviewsController {
         ]
       });
 
-      const userCooment = reviews.find(reviews => reviews.userId === userId);
+      const userReview = reviews.find(reviews => reviews.userId === userId);
       
-      console.log('userCooment: ', userCooment);
+      console.log('userCooment: ', userReview);
       
       if(!order) {
         console.log('order', order);
@@ -38,7 +38,7 @@ class ReviewsController {
       
       return res.json({
         reviews: reviews, 
-        userComment: userCooment ? userCooment : null,
+        currentUserReview: userReview ? userReview : null,
         isPaid: order ? true : false
       })
 

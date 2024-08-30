@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
-import { IReviews } from '../../types/IReviews.interface';
+import { IReview } from '../../types/IReviews.interface';
 import { Observable } from 'rxjs';
 import { IReviewsData } from '../../types/IReviewsStore.interface';
 

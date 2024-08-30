@@ -55,6 +55,7 @@ export class ProductDetailedContainerComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open<string>(ReviewModalFeedbackComponent, {
       width: 'max-width',
+      data: {}
     });
     
     dialogRef.closed.subscribe(result => {
