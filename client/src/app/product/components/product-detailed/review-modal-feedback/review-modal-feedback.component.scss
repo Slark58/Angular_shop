@@ -4,3 +4,12 @@
   border-radius: 8px;
   padding: 8px 16px 16px;
 }
+
+.review-textarea {
+  resize: none;
+}
+
+.review-textarea:invalid {
+  border: 2px dashed red;
+}
+

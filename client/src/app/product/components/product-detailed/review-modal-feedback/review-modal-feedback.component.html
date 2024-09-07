@@ -1,10 +1,14 @@
-<div >
+<form [formGroup]="reviewForm" (ngSubmit)="createReview()">
+  <pre>{{reviewForm.value| json}}</pre>
+  <div class="Modal-title">Your review</div>
   <div class="">
-    <label ></label>
+    <app-star-rating formControlName="rate" [options]="ratesOptions" [rate]="0"></app-star-rating>
+    <textarea formControlName="comment" class="review-textarea" rows="5" cols="33" ></textarea>
   </div>
-  <div class="">
-    <app-star-rating [groupName]="'star-review'" [rating]="0" [readOnly]="false"></app-star-rating>
-    <input type="text">
-    <!-- [(ngModel)]="data.animal" -->
-  </div>
-</div>
+
+  <button >submit</button>
+
+  @if(isLoading$ | async) {
+    <div>Loading</div>
+  }
+</form>

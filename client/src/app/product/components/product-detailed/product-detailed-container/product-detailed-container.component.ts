@@ -40,12 +40,13 @@ export class ProductDetailedContainerComponent implements OnInit {
 
   public userId$ = this.store.select(selectUserID)
   public basketId = this.persistService.get('basketId') as number;
-  public sizeId!: number;
-  public productId!: number;
+  
   public product$ = this.productFacade.product$;
-
   public data$ = this.reviewsFacade.data$;
-
+  
+  public productId!: number;
+  public userId!: number
+  public sizeId!: number;
 
   chouseSizeProduct(size: number) {
     this.sizeId = size;
@@ -55,7 +56,7 @@ export class ProductDetailedContainerComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open<string>(ReviewModalFeedbackComponent, {
       width: 'max-width',
-      data: {}
+      data: {productId: this.productId, userId: this.userId},
     });
     
     dialogRef.closed.subscribe(result => {
@@ -79,7 +80,9 @@ export class ProductDetailedContainerComponent implements OnInit {
       }))
     ).subscribe(({productId, userId}) => {
       this.productFacade.getProductById(productId);
+      this.productId = productId;
       if(userId){
+        this.userId = userId;
         this.reviewsFacade.getAllReviews(productId, userId)
       }
     })

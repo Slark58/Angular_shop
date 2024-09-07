@@ -20,3 +20,19 @@ export const getReviewsEffect = createEffect(
   },
   {functional: true}
 )
+
+
+export const creteReviewEffect = createEffect(
+  (actions$ = inject(Actions), reviewsService = inject(ReviewsService)) => {
+    return actions$.pipe(
+      ofType(ReviewsActions.createReviews),
+      switchMap(({comment, productId, rating, userId}) => {
+        return reviewsService.creteReview(productId, userId, comment, rating).pipe(
+          map((review) => ReviewsActions.createReviewsSuccess({review})),
+          catchError((error) => of(ReviewsActions.createReviewsFailure({error})))
+         )
+      })
+    )
+  },
+  {functional: true}
+)

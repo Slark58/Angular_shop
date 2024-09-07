@@ -21,8 +21,6 @@ export class OrderPaymentDialogComponent implements OnInit, OnDestroy {
   private readonly orderFacade = inject(OrderFacade);
 
   isLoading$ = this.orderFacade.isLoading$
-  
-
 
   isLoadingSub$?: Subscription
 

@@ -1,5 +1,5 @@
 const ApiError = require('../error/ApiError');
-const { Review, Order, OrderProduct, Product, ProductChars } = require('../models/models');
+const { Review, Order, OrderProduct, Product, ProductChars, User } = require('../models/models');
 
 
 class ReviewsController {
@@ -8,9 +8,17 @@ class ReviewsController {
     try {
       let {productId, userId} = req.query;
 
-      const reviews = await Review.findAll({where: {productId}});
+      console.log(productId, userId);
       
-      console.log(reviews);
+
+      const reviews = await Review.findAll({
+        where: {productId},
+        include: [
+          {model: User}
+        ]
+      });
+      
+      console.log('reviews: ', ...reviews);
       // console.log(productId, userId);
       
       const order = await OrderProduct.findOne({
@@ -27,9 +35,9 @@ class ReviewsController {
         ]
       });
 
-      const userReview = reviews.find(reviews => reviews.userId === userId);
+      const userReview = reviews.find(review => review.userId === Number(userId))
+      const reviewsWithoutCurrentUser = reviews.filter(review => review.userId!== Number(userId));
       
-      console.log('userCooment: ', userReview);
       
       if(!order) {
         console.log('order', order);
@@ -37,22 +45,36 @@ class ReviewsController {
       }
       
       return res.json({
-        reviews: reviews, 
+        reviews: reviewsWithoutCurrentUser, 
         currentUserReview: userReview ? userReview : null,
         isPaid: order ? true : false
       })
 
-      // if(!reviews) {
-      //   next(ApiError.badRequest('Не удалось получить отзывы'))
-      // }
-
-      // const personalReview = reviews.find(reviews => reviews.userId === userId);
-
-      // console.log(personalReview);
-      
     } catch (error) {
       return ApiError.badRequest('Ошибка запроса');
     }
+  }
+
+  async createReview(req, res, next) {
+    let {productId, userId, comment, rating} = req.body
+    
+    try {
+      
+      const review = await Review.create({
+        productId,
+        userId,
+        comment,
+        rating
+      });
+      
+      return res.json(review);
+
+
+    } catch (error) {
+      return ApiError.badRequest('Ошибка запроса');
+      
+    }
+  
   }
 }
 

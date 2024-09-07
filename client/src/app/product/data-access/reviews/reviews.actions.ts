@@ -10,9 +10,14 @@ export const ReviewsActions = createActionGroup({
     'get reviews success': props<{data: IReviewsData}>(),
     'get reviews failure': emptyProps(),
 
-    'create reviews': emptyProps(),
-    'create reviews success': emptyProps(),
-    'create reviews failure': emptyProps(),
+    'create reviews': props<{
+      productId: number,
+      userId: number,
+      comment: string | undefined,
+      rating: number | null,
+    }>(),
+    'create reviews success': props<{review: IReview}>(),
+    'create reviews failure': props<{error: string}>(),
 
     'change reviews': emptyProps(),
     'change reviews success': emptyProps(),

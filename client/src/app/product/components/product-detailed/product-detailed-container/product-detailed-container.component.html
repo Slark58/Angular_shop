@@ -75,20 +75,20 @@
               @if(data.currentUserReview) {
                 <div class="review-person">
                   <div class="review-person-title">Your Review</div>
-                  <app-review-block></app-review-block>
+                  <app-review-block [review]="data.currentUserReview"></app-review-block>
                 </div>
               }
               <div class="product-reviews-list">
-                <!-- @if(data.reviews?.length === 0) {
+                @if(data.reviews?.length === 0) {
                   <div class="">Not Reviews ((</div>
                 } @else {
                   @for(review of data.reviews; track $index) {
-                    <app-review-block></app-review-block>
+                    <app-review-block [review]="review"></app-review-block>
                   }
-                } -->
-                    <app-review-block [name]="'2'"></app-review-block>
-                    <app-review-block [name]="'3'"></app-review-block>
-                    <app-review-block [name]="'4'"></app-review-block>
+                }
+                    <!-- <app-review-block ></app-review-block>
+                    <app-review-block ></app-review-block>
+                    <app-review-block ></app-review-block> -->
               </div>
             </div>
           }

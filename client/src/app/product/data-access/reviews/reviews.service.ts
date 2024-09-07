@@ -17,4 +17,17 @@ export class ReviewsService {
       {params: {productId, userId}}
     )
   }
+
+  creteReview(
+    productId: number,
+    userId: number,
+    comment: string | undefined,
+    rating: number | null,
+  ): Observable<IReview> {
+    return this._http.post<IReview>(
+      `${environment.URL_API}/reviews/create`,
+      {productId, userId, comment, rating}
+    )
+  }
+  
 }

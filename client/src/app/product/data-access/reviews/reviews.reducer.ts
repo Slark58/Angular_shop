@@ -36,13 +36,18 @@ export const reviewsReducer = createFeature({
       ...state,
       isLoading: true,
     })),
-    on(ReviewsActions.createReviewsSuccess, (state) => ({
+    on(ReviewsActions.createReviewsSuccess, (state, action) => ({
       ...state,
-      isLoading: true,
+      isLoading: false,
+      data: {
+        ...state.data,
+        currentUserReview: action.review        
+      }
     })),
-    on(ReviewsActions.createReviewsFailure, (state) => ({
+    on(ReviewsActions.createReviewsFailure, (state, action) => ({
       ...state,
-      isLoading: true,
+      isLoading: false,
+      error: action.error,
     })),
   )
 })

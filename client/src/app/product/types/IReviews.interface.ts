@@ -2,7 +2,7 @@ import { IUser } from "../../shared/types/user.interface";
 
 export interface IReview {
   id: string;
-  content: string;
+  comment: string;
   rating: number;
   createdAt: Date;
   updatedAt: Date;
